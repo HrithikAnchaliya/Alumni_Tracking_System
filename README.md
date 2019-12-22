@@ -1,2 +1,2 @@
-# Loan_Tracking_System
+# Loan Tracking System
 Loan tracking System - Mini Project
