@@ -1,4 +1,4 @@
-# Loan Tracking System
-Loan tracking System - Mini Project
+# Alumni Tracking System
+Alumni tracking System - Mini Project
 (with - Jatin 
      - Chethan)
