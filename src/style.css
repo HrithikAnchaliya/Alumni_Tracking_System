@@ -1,0 +1,29 @@
+#nav{
+    text-align: right;
+    padding-right: 40px;
+}
+#nav li{
+    display: inline-block;
+    padding:17px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+}
+    
+#nav a{
+    color: black;
+    text-decoration: none;
+    position:relative;
+}
+#nav a::after{
+    content: "";
+    display:block;
+    width:0;
+    height:5.5px;
+    background-color:yellowgreen;
+    position: absolute;
+    bottom:10%;
+    z-index: -1;
+}
+#nav a:hover::after{
+    width: 100%;
+}
