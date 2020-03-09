@@ -1,63 +1,66 @@
 import React from 'react';
 import Profilecard from './profilecard.js';
 
-
-
 export default class Searchprofile extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             value: '',
-          profiledict : {
-             'name' : [],
-             'name1' : []
+            arrayvalue:'',
+            loading:true
           }
-            
-          }
-
-          this.getdata = this.getdata.bind(this)
+        
+          this.getdata = this.getdata.bind(this);
+          this.aftergetdata = this.aftergetdata.bind(this);
     }
-        getdata(){
-        const dict = {};
-        // const dictname = {};
-        // const dictdetails = {}; 
-        const url = 'https://jsonplaceholder.typicode.com/users';
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(profile => {
-                console.log(profile.username)
-                dict[`${profile.name}`] = `${profile.username}` 
-                
+        async getdata(){
+            const url = 'https://jsonplaceholder.typicode.com/users'
+            const respones = await fetch(url);
+            const users = await respones.json();
+            this.setState({
+                value:users
             })
-        })
-
-        this.setState({
-            
-        })
-        console.log(dict)  
-
+            console.log(users[0])
+            await this.aftergetdata();
         }
-    
+
+        aftergetdata(){
+            if(this.state.value){
+                const values = this.state.value;
+                const dataarray = [];
+                Object.keys(values).forEach(key => {
+                    dataarray.push(values[key])
+                })
+                this.setState({
+                    arrayvalue:dataarray,
+                    loading:false
+                });
+                // return(
+                //     <div>{dataarray.map(data => <Profilecard key={data.id} name={data.name} website={data.website}/>)} </div>
+                // );
+            }
+        }
+
         
 
       handleSubmit = e => {
         e.preventDefault();
-        this.setState({ value: this.textInput.value})
       };
       
       
 
     render(){
+
+
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
                 <h1>Search</h1>
                 <br/>
-                <h1>{this.state.value}</h1>
+                {/* <h1>{this.state.value.name}</h1> */}
                 <p>Search profiles</p>
                 <br/>
-                <input type='text' id='profileinput' autoComplete='off' ref={e => this.textInput = e} name='profilesearch'/> 
+                <input type='text' id='profileinput' autoComplete='off'  name='profilesearch'/> 
                 <br/>
                 <button type='submit' id='profilesubmit'>Submit</button> 
                 <button onClick={this.getdata}>Done</button>
@@ -65,6 +68,9 @@ export default class Searchprofile extends React.Component{
                 </form>
                 <div>
                 <Filter/>
+                {!this.state.loading ? (
+                    <div>{this.state.arrayvalue.map(data => <Profilecard key={data.id} name={data.name} website={data.website}/>)} </div>
+                ) : (<h5>Search Something</h5>)}
                 </div>
                 
             </div>
@@ -76,9 +82,22 @@ export class Filter extends React.Component{
     render(){
         return(
             <div>
+                <label>Filter</label><br/>
+                   <div>
+                       <Filteryear/>
+                       <FilterEducation />
+                       <FilterLocation/>
+                    </div>
+            </div>
+        );
+    }
+}
+class Filteryear extends React.Component{
+    render(){
+        return(
+            <div>
                 <form>
-                    <label>Filter</label><br/>
-                    <button>Year</button><br/>
+                 <button>Year</button><br/>
                     <div>
                         <input type='text' name='inputtedtext'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="2000"></input>
@@ -91,16 +110,12 @@ export class Filter extends React.Component{
                         <br/>
                         <br/>
                     </div>
-                   <div>
-                       <FilterEducation />
-                       <FilterLocation/>
-                       <Profilecard />
-                    </div>
                 </form>
             </div>
         );
     }
 }
+
  export class FilterEducation extends React.Component{
      render(){
          return(

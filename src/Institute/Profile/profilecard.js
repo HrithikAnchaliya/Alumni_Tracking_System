@@ -8,11 +8,8 @@ export default class Profilecard extends React.Component{
                 <Card style={{ width: '12rem' }}>
                 <Card.Img style={{height:'12rem'}}variant="top" src="http://tineye.com/images/widgets/mona.jpg" />
                 <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
+                <Card.Title>{this.props.name}</Card.Title>
+                <Card.Text>{this.props.website}</Card.Text>
                 </Card.Body>
                 <Card.Body>
                 <Card.Link href="#">Card Link</Card.Link>
@@ -24,3 +21,4 @@ export default class Profilecard extends React.Component{
         );
     }
 }
+
