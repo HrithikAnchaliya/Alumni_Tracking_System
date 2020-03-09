@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+For Quick-Guide, Read the Wiki Page of this Repository. [Link](https://github.com/HrithikAnchaliya/Alumni_Tracking_System/wiki)
+
 ## Available Scripts
 
 In the project directory, you can run:
