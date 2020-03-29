@@ -7,11 +7,13 @@ export default class Searchprofile extends React.Component{
         this.state = {
             value: '',
             arrayvalue:'',
-            loading:true
+            loading:true,
+            profilesearch:''
           }
         
           this.getdata = this.getdata.bind(this);
           this.aftergetdata = this.aftergetdata.bind(this);
+          this.onChangefunc = this.onChangefunc.bind(this);
     }
         async getdata(){
             const url = 'https://jsonplaceholder.typicode.com/users'
@@ -21,7 +23,7 @@ export default class Searchprofile extends React.Component{
                 value:users
             })
             console.log(users[0])
-            await this.aftergetdata();
+            this.aftergetdata();
         }
 
         aftergetdata(){
@@ -46,6 +48,12 @@ export default class Searchprofile extends React.Component{
       handleSubmit = e => {
         e.preventDefault();
       };
+
+      onChangefunc = (event) =>{
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      }
       
       
 
@@ -54,13 +62,13 @@ export default class Searchprofile extends React.Component{
 
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                 <h1>Search</h1>
                 <br/>
                 {/* <h1>{this.state.value.name}</h1> */}
                 <p>Search profiles</p>
                 <br/>
-                <input type='text' id='profileinput' autoComplete='off'  name='profilesearch'/> 
+                <input type='text' id='profileinput' autoComplete='off' value={this.state.profilesearch} onChange={this.onChangefunc} name='profilesearch'/> 
                 <br/>
                 <button type='submit' id='profilesubmit'>Submit</button> 
                 <button onClick={this.getdata}>Done</button>
