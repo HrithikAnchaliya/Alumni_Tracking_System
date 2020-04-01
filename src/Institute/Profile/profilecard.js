@@ -27,8 +27,8 @@ export default class Profilecard extends React.Component{
 
             <div class="content">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-            <a href="#">#css</a> <a href="#">#responsive</a>
+            Phasellus nec iaculis mauris. <a href="http://localhost:3000/">@bulmaio</a>.
+            <a href="http://localhost:3000/">#css</a> <a href="http://localhost:3000/">#responsive</a>
             <br/>
             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
             </div>
