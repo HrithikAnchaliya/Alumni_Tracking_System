@@ -24,9 +24,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends React.Component {
-    render() {
 
-      return (
+  render() {
+    return (
         <div>
           <div>
           <div id="navbar">
@@ -70,18 +70,20 @@ class App extends React.Component {
             <Route path='/' exact component={Home}/>
             <Route path='/login' component={Login}/>
             <ProtectedRoute path='/searchprofile' component={Searchprofile}/>
-            <ProtectedRoute path='/profilepage' component={Profilepage}/>
-            <Route path='/eventpage' component={Eventpage}/>
-            <Route path='/addevent' component={Addevents}/>
+            <Route path='/profilepage' component={Profilepage}/>
+            <ProtectedRoute path={`/events/:id`} component={Eventpage}/>
+            <ProtectedRoute path='/events/addevent' exact component={Addevents}/>
             <Route path='/events' component={Events}/>
-            <ProtectedRoute path='/jobs' component={Jobs}/>
+            <ProtectedRoute path='/jobs'  component={Jobs}/>
             <Route path='/addjobs' component={Addjobs}/>
-            <Route path='*' component={() => "Ain't Femilia .. (404 Not Found)"}/>
+            <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
         </div>
       );
-      }
+
     }
+}
+
 
 
 ReactDOM.render(

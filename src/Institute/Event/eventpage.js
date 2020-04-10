@@ -19,13 +19,13 @@ export default class Eventpage extends React.Component{
             const url = 'https://jsonplaceholder.typicode.com/posts';
             const response = await fetch(url);
             const posts = await response.json();
-            this.setState({posts:posts[0],loading:false})       //no name for the json so its "posts[0]" or else it would be "posts.nameofthejson[0]" to get he data.
+            this.setState({ posts:posts[0], loading:false })       //no name for the json so its "posts[0]" or else it would be "posts.nameofthejson[0]" to get he data.
             // console.log(posts[0].title)                      //consoling it
         }
        
 
-        render(){
-      return(
+    render(){
+        return(
             <div>
                 {this.state.loading || !this.state.posts ? 
                 (<h1>Loading...</h1>) : 

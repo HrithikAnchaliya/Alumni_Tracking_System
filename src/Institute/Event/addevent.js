@@ -18,8 +18,11 @@ export default class Addevents extends React.Component{
       organiser:'',
       link:''
     }
+
     this.onChangefunc = this.onChangefunc.bind(this)
+
   }
+  
   onChangefunc = (event) =>{
     this.setState({
       [event.target.name]: event.target.value

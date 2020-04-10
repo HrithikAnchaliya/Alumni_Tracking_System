@@ -1,9 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Auth_True from '../../Redux/action/actionstrue'
+import Auth_True from '../../Redux/action/actions'
+
 
 
 class Login extends React.Component{
+
+    log_in = () => {
+        const serialized = JSON.stringify(true)
+        window.localStorage.setItem('Auth_state' , serialized )
+        this.props.change_state_true()
+    }
+
+    log_off = () => {
+        window.localStorage.removeItem('Auth_state')
+        this.props.change_state_true()
+    }
+
     render(){
         console.log(this.props.Auth)
         return(
@@ -41,9 +54,15 @@ class Login extends React.Component{
                 </form>
                 <br/>
                 <div>
-                <h3>{this.props.Auth}</h3>
-                <button onClick={this.props.change_state_true}>Set True</button>
-                <button onClick={this.props.change_state_false}>Set False</button>
+                {
+                    (this.props.Auth) ? (
+                    <h5>The Login is : True</h5>
+                    ) : (
+                        <h5>The Login is : False</h5>
+                    )
+                }
+                    <button onClick={this.log_in}>Set True</button>
+                    <button onClick={this.log_off}>Set False</button>
                 </div>
             </div>
             </div>
@@ -53,14 +72,13 @@ class Login extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        Auth : state.Auth_State
+        Auth : state.Auth_state
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        change_state_true : () => dispatch(Auth_True('True')),
-        change_state_false : () => dispatch(Auth_True('False'))
+        change_state_true : () => dispatch(Auth_True())
        
     }
 }
