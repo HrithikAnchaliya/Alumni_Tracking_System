@@ -1,20 +1,21 @@
-import React from 'react';
-import Eventcard from './Eventcard'
+import React from 'react'
 import { connect } from 'react-redux'
+import Jobcard from './Jobcard'
+import {
+    Link
+  } from "react-router-dom";
 
 
-
-class Events extends React.Component{
+class Jobs extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            all:null,
-            loading:true,
-            data:null
-        }
-
-    this.toArray = this.toArray.bind(this);
-
+            all: null,
+            loading : true,
+            data : null
+          }
+        
+          this.toArray = this.toArray.bind(this);
     }
 
     async componentDidMount(){
@@ -25,7 +26,7 @@ class Events extends React.Component{
             } 
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/events', values);
+        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/jobs', values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -48,31 +49,37 @@ class Events extends React.Component{
             Object.keys(stateall).forEach(key => {
                 dataarray.push(stateall[key])
             })
-            console.log(dataarray[0].title)
             this.setState({
                 data : dataarray,
                 loading : false
             })
         }
     }
+    
 
 
     render(){
         return(
             <div>
-                <br/>
-                <br/>
-                {!this.state.loading ? 
+                <button type='button'><Link to='/addjobs'>Add Job</Link></button>
+                { this.state.loading || !this.state.data ?
                 (
-                    <div>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
+                    <h5>Loading ..</h5>
                 ) : (
-                    <div>
-                    <br/>
-                    <h4>Loading ..</h4>
-                    </div>
-                )
+                    <div>{this.state.data.map((item,index) => 
+                    <Jobcard key={index} 
+                    id={item._id}
+                    title={item.workTitle} 
+                    company={item.company}
+                    industry={item.industry}
+                    for={item.typeOfJob}
+                    salary={item.salaryOffered}
+                    description={item.description}
+                    skill1={item.skillsRequired[0]}
+                    skill2={item.skillsRequired[1]}
+                    /> )}</div>
+                ) }
 
-                }
             </div>
         )
     }
@@ -85,8 +92,4 @@ const mapStatesToProps = state => {
 }
 
 
-export default connect(mapStatesToProps,null) (Events);
-
-
-
-
+export default connect(mapStatesToProps,null) (Jobs);

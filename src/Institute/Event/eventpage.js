@@ -1,103 +1,109 @@
 import React from 'react';
+import Attendees from './Attendees'
+import { connect } from 'react-redux'
+import EventInfo from './EventInfo'
 
-
-export default class Eventpage extends React.Component{
+class Eventpage extends React.Component{
     constructor(props){
         super(props)
         this.state = {                                     
             loading: true,
-            posts : null
+            posts : null,
+            jsonPosts : null
             }
-            // this.getdata = this.getdata.bind(this)    //No need to  bind anything bcaz of using the componentdidmount funct
+
+            this.toArray = this.toArray.bind(this);
         }          
-        /*{ <tbody>
-            {items.map(item => <ObjectRow key={item.id} name={item.name} />)}    //To loop the componrnt multiple times
-          </tbody> }*/                        // Not needed here just for peice of info
-
-     
-        async componentDidMount(){
-            const url = 'https://jsonplaceholder.typicode.com/posts';
-            const response = await fetch(url);
-            const posts = await response.json();
-            this.setState({posts:posts[0],loading:false})       //no name for the json so its "posts[0]" or else it would be "posts.nameofthejson[0]" to get he data.
-            // console.log(posts[0].title)                      //consoling it
+    
+       async componentDidMount(){
+        let locationId = this.props.computedMatch.params.id;
+        const values = {
+            method : "GET",
+            headers : {
+                'x-auth' : this.props.token,
+            } 
         }
-       
+        try{
+        const response = await fetch(`https://alumni-backend-app.herokuapp.com/alumni/events/${locationId}`, values);
+        console.log(response)
+        if (!response.ok) {
+            throw new Error(response.status); // 404
+          }
+        const json = await response.json();
+        console.log(json)
+        this.setState({
+            jsonPosts : json })
+        this.toArray()
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
 
-        render(){
-      return(
+    toArray = () => {
+        const dataarray = [];
+        if(this.state.jsonPosts)              
+        {
+            const stateall = this.state.jsonPosts.event.attendees;
+            console.log(stateall)
+            Object.keys(stateall).forEach(key => {
+                dataarray.push(stateall[key])
+            })
+            console.log(dataarray[0].firstName)
+            this.setState({
+                posts : dataarray,
+                loading : false
+            })
+        }
+    }
+
+    render(){
+        let eventId = this.props.computedMatch.params.id
+        console.log(eventId)
+        return(
             <div>
                 {this.state.loading || !this.state.posts ? 
-                (<h1>Loading...</h1>) : 
-                (<div>
-                     <div>
-                    <h1>{this.state.posts.title}</h1>
-                    <span>
-                        <span>The Time</span>
-                        <br/>
-                        <span>And Date</span>
-                    </span>
-                </div>
-                <div>
+                (<h1>Loading ..</h1>) : 
+                (
                     <div>
-                    <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>The Subtitle</strong>
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Date :</strong>
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Time :</strong>
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Location</strong>
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Spaeker</strong>
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Description</strong><br/>
-                       {this.state.posts.body}
-                        </p>
-                        <p>
-                       <br/>
-                        </p>
-                        <p>
-                       <strong>Speaker-Bio</strong>
-                        </p>
+                    <EventInfo
+                        title={this.state.jsonPosts.event.title}
+                        subtitle={this.state.jsonPosts.event.subtitle}
+                        venue={this.state.jsonPosts.event.venue}
+                        time={this.state.jsonPosts.event.time} date={this.state.jsonPosts.event.date}
+                        organiser={this.state.jsonPosts.event.organiserType}
+                        address={this.state.jsonPosts.event.location.address}
+                        city={this.state.jsonPosts.event.location.city}
+                        eventId = {eventId}
+                    />
                         <div>
-                            {/* {
-                                this.state.title.map((data,i) => {
-                                return <p key={i}>{data}</p>
-                                })
-
-                            }
-                         */}
+                            {this.state.jsonPosts.event.attendees[0] ? 
+                                (
+                            <div>
+                                <br/>
+                                <h5>People who are gonna attend this event</h5>
+                                <br/>
+                                <div> {this.state.posts.map((item,number) => 
+                                <Attendees key={number} id={item._id} name={item.firstName} />
+                                )} </div>
+                            </div>
+                            ) : ( null )}
+                                <br/>
+                                <br/>
                         </div>
-                        <button type='submit'>Lets Go</button>
                     </div>
-                </div>
-                </div>)
-                }
+                )}
             </div>
         );
     }
 }
+
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (Eventpage);
