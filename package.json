@@ -2,10 +2,6 @@
   "name": "sideman",
   "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "engines": {
-    "node": "13.5.x",
-    "npm": "6.13.x"
-  },
   "dependencies": {
     "antd": "^4.1.4",
     "axios": "^0.19.2",
