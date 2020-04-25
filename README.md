@@ -1,16 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-For Quick-Guide, Read the Wiki Page of this Repository. [Wiki](https://github.com/HrithikAnchaliya/Alumni_Tracking_System/wiki)
-
 ## Available Scripts
 
 In the project directory, you can run:
-
-Install all the dependency by running theis command.
-
-### `npm install`
-
-And after that run this command to run the project. 
 
 ### `npm start`
 

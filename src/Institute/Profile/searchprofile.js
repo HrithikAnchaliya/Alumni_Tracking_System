@@ -15,7 +15,9 @@ export default class Searchprofile extends React.Component{
           this.aftergetdata = this.aftergetdata.bind(this);
           this.onChangefunc = this.onChangefunc.bind(this);
     }
-        async getdata(){
+
+        async getdata(e){
+            e.preventDefault();
             const url = 'https://jsonplaceholder.typicode.com/users'
             const respones = await fetch(url);
             const users = await respones.json();
@@ -34,8 +36,8 @@ export default class Searchprofile extends React.Component{
                     dataarray.push(values[key])
                 })
                 this.setState({
-                    arrayvalue:dataarray,
-                    loading:false
+                    arrayvalue : dataarray,
+                    loading : false
                 });
                 // return(
                 //     <div>{dataarray.map(data => <Profilecard key={data.id} name={data.name} website={data.website}/>)} </div>
@@ -63,28 +65,32 @@ export default class Searchprofile extends React.Component{
         return(
             <div>
                 <form>
-                <h1>Search</h1>
-                <br/>
-                {/* <h1>{this.state.value.name}</h1> */}
-                <p>Search profiles</p>
-                <br/>
-                <input type='text' id='profileinput' autoComplete='off' value={this.state.profilesearch} onChange={this.onChangefunc} name='profilesearch'/> 
-                <br/>
-                <button type='submit' id='profilesubmit'>Submit</button> 
-                <button onClick={this.getdata}>Done</button>
+
+                        <h1>Search</h1>
+                    <br/>
+                    {/* <h1>{this.state.value.name}</h1> */}
+                        <p>Search profiles</p>
+                    <br/>
+                        <input type='text' id='profileinput' autoComplete='off' value={this.state.profilesearch} onChange={this.onChangefunc} name='profilesearch'/> 
+                    <br/>
+                        <button type='submit' id='profilesubmit'>Submit</button> 
+                        <button onClick={this.getdata}>Done</button>
 
                 </form>
                 <div>
-                <Filter/>
-                {!this.state.loading ? (
-                    <div>{this.state.arrayvalue.map(data => <Profilecard key={data.id} name={data.name} website={data.website}/>)} </div>
-                ) : (<h5>Search Something</h5>)}
+
+                    <Filter/>
+                    {!this.state.loading ? (
+                        <div>{this.state.arrayvalue.map(data => <Profilecard key={data.id} id={data.id}name={data.name} website={data.website}/>)} </div>
+                    ) : (<h5>Search Something</h5>)}
+
                 </div>
                 
             </div>
         );
     }
 }
+
 
 export class Filter extends React.Component{
     render(){
@@ -109,11 +115,11 @@ class Filteryear extends React.Component{
                     <div>
                         <input type='text' name='inputtedtext'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="2000"></input>
-                        <label for="vehicle1">2000</label><br/>
+                        <label htmlFor="vehicle1">2000</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="20001"></input>
-                        <label for="vehicle2">20001</label><br/>
+                        <label htmlFor="vehicle2">20001</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="2002"></input>
-                        <label for="vehicle3">2002</label><br/><br/>
+                        <label htmlFor="vehicle3">2002</label><br/><br/>
                         <input type="submit" value="Submit"></input>
                         <br/>
                         <br/>
@@ -134,21 +140,21 @@ class Filteryear extends React.Component{
                  <div id='Course'>
                  <input type='text' name='inputtedEdText'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="B.Education"></input>
-                        <label for="vehicle1">B.Education</label><br/>
+                        <label htmlFor="vehicle1">B.Education</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="B.Tech"></input>
-                        <label for="vehicle2">B.Tech</label><br/>
+                        <label htmlFor="vehicle2">B.Tech</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="B.Arch"></input>
-                        <label for="vehicle3">B.Arch</label><br/><br/>
+                        <label htmlFor="vehicle3">B.Arch</label><br/><br/>
                         <input type="submit" value="Submit"></input>
                 </div>
                 <div id='Branch'>
                 <input type='text' name='inputtedEdText'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="computer Science"></input>
-                        <label for="vehicle1">Computer Scinece</label><br/>
+                        <label htmlFor="vehicle1">Computer Scinece</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="EEE"></input>
-                        <label for="vehicle2">EEE</label><br/>
+                        <label htmlFor="vehicle2">EEE</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="Arch"></input>
-                        <label for="vehicle3">Arch</label><br/><br/>
+                        <label htmlFor="vehicle3">Arch</label><br/><br/>
                         <input type="submit" value="Submit"></input>
                 </div>
                 </div>
@@ -167,31 +173,31 @@ class Filteryear extends React.Component{
                 <div id='Country'>
                 <input type='text' name='inputtedEdText'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="India"></input>
-                        <label for="vehicle1">India</label><br/>
+                        <label htmlFor="vehicle1">India</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="USA"></input>
-                        <label for="vehicle2">USA</label><br/>
+                        <label htmlFor="vehicle2">USA</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="Canada"></input>
-                        <label for="vehicle3">Canada</label><br/><br/>
+                        <label htmlFor="vehicle3">Canada</label><br/><br/>
                         <input type="submit" value="Submit"></input>  
                 </div>
                 <div id='State'>
                 <input type='text' name='inputtedEdText'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="Tamil Nadu"></input>
-                        <label for="vehicle1">Tamil Nadu</label><br/>
+                        <label htmlFor="vehicle1">Tamil Nadu</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="Goa"></input>
-                        <label for="vehicle2">Goa</label><br/>
+                        <label htmlFor="vehicle2">Goa</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="Kashmir"></input>
-                        <label for="vehicle3">Kashmir</label><br/><br/>
+                        <label htmlFor="vehicle3">Kashmir</label><br/><br/>
                         <input type="submit" value="Submit"></input>  
                 </div>
                 <div id='City'>
                 <input type='text' name='inputtedEdText'></input><br/>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="Chennai"></input>
-                        <label for="vehicle1">Chennai</label><br/>
+                        <label htmlFor="vehicle1">Chennai</label><br/>
                         <input type="checkbox" id="vehicle2" name="vehicle2" value="bangalore"></input>
-                        <label for="vehicle2">bangalore</label><br/>
+                        <label htmlFor="vehicle2">bangalore</label><br/>
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="New Delhi"></input>
-                        <label for="vehicle3">New Delhi</label><br/><br/>
+                        <label htmlFor="vehicle3">New Delhi</label><br/><br/>
                         <input type="submit" value="Submit"></input>  
                 </div>
                 </div>

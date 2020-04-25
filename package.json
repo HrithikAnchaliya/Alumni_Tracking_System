@@ -1,18 +1,29 @@
 {
   "name": "sideman",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "engines": {
+    "node": "13.5.x",
+    "npm": "6.13.x"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.1.4",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "mdbreact": "^4.25.3",
-    "react": "^16.13.0",
-    "react-bootstrap": "^1.0.0-beta.17",
-    "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "bulma": "^0.8.2",
+    "geojson-world-map": "^0.0.2",
+    "leaflet": "^1.6.0",
+    "leaflet.markercluster": "^1.4.1",
+    "mdbreact": "^4.25.6",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^16.13.1",
+    "react-leaflet": "^2.6.3",
+    "react-leaflet-markercluster": "^2.0.0",
+    "react-redux": "^7.2.0",
+    "react-scripts": "^3.4.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
