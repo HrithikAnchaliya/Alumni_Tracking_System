@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Run `npm init` 
+## Initial Command
+
+Run ### `npm init` 
 to install the node modules.
 
 ## Available Scripts
