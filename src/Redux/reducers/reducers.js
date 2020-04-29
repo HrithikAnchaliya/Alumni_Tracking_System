@@ -46,13 +46,13 @@ const authstate = (state = intialState, action) => {
             return{
              ...state,
                 Auth_token: null,
-                Auth_state : !state.Auth_state
+                Auth_state : false
             }
         case 'Add_Token':
           return{
             ...state,
               Auth_token : action.Auth_token,
-              Auth_state : !state.Auth_state
+              Auth_state : true
           }
         default:
             return state;

@@ -61,6 +61,7 @@ export default class Addjobs extends React.Component{
     }}
 
     render(){
+        
         const { company, workTitle, industry, typeOfJob,salaryOffered,
             experience,country,state ,city ,description ,skillsRequired ,qualification ,contactInfo,skills_array, qualif_array } =  this.state
         

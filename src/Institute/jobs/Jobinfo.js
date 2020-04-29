@@ -10,7 +10,8 @@ class Jobinfo extends React.Component{
         this.toPost = this.toPost.bind(this);
           }
 
-    async toGather(){
+    async toGather(e){
+          e.preventDefault();
           await this.props.toArrayskill()                       //function decomposition
           await this.props.toArrayQualif()
 
@@ -52,16 +53,17 @@ class Jobinfo extends React.Component{
     }
 
     render(){
-
+        
         const { salaryOffered,description ,skillsRequired ,qualification,experience ,contactInfo } = this.props.values;
 
         return(
             <div>
-                 <form>
+                 <form
+                 onSubmit={this.toGather} >
                     <div id='addjobcontainer' className="container is-fluid">
                     <div className="notification">
                     <h5>Company</h5>
-                    <select  name="company"  onChange={this.props.theonChange}>
+                    <select  name="company"  required onChange={this.props.theonChange}>
                         <option value="">Select Company</option>
                         <option value="microsoft">Microsoft</option>
                         <option value="google">Google</option>
@@ -70,7 +72,7 @@ class Jobinfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Work - Title</h5>
-                    <select  name="workTitle"  onChange={this.props.theonChange}>
+                    <select  name="workTitle"  required onChange={this.props.theonChange}>
                         <option value="">select Title</option>
                         <option value="front end dev">Front-End Developer</option>
                         <option value="back end dev">Back-End Developer</option>
@@ -80,7 +82,7 @@ class Jobinfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Industry</h5>
-                    <select  name="industry"  onChange={this.props.theonChange}>
+                    <select  name="industry" required onChange={this.props.theonChange}>
                         <option value="">select Industry</option>
                         <option value="IT">IT</option>
                         <option value="automobile">Automobile</option>
@@ -89,7 +91,7 @@ class Jobinfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Type Of Work</h5>
-                    <select name="typeOfJob"  onChange={this.props.theonChange}>
+                    <select name="typeOfJob" required onChange={this.props.theonChange}>
                         <option value="">select Type</option>
                         <option value='full-time'> Full  Time</option>
                         <option value='intern'>Internship</option>
@@ -97,40 +99,40 @@ class Jobinfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Salary Offered</h5>
-                    <input  name="salaryOffered" value={salaryOffered} onChange={this.props.theonChange}></input>
+                    <input  name="salaryOffered" value={salaryOffered} required onChange={this.props.theonChange}></input>
                     <br/>
                     <h5>Experience</h5> 
-                        <input name='experience' type='number' placeholder='Range is from 1 to 5' onChange={this.props.theonChange} value={experience}></input>
+                        <input name='experience' type='number'  required pattern='[1-5]{1}' placeholder='Range is from 1 to 5'  onChange={this.props.theonChange} value={experience}></input>
                     <br/>
                     <h6>Country</h6>
-                    <select name="country" onChange={this.props.theonChange} className="countries" id="countryId">
+                    <select name="country" onChange={this.props.theonChange} required className="countries" id="countryId">
                         <option value="">Select Country</option>
                     </select>
                     <br/>
                     <h6>State</h6>
-                    <select name="state"  onChange={this.props.theonChange} className="states" id="stateId">
+                    <select name="state"  onChange={this.props.theonChange} required className="states" id="stateId">
                         <option value="">Select State</option>
                     </select>
                     <br/>
                     <h6>City</h6>
-                    <select name="city"  onChange={this.props.theonChange} className="cities" id="cityId">
+                    <select name="city"  onChange={this.props.theonChange} required className="cities" id="cityId">
                         <option value="">Select City</option>
                     </select>
                     <br/>
                     <h5>Description</h5>
-                    <textarea name="description"  value={description} onChange={this.props.theonChange} ></textarea>
+                    <textarea name="description" required  value={description} onChange={this.props.theonChange} ></textarea>
                     <br/>
                     <h5>Skills Required</h5>
-                    <textarea name="skillsRequired" value={skillsRequired} placeholder='" , " to seperate the skill' onChange={this.props.theonChange} ></textarea>
+                    <textarea name="skillsRequired" required value={skillsRequired} placeholder='" , " to seperate the skill' onChange={this.props.theonChange} ></textarea>
                     <br/>
                     <h5>Qualification</h5>
-                    <textarea name="qualification" value={qualification} placeholder='" , " to seperate the skill' onChange={this.props.theonChange} ></textarea>
+                    <textarea name="qualification" required value={qualification} placeholder='" , " to seperate the skill' onChange={this.props.theonChange} ></textarea>
                     <br/>
                     <h5>External Link</h5>
-                    <input type='url' value={contactInfo} name='contactInfo'onChange={this.props.theonChange}></input>
+                    <input type='url' value={contactInfo} required  name='contactInfo'onChange={this.props.theonChange}></input>
                     <br/>
                     <br/>
-                    <button type='button' onClick={this.toGather} >Submit the Job</button>
+                    <button type='submit'  >Submit the Job</button>
                     </div>
                     </div>
                 </form>

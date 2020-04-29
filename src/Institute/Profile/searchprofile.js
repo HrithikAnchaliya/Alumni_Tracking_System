@@ -1,5 +1,6 @@
 import React from 'react';
 import Profilecard from './profilecard.js';
+import 'bulma/css/bulma.css';
 
 export default class Searchprofile extends React.Component{
     constructor(props){
@@ -39,9 +40,6 @@ export default class Searchprofile extends React.Component{
                     arrayvalue : dataarray,
                     loading : false
                 });
-                // return(
-                //     <div>{dataarray.map(data => <Profilecard key={data.id} name={data.name} website={data.website}/>)} </div>
-                // );
             }
         }
 
@@ -64,26 +62,32 @@ export default class Searchprofile extends React.Component{
 
         return(
             <div>
+                
+                <div>
+                    <div className="container">
+                    <div className="notification">
                 <form>
 
-                        <h1>Search</h1>
+                    <h1>Search</h1>
                     <br/>
-                    {/* <h1>{this.state.value.name}</h1> */}
-                        <p>Search profiles</p>
+                    <p>Search profiles</p>
                     <br/>
-                        <input type='text' id='profileinput' autoComplete='off' value={this.state.profilesearch} onChange={this.onChangefunc} name='profilesearch'/> 
+                    <input type='text' id='profileinput' autoComplete='off' value={this.state.profilesearch} onChange={this.onChangefunc} name='profilesearch'/> 
                     <br/>
-                        <button type='submit' id='profilesubmit'>Submit</button> 
-                        <button onClick={this.getdata}>Done</button>
+                    <button type='submit' id='profilesubmit'>Submit</button> 
+                    <button onClick={this.getdata}>Done</button>
 
                 </form>
-                <div>
-
                     <Filter/>
+                    </div>
+                    </div>
+                    <div className="container">
+                    <div className="notification">
                     {!this.state.loading ? (
                         <div>{this.state.arrayvalue.map(data => <Profilecard key={data.id} id={data.id}name={data.name} website={data.website}/>)} </div>
                     ) : (<h5>Search Something</h5>)}
-
+                    </div>
+                    </div>
                 </div>
                 
             </div>
