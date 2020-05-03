@@ -15,7 +15,7 @@ class Navigation extends React.Component{
                 </Link>
               </li>
               <li>
-                <Link to='/profilepage'>
+                <Link to='/user'>
                   Profile
                 </Link>
               </li>
@@ -32,6 +32,11 @@ class Navigation extends React.Component{
               <li>
                 <Link to='/jobs'>
                   Jobs
+                </Link>
+              </li>
+              <li>
+                <Link to='/addnewsletter'>
+                  Newsletter
                 </Link>
               </li>
               <li>

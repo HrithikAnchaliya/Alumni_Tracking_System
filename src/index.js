@@ -24,9 +24,11 @@ import InterviewPage from './Institute/Interview/Interviewpage'
 import Interviews from './Institute/Interview/Interviews'
 import Addinterview from './Institute/Interview/Addinterview'
 import RaiseTicket from './Institute/Tickets/RaiseTicket'
+import Addnewsletter from './Institute/Newsletter/Addnewsletter'
 import { ProtectedRoute, LoginRoute, LogoutRoute } from './Institute/Protectedroutes/index'
 import { Provider } from 'react-redux';
 import store from './Redux/store/storage';
+import UserProfile from './Institute/temp_Profile/UserProfile';
 
 
 class App extends React.Component {
@@ -43,6 +45,7 @@ class App extends React.Component {
             <LogoutRoute path='/logoff' component={Logoff}/>
             <ProtectedRoute path='/searchprofile' component={Searchprofile}/>
             <Route path='/profilepage' component={Profilepage}/>
+            <Route path='/user' component={UserProfile}/>
             <ProtectedRoute path='/map' component={GeoJsonMap}/>
             <ProtectedRoute path={`/events/:id`} component={Eventpage}/>
             <ProtectedRoute path='/events/addevent' exact component={Addevents}/>
@@ -54,6 +57,7 @@ class App extends React.Component {
             <ProtectedRoute path='/interviews' exact component={Interviews}/>
             <ProtectedRoute path='/addinterview' exact component={Addinterview}/>
             <ProtectedRoute path='/raiseticket' exact component={RaiseTicket}/>
+            <ProtectedRoute path='/addnewsletter' exact component={Addnewsletter}/>
             <LoginRoute path='/register' component={Register}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
