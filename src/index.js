@@ -12,7 +12,7 @@ import Login from './Institute/Login/login.js';
 import Logoff from './Institute/Login/logoff'
 import Register from './Institute/Register/register'
 import Profilepage from './Institute/Profile/profilepage.js';
-import Searchprofile from './Institute/Profile/searchprofile.js'
+// import Searchprofile from './Institute/Profile/searchprofile.js'
 import GeoJsonMap from './Institute/Map/leafletmap'
 import Events from './Institute/Event/events.js';
 import Addevents from './Institute/Event/addevent.js';
@@ -29,6 +29,9 @@ import { ProtectedRoute, LoginRoute, LogoutRoute } from './Institute/Protectedro
 import { Provider } from 'react-redux';
 import store from './Redux/store/storage';
 import UserProfile from './Institute/temp_Profile/UserProfile';
+import EditPage from './Institute/temp_Profile/EditPage'
+import users from './Institute/Search Profile/users';
+import OtherProfile from './Institute/Search Profile/OtherProfile';
 
 
 class App extends React.Component {
@@ -43,9 +46,11 @@ class App extends React.Component {
             <Route path='/' exact component={Home}/>
             <LoginRoute path='/login' component={Login}/>
             <LogoutRoute path='/logoff' component={Logoff}/>
-            <ProtectedRoute path='/searchprofile' component={Searchprofile}/>
+            <ProtectedRoute path='/searchprofile' component={users}/>
+            <ProtectedRoute path={`/profile/:id`} component={OtherProfile}/>
             <Route path='/profilepage' component={Profilepage}/>
-            <Route path='/user' component={UserProfile}/>
+            <ProtectedRoute path='/user' component={UserProfile}/>
+            <ProtectedRoute path='/edit' component={EditPage}/>
             <ProtectedRoute path='/map' component={GeoJsonMap}/>
             <ProtectedRoute path={`/events/:id`} component={Eventpage}/>
             <ProtectedRoute path='/events/addevent' exact component={Addevents}/>

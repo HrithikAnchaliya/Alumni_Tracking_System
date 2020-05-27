@@ -35,30 +35,26 @@ export default class Register extends React.Component{
             facebook : '',
             linkedin : '',
             skills : '',
-            skills_array : '',
+            education_input : [],
+            work_input : [],
             page : 1
         }
         
           this.onChangefuc = this.onChangefuc.bind(this);
           this.goNext = this.goNext.bind(this);
           this.goBack = this.goBack.bind(this);
-          this.toArray = this.toArray.bind(this);
           this.toNumber = this.toNumber.bind(this);
-          
+          this.Addfield = this.Addfield.bind(this);
+          this.Deletefield = this.Deletefield.bind(this);
+          this.AddWorkField = this.AddWorkField.bind(this);
+          this.DeleteWorkField = this.DeleteWorkField.bind(this);
+
     }
 
 
     toNumber = (e) => {
         this.setState({
             [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
-        })
-    }
-
-    toArray = () => {
-        const listToArray = this.state.skills.split(',');
-        console.log(listToArray)
-        this.setState({
-            skills_array : listToArray
         })
     }
 
@@ -81,18 +77,52 @@ export default class Register extends React.Component{
             page : page - 1
         })
     }
+
+    Addfield = () => { 
+        const field = this.state.education_input;
+        const size = field.length + 1;
+        field.push(size)
+        this.setState({
+            education_input : field
+        })
+    }
+
+    Deletefield = () => {
+        const field = this.state.education_input;
+        field.pop()
+        this.setState({
+            education_input : field
+        })
+    }
+
+    AddWorkField = () => { 
+        const field = this.state.work_input;
+        const size = field.length + 1;
+        field.push(size)
+        this.setState({
+            work_input : field
+        })
+    }
+
+    DeleteWorkField = () => {
+        const field = this.state.work_input;
+        field.pop()
+        this.setState({
+            work_input : field
+        })
+    }
     
 
     render(){
-        console.log(this.state)
+        // console.log(this.state)
 
         const {  page, firstName, lastName, country, state, city, collegeName, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
-            email, password, mobileNumber, facebook, linkedin, skills , skills_array } = this.state
+            email, password, mobileNumber, facebook, linkedin, skills , skills_array, education_input } = this.state
 
         const values = {  firstName, lastName, country, state, city, collegeName, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
-            email, password, mobileNumber, facebook, linkedin, skills, skills_array, page }
+            email, password, mobileNumber, facebook, linkedin, skills, skills_array, page, education_input }
 
 
 
@@ -105,10 +135,14 @@ export default class Register extends React.Component{
                 goNext={this.goNext}/>
             case 2:
                 return <Workform
-                values={values}
+                field={this.state}
                 handlechg={this.onChangefuc}
                 goNext={this.goNext}
-                goBack={this.goBack}/>
+                goBack={this.goBack}
+                Addfield={this.Addfield}
+                Deletefield={this.Deletefield}
+                AddWorkField={this.AddWorkField}
+                DeleteWorkField={this.DeleteWorkField}/>
             case 3:
                 return <Standardform
                 values={values}
@@ -118,9 +152,8 @@ export default class Register extends React.Component{
                 goBack={this.goBack}/>
             case 4:
                 return <Confirmationform
-                values={values}
-                goBack={this.goBack}
-                Arraying={this.toArray}/>
+                values={this.state}
+                goBack={this.goBack}/>
             default:
                 return <h6>What up .. (under dev)</h6>
         }

@@ -11,6 +11,8 @@ export default class Basicform extends React.Component{
         const {  firstName, lastName, country, state, city, collegeName, startYear, endYear  } = this.props.values;
         return(
             <div>
+                <div className="container is-fluid">
+                    <div className="notification">
                 <h5>Register To Login</h5>
                 <br/>
                 <form>
@@ -27,7 +29,7 @@ export default class Basicform extends React.Component{
                         <option value="">Select Country</option>
                     </select>
                     <br/>
-                    <h7>Selected Country : {country}</h7>
+                    <span>Selected Country : {country}</span>
                     <br/>
                     <br/>
                     <h6>State</h6>
@@ -35,7 +37,7 @@ export default class Basicform extends React.Component{
                         <option value="">Select State</option>
                     </select>
                     <br/>
-                    <h7>Selected State : {state}</h7>
+                    <span>Selected State : {state}</span>
                     <br/>
                     <br/>
                     <h6>City</h6>
@@ -43,7 +45,7 @@ export default class Basicform extends React.Component{
                         <option value="">Select City</option>
                     </select>
                     <br/>
-                    <h7>Selected City : {city}</h7>
+                    <span>Selected City : {city}</span>
                     <br/>
                     <br/>
                     <h6>College Name</h6>
@@ -54,7 +56,7 @@ export default class Basicform extends React.Component{
                         <option value="mnm">MNM</option>
                     </select>
                     <br/>
-                    <h7>Selected College : {collegeName}</h7>
+                    <span>Selected College : {collegeName}</span>
                     <br/>
                     <br/>
                     <h6>Start Year</h6>
@@ -67,6 +69,8 @@ export default class Basicform extends React.Component{
                     <br/>
                     <button type='button' onClick={this.toGoNext}>Next</button>
                 </form>
+                </div>
+                </div>
             </div>
         )
     }
