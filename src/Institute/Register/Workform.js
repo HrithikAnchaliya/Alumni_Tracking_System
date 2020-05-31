@@ -74,13 +74,13 @@ export default class Workform extends React.Component{
                                 <div key={index - 1}>
                                     <h5>Add Education</h5>
                                     <span>School/University/College</span>
-                                    <input onChange={this.props.handlechg} name={`school${index}`}  type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`school${index}`} defaultValue={eval('State.school'+index)} type='text'></input>
                                     <span>Course</span>
-                                    <input onChange={this.props.handlechg} name={`course${index}`}  type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`course${index}`} defaultValue={eval("State.course"+index)} type='text'></input>
                                     <span>Start - Year</span>
-                                    <input onChange={this.props.handlechg} name={`eduStartYear${index}`}  type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`eduStartYear${index}`} defaultValue={eval("State.eduStartYear"+index)} type='text'></input>
                                     <span>End - Year</span>
-                                    <input onChange={this.props.handlechg} name={`eduEndYear${index}`}  type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`eduEndYear${index}`} defaultValue={eval("State.eduEndYear"+index)} type='text'></input>
                                     <br/>
                                     <br/>
                                 </div>
@@ -146,25 +146,3 @@ export default class Workform extends React.Component{
         )
     }
 }
-
-
-// <div>
-//                         {(education_input.length !== 0) ? ( 
-//                             education_input.map((index) => (
-//                                 <div key={index - 1}>
-//                                     <h5>Add Education</h5>
-//                                     <span>School/University/College</span>
-//                                     <input onChange={this.props.handlechg} name={`school${index}`} defaultValue={eval('State.school'+index)} type='text'></input>
-//                                     <span>Course</span>
-//                                     <input onChange={this.props.handlechg} name={`course${index}`} defaultValue={eval("State.course"+index)} type='text'></input>
-//                                     <span>Start - Year</span>
-//                                     <input onChange={this.props.handlechg} name={`eduStartYear${index}`} defaultValue={eval("State.eduStartYear"+index)} type='text'></input>
-//                                     <span>End - Year</span>
-//                                     <input onChange={this.props.handlechg} name={`eduEndYear${index}`} defaultValue={eval("State.eduEndYear"+index)} type='text'></input>
-//                                     <br/>
-//                                     <br/>
-//                                 </div>
-//                             ))) : (null)
-//                         }
-//                         <br/>
-//                     </div>
