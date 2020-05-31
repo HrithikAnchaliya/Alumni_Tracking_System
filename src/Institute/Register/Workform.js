@@ -1,4 +1,5 @@
 /*eslint-disable no-eval */
+
 import React from 'react';
 
 
@@ -22,6 +23,8 @@ export default class Workform extends React.Component{
 
     render(){
         const { work_input, education_input, degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear } = this.props.field
+        // eslint-disable-next-line
+        const State = this.props.field;
         return(
                 <div>
                     <div className="container is-fluid">
@@ -71,13 +74,13 @@ export default class Workform extends React.Component{
                                 <div key={index - 1}>
                                     <h5>Add Education</h5>
                                     <span>School/University/College</span>
-                                    <input onChange={this.props.handlechg} name={`school${index}`} defaultValue={eval("this.props.field.school"+index)} type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`school${index}`}  type='text'></input>
                                     <span>Course</span>
-                                    <input onChange={this.props.handlechg} name={`course${index}`} defaultValue={eval("this.props.field.course"+index)} type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`course${index}`}  type='text'></input>
                                     <span>Start - Year</span>
-                                    <input onChange={this.props.handlechg} name={`eduStartYear${index}`} defaultValue={eval("this.props.field.eduStartYear"+index)} type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`eduStartYear${index}`}  type='text'></input>
                                     <span>End - Year</span>
-                                    <input onChange={this.props.handlechg} name={`eduEndYear${index}`} defaultValue={eval("this.props.field.eduEndYear"+index)} type='text'></input>
+                                    <input onChange={this.props.handlechg} name={`eduEndYear${index}`}  type='text'></input>
                                     <br/>
                                     <br/>
                                 </div>
@@ -112,15 +115,15 @@ export default class Workform extends React.Component{
                                 <div key={index - 1}>
                                     <h5>Add Work Experince</h5>
                                     <span>Work Title</span>
-                                    <input name={`workTitle${index}`} onChange={this.props.handlechg} defaultValue={eval("this.props.field.workTitle"+index)} type='text'></input>
+                                    <input name={`workTitle${index}`} onChange={this.props.handlechg} defaultValue={eval("State.workTitle"+index)} type='text'></input>
                                     <span>Company</span>
-                                    <input type='text' onChange={this.props.handlechg} defaultValue={eval("this.props.field.company"+index)} name={`company${index}`}></input>
+                                    <input type='text' onChange={this.props.handlechg} defaultValue={eval("State.company"+index)} name={`company${index}`}></input>
                                     <span>Industry</span>
-                                    <input name={`industry${index}`} onChange={this.props.handlechg} defaultValue={eval("this.props.field.industry"+index)} type='text'></input>
+                                    <input name={`industry${index}`} onChange={this.props.handlechg} defaultValue={eval("State.industry"+index)} type='text'></input>
                                     <span>Start - Year</span>
-                                    <input name={`workStartYear${index}`} onChange={this.props.handlechg} defaultValue={eval("this.props.field.workStartYear"+index)} type='text'></input>
+                                    <input name={`workStartYear${index}`} onChange={this.props.handlechg} defaultValue={eval("State.workStartYear"+index)} type='text'></input>
                                     <span>End - Year</span>
-                                    <input name={`workEndYear${index}`} onChange={this.props.handlechg} defaultValue={eval("this.props.field.workEndYear"+index)} type='text'></input>
+                                    <input name={`workEndYear${index}`} onChange={this.props.handlechg} defaultValue={eval("State.workEndYear"+index)} type='text'></input>
                                     <br/>
                                     <br/>
                                 </div>
@@ -143,3 +146,25 @@ export default class Workform extends React.Component{
         )
     }
 }
+
+
+// <div>
+//                         {(education_input.length !== 0) ? ( 
+//                             education_input.map((index) => (
+//                                 <div key={index - 1}>
+//                                     <h5>Add Education</h5>
+//                                     <span>School/University/College</span>
+//                                     <input onChange={this.props.handlechg} name={`school${index}`} defaultValue={eval('State.school'+index)} type='text'></input>
+//                                     <span>Course</span>
+//                                     <input onChange={this.props.handlechg} name={`course${index}`} defaultValue={eval("State.course"+index)} type='text'></input>
+//                                     <span>Start - Year</span>
+//                                     <input onChange={this.props.handlechg} name={`eduStartYear${index}`} defaultValue={eval("State.eduStartYear"+index)} type='text'></input>
+//                                     <span>End - Year</span>
+//                                     <input onChange={this.props.handlechg} name={`eduEndYear${index}`} defaultValue={eval("State.eduEndYear"+index)} type='text'></input>
+//                                     <br/>
+//                                     <br/>
+//                                 </div>
+//                             ))) : (null)
+//                         }
+//                         <br/>
+//                     </div>
