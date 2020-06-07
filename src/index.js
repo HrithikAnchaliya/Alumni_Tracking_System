@@ -32,6 +32,7 @@ import UserProfile from './Institute/temp_Profile/UserProfile';
 import EditPage from './Institute/temp_Profile/EditPage'
 import users from './Institute/Search Profile/users';
 import OtherProfile from './Institute/Search Profile/OtherProfile';
+import Setup from './Institute/Funds/setup';
 
 
 class App extends React.Component {
@@ -64,6 +65,7 @@ class App extends React.Component {
             <ProtectedRoute path='/raiseticket' exact component={RaiseTicket}/>
             <ProtectedRoute path='/addnewsletter' exact component={Addnewsletter}/>
             <LoginRoute path='/register' component={Register}/>
+            <ProtectedRoute path='/funds' exact component={Setup}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
         </div>

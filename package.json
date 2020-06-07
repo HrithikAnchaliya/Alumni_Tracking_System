@@ -6,6 +6,8 @@
   "repository": "github:HrithikAnchaliya/Alumni_Tracking_System",
   "license": "UNLICENSED",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.6.0",
     "antd": "^4.2.5",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
@@ -13,6 +15,7 @@
     "bulma": "^0.8.2",
     "countries-cities": "0.0.11",
     "geojson-world-map": "^0.0.2",
+    "immutability-helper": "^3.0.2",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
     "mdbreact": "^4.27.0",

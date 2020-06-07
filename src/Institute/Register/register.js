@@ -1,4 +1,4 @@
-import React from 'react';                  /*This Module needs to be Optimized*/
+import React from 'react';
 import Basicform from './Basicform'
 import Workform from './Workform'
 import Standardform from './Standardform'
@@ -114,7 +114,7 @@ export default class Register extends React.Component{
     
 
     render(){
-        // console.log(this.state)
+        console.log(this.state)
 
         const {  page, firstName, lastName, country, state, city, collegeName, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
