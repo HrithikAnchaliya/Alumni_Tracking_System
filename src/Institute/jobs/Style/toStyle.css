@@ -1,0 +1,47 @@
+#jobcard-div {
+    top:50px;
+    background-color: white;
+}
+#Jobcard-id {
+    background-color: white;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#AddButton-Link {
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+}
+
+#Addbutton-class {
+    width: 100%;
+    height: 70px;
+    border: 0;
+    background-color: black;
+    animation-timing-function: ease;
+    animation-name: rollin;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes rollin {
+    from {width : 100%; height: 0;}
+    to {width: 100%; height: 70px;}
+}
+
+#Addbutton-class:hover {
+    width: 100%;
+    height: 70px;
+    border: 0;
+    background-color: rgb(29, 37, 29);
+}
+
+#Loading-id {
+    padding-top: 40px;
+    text-align: center;
+}

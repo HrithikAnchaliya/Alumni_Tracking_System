@@ -6,8 +6,6 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import './map.css'
 
 
-
-
 class GeoJsonMap extends React.Component {
 
   constructor(props) {

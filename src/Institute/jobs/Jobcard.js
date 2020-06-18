@@ -30,7 +30,6 @@ export default class Jobcard extends React.Component{
                 </div>
                 <footer style={{width:'320px',height:'50px'}} className="card-footer">
                 <Link style={{"textDecoration":'none'}} className="card-footer-item" to={`/jobs/${this.props.id}`}>Link</Link>
-        
                 </footer>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link }from 'react-router-dom'
 
 export default class UserInfo extends React.Component{
     constructor(props){
@@ -13,6 +14,7 @@ export default class UserInfo extends React.Component{
         return(
             <div className="container">
                 <div className="notification">
+                    <Link style={{"textDecoration":'none'}} className="card-footer-item" to='/edit'>Edit</Link>
                     <span>
                     <hr/>
                     <h5>Profile</h5>

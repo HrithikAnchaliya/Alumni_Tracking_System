@@ -106,7 +106,7 @@ export default class Workform extends React.Component{
                     <h5>Education</h5>
                         {(education.length !== 0) ? ( 
                             education.map((value, index) => (
-                                <div key={index}>
+                                <div key={value.school}>
                                     <br/>
                                     <span>School/University/College</span>
                                     <input onChange={this.forEducation} id={index} name='school' defaultValue={value.school} type='text'></input>
@@ -154,7 +154,7 @@ export default class Workform extends React.Component{
                     <h5>Work Experince</h5>
                         {(workExperiences.length !== 0) ? ( 
                             workExperiences.map((value, index) => (
-                                <div key={index}>
+                                <div key={value.workTitle}>
                                     <span>Work Title</span>
                                     <input name="workTitle" id={index} onChange={this.forWork} defaultValue={value.workTitle} type='text'></input>
                                     <span>Company</span>

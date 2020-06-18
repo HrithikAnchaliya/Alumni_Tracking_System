@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Jobcard from './Jobcard'
-import {
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner'
+import './Style/toStyle.css'
 
 
 class Jobs extends React.Component{
@@ -61,12 +61,19 @@ class Jobs extends React.Component{
     render(){
         return(
             <div>
-                <button type='button'><Link to='/addjobs'>Add Job</Link></button>
+                <div className="container div-Container">
+                <div className="notification" id="jobcard-div">
+                <button id="Addbutton-class" type='button'><Link id='AddButton-Link'  to='/addjobs'>Add Job</Link></button>
                 { this.state.loading || !this.state.data ?
                 (
-                    <h5>Loading ..</h5>
+                    <div id='Loading-id'>
+                    <Spinner  animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    </div>
+                    // null
                 ) : (
-                    <div>{this.state.data.map((item,index) => 
+                    <div id="Jobcard-id">{this.state.data.map((item,index) => 
                     <Jobcard key={index} 
                     id={item._id}
                     title={item.workTitle} 
@@ -79,7 +86,8 @@ class Jobs extends React.Component{
                     skill2={item.skillsRequired[1]}
                     /> )}</div>
                 ) }
-
+                </div>
+                </div>
             </div>
         )
     }

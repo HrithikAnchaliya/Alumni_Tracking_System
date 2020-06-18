@@ -1,29 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import 'bulma/css/bulma.css';
-
+import Interviews from './Utils/data' 
 
 class AddInterviewInfo extends React.Component{
     constructor(props){
         super(props)
     
-        this.toGather = this.toGather.bind(this);
         this.toPost = this.toPost.bind(this);
         }
 
-    async toGather(){
-        await this.props.toArray()                       //function decomposition
-
-        const { company, workTitle, industry , difficulty, description, feedback,"topics": topics_array } = this.props.values
-
-      const aloneValue = {
-        company, workTitle, industry , difficulty, description,feedback,topics_array
-      }
-          console.log(aloneValue)
-          this.toPost(aloneValue)
-    }
-
-    async toPost(data){
+    async toPost(event){
+        event.preventDefault();
+        const state = this.props.values;
+        let data = Interviews(state);
         const values = {
             method : "POST",
             headers : {
@@ -45,14 +35,14 @@ class AddInterviewInfo extends React.Component{
     
     render(){
 
-        const {  difficulty, description, topics,feedback } = this.props.values
+        const {  difficulty, description, toTopics,feedback } = this.props.values
         return(
             <div>
-            <form>
+            <form onSubmit={this.toPost}>
                 <div id='addjobcontainer' className="container is-fluid">
                 <div className="notification">
                 <h5>Company</h5>
-                    <select  name="company"  onChange={this.props.onChange}>
+                    <select required name="company"  onChange={this.props.onChange}>
                         <option value="">Select Company</option>
                         <option value="microsoft">Microsoft</option>
                         <option value="google">Google</option>
@@ -61,7 +51,7 @@ class AddInterviewInfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Work - Title</h5>
-                    <select  name="workTitle"  onChange={this.props.onChange}>
+                    <select required name="workTitle"  onChange={this.props.onChange}>
                         <option value="">select Title</option>
                         <option value="front end dev">Front-End Developer</option>
                         <option value="back end dev">Back-End Developer</option>
@@ -71,7 +61,7 @@ class AddInterviewInfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Industry</h5>
-                    <select  name="industry"  onChange={this.props.onChange}>
+                    <select required name="industry"  onChange={this.props.onChange}>
                         <option value="">select Industry</option>
                         <option value="IT">IT</option>
                         <option value="automobile">Automobile</option>
@@ -80,18 +70,18 @@ class AddInterviewInfo extends React.Component{
                     </select>
                     <br/>
                     <h5>Difficulty</h5> 
-                        <input name='difficulty' type='number' placeholder='Range is from 1 to 5' onChange={this.props.onChange} value={difficulty}></input>
+                        <input required name='difficulty' type='number' placeholder='Range is from 1 to 5' onChange={this.props.onChange} value={difficulty}></input>
                     <br/>
                     <h5>Description</h5>
-                    <textarea name="description"  value={description} onChange={this.props.onChange} ></textarea>
+                    <textarea required name="description"  value={description} onChange={this.props.onChange} ></textarea>
                     <br/>
                     <h5>Topics</h5>
-                    <textarea name="topics"  value={topics} onChange={this.props.onChange} ></textarea>
+                    <textarea required name="toTopics"  value={toTopics} onChange={this.props.onChange} placeholder='Use comma to sepreate them'></textarea>
                     <br/>
                     <h5>Feedback</h5>
-                    <textarea name="feedback"  value={feedback} onChange={this.props.onChange} ></textarea>
+                    <textarea required name="feedback"  value={feedback} onChange={this.props.onChange} ></textarea>
                     <br/>
-                    <button type='button' onClick={this.toGather}>Submit</button>
+                    <button type='submit'>Submit</button>
                 </div>
                 </div>
             </form>

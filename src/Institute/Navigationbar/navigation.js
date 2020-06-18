@@ -7,7 +7,7 @@ class Navigation extends React.Component{
     render(){
         return(
             <div>
-                <div id="navbar">
+              <nav>
             <ul id="nav">
               <li>
                 <Link to='/'>
@@ -63,7 +63,7 @@ class Navigation extends React.Component{
               )
               }
               </ul>
-          </div>
+          </nav>
             </div>
         )
     }

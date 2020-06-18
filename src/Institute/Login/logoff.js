@@ -30,6 +30,7 @@ class Logoff extends React.Component{
         await fetch('https://alumni-backend-app.herokuapp.com/alumni/logout',values)
         window.localStorage.removeItem('Auth_state')
         window.localStorage.removeItem('Auth_token')
+        window.localStorage.removeItem('Auth_user')
         await this.props.removetoken();
         this.toRedirect();
         }

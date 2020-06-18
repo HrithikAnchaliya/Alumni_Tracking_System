@@ -1,7 +1,7 @@
 import React from 'react';
 import Eventcard from './Eventcard'
 import { connect } from 'react-redux'
-
+import Spinner from 'react-bootstrap/Spinner'
 
 
 class Events extends React.Component{
@@ -60,19 +60,22 @@ class Events extends React.Component{
     render(){
         return(
             <div>
-                <br/>
-                <br/>
+                <div className="container div-Container">
+                <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
                 (
                     <div>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
                 ) : (
-                    <div>
-                    <br/>
-                    <h4>Loading ..</h4>
+                    <div id='Loading-id'>
+                    <Spinner  animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </Spinner>
                     </div>
                 )
 
                 }
+                </div>
+                </div>
             </div>
         )
     }

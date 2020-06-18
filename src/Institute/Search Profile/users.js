@@ -24,7 +24,7 @@ class Users extends React.Component{
         }
         console.log(values)
         try{
-        const fetchUser = await fetch('https://alumni-backend-app.herokuapp.com/alumni/users?search=IT cto&location.city=Chengalpattu',values);
+        const fetchUser = await fetch('https://alumni-backend-app.herokuapp.com/alumni/users?search=IT cto&location.city=chengalpattu',values);
         const json = await fetchUser.json()
         console.log(json);
         this.setState({

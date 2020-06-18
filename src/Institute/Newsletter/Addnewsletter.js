@@ -20,6 +20,16 @@ export default class Addnewsletter extends React.Component{
         const { file } = this.state;
         if(file.type === "application/pdf"){
             console.log("Uploading")
+            let data = new FormData()
+            data.append('files', file)
+                    const values = {
+                    method : "POST",
+                    body : data
+                }
+                console.log(values)
+                // for (let pair of data.entries()) {
+                //     console.log(pair[0]+ ', ' + pair[1]); 
+                // }
         }
         else alert('Please Upload a PDF')
     }

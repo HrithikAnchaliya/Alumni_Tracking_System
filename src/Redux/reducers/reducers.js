@@ -25,11 +25,27 @@ export const loadState = () => {
         return undefined
       }
     }
+// New Addition - Users
+  export const loaduser = () => {
+    try{
+      const serializeduser = loadState.getItem('Auth_user');
+      if(serializeduser === null){
+        return null;
+      }
+      else{
+        return JSON.parse(serializeduser)
+      }
+    }
+    catch(error){
+      return undefined
+    }
+  }
 
     
 const intialState = {
     Auth_state : loadState(),
-    Auth_token : loadtoken()
+    Auth_token : loadtoken(),
+    Auth_user : loaduser() //New Addition
     
 };
 
@@ -46,13 +62,15 @@ const authstate = (state = intialState, action) => {
             return{
              ...state,
                 Auth_token: null,
-                Auth_state : false
+                Auth_state : false,
+                Auth_user : null //New Addition
             }
         case 'Add_Token':
           return{
             ...state,
               Auth_token : action.Auth_token,
-              Auth_state : true
+              Auth_state : true,
+              Auth_user : action.Auth_user  //New Addition
           }
         default:
             return state;

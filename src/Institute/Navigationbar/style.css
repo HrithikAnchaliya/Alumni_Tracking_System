@@ -1,15 +1,21 @@
 #navbar{
     position: sticky;
     position: -webkit-sticky;
-    top: 0;
-    
+    top: 0px;
+    z-index: 100;
+    /* To make it transpernt remove below prop */
+    background-color: white;
 }
 
 #nav{
 
     text-align: right;
     padding-right: 40px;
+    /*Below Property is changed after a long time*/
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+    
 }
+
 #nav li{
     display: inline-block;
     padding:17px;
@@ -34,20 +40,4 @@
 }
 #nav a:hover::after{
     width: 100%;
-}
-#searchdiv{
-    position: relative;
-    width:100%;
-    height: 650px;
-    background-color: #f4c4f3;
-}
-#input{
-    border: .2px solid ;
-    position: absolute;
-    top: 250px;
-    left:690px;
-}
-#motherfucck{
-    border : 1px solid;
-    padding-right: 2px;
 }

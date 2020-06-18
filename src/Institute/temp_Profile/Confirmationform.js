@@ -1,6 +1,7 @@
 import React from 'react';
 import { combine } from './Utills/data'
 import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
 
 
 class Confirmationform extends React.Component{
@@ -8,7 +9,8 @@ class Confirmationform extends React.Component{
         super(props)
 
         this.state = {
-            error : false
+            error : false,
+            redirect : false
         }
 
         this.toFetch = this.toFetch.bind(this)
@@ -39,6 +41,9 @@ class Confirmationform extends React.Component{
             }
             const json = await response.json()
             console.log(json)
+            this.setState({
+                redirect : true
+            })
         }
         catch(error){
             console.log(error)
@@ -53,7 +58,7 @@ class Confirmationform extends React.Component{
     render(){
         console.log(this.props.values)
         let Alert = this.state.error;
-
+        let Redirects = this.state.redirect;
         return(
             <div>
                 <div className="container is-fluid">
@@ -72,6 +77,9 @@ class Confirmationform extends React.Component{
                         alert("Something Went Wrong")) : (null)
                     }
                 </div>
+                    { (Redirects) ? (
+                        <Redirect to='/user' /> ) : (null)
+                    }
             </div>
         )
     }

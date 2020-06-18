@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Interviewcard from './InterviewCard';
+import Spinner from 'react-bootstrap/Spinner'
+import  './Style/toStyle.css';
 
 
 class Interviews extends React.Component{
@@ -61,12 +61,18 @@ class Interviews extends React.Component{
     render(){
         return(
             <div>
-                <button type='button'><Link to='/addinterview'>Add Experience</Link></button>
+                <div className="container div-Container">
+                <div className="notification" id="jobcard-div">
+                <Link className='button' to='/addinterview'>Add Experience</Link>
                 { this.state.loading || !this.state.data ?
                 (
-                    <h5>Loading ..</h5>
+                    <div id='Loading-id'>
+                    <Spinner  animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    </div>
                 ) : (
-                    <div>{this.state.data.map((item,index) => 
+                    <div id="Jobcard-id">{this.state.data.map((item,index) => 
                     <Interviewcard
                     key={index}
                     company={item.company}
@@ -77,7 +83,8 @@ class Interviews extends React.Component{
                     topic={item.topics}/>
                     )}</div>
                 ) }
-
+                </div>
+                </div>
             </div>
         )
     }

@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Auth_True from '../../Redux/action/actions'
+// import Facebookbutton from './facebookLogin';
 import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
+import Serialize from './Utils/data';
+import '../Style/toStyleLogin.css'
 import 'bulma/css/bulma.css';
 
 
@@ -12,7 +14,10 @@ class Login extends React.Component{
         this.state = {
             email : '',
             password: '',
-            redirect : false
+            user:'',
+            redirect : false,
+            error : false,
+            loading:false
           }
 
         this.onChangefunc = this.onChangefunc.bind(this);
@@ -23,14 +28,19 @@ class Login extends React.Component{
 
     onChangefunc = (event) =>{
         this.setState({
-          [event.target.name]: event.target.value
+          [event.target.name]: event.target.value,
+          error:false
         });
       }
 
     
     async officiallogin(e){
         e.preventDefault();
-        const { email , password } = this.state
+        this.setState({
+            error : false,
+            loading:true
+        })
+        const { email , password, user } = this.state
         const data = { email , password } 
             const values = {
             method : "POST",
@@ -40,19 +50,24 @@ class Login extends React.Component{
             body : JSON.stringify(data)
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/login',values)
+        const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/login`,values)
         const json = await response.json()
-        if(response.ok){
-        console.log(json.user.tokens[0].token)
-        const serialized_token =  JSON.stringify(json.user.tokens[0].token)
-        const serialized_auth = JSON.stringify(true)
-        window.localStorage.setItem('Auth_state' , serialized_auth )
-        window.localStorage.setItem('Auth_token' , serialized_token )
+        if(!response.ok){
+            throw new Error(response.status); // 404
+        }
+        let storeToken = json.user.tokens[0].token;
+        let storeUser = this.state.user;
+        Serialize(storeToken,storeUser);
         await this.props.addtoken();
         this.redirect();
-        }}
+        }
         catch(error){
-            console.log(error)
+            // console.log(error.message)
+            this.setState({
+                error : true,
+                loading:false
+            });
+            
         }
 
     }
@@ -67,57 +82,65 @@ class Login extends React.Component{
 
     render(){
         console.log(this.props.Auth)
-        return(
+        let loading = this.state.loading
+        return( 
             <div>
                 <br/>
                 <br/>
-            <div className="container">
-            <div className="notification">
-            <h5>Login Or Sign-up</h5>
-            <h5>To Unlock the Essential Features of this App</h5>
+            <div className="container" id='Login-contain-1'>
+            <div className="notification" id='Login-container'>
             <br/>
             <div className='LoginDiv'>
                 <form id='loginform' onSubmit={this.officiallogin}>
                     <h2>Login</h2>
+                    <br/>
+                    <div>
                     <label>E-Mail</label>
-                    <br/>
-                    <input required className="mailinput" type='text' name='email' value={this.state.email} onChange={this.onChangefunc}/>  
-                    <br/>
+                    <input required className="div-input" type='email' name='email' value={this.state.email} onChange={this.onChangefunc}/>
+                    </div>
+                    <br/> 
+                    <div> 
                     <label>Password</label>
+                    <input required className="div-input" type='password' name='password' value={this.state.password} onChange={this.onChangefunc}/>
+                    </div>
                     <br/>
-                    <input required className="passinput" type='password' name='password' value={this.state.password} onChange={this.onChangefunc}/>
+                    <div>
+                    <label>Please select who you are</label>
+                    <select required id='Login-Select' name='user' onChange={this.onChangefunc}>
+                        <option value=''></option>
+                        <option value='alumni'>Alumni</option>
+                        <option value='student'>Student</option>
+                        <option value='admin'>Admin</option>
+                        <option value='college'>College</option>
+                    </select>
+                    </div>
                     <br/>
                     <br/>
-                    <button type='submit'>submit</button>
+                    <button id='Submit-button'disabled={loading} type='submit'>submit</button>
                 </form>
                 <br/>
-                <span>Or , You can</span>
+                {/* <div id='facebook-flex'>
+                Or <Facebookbutton/>
+                </div> */}
+                <br/>
+                <h6 id='login-span-text'>Or , You can</h6>
+                <br/>
+                    <button id='button1'><Link id='button-link' to='/register'>Register</Link></button>
                 <br/>
                 <br/>
-                    <button type='button'><Link to='/register'>Register</Link></button>
                 <br/>
-                <br/>
-                <br/>
-                <div>
                 {
-                    (this.props.Auth) ? (
-                    <h5>The Login is : True</h5>
-                    ) : (
-                        <h5>The Login is : False</h5>
-                    )
-                }
-
-                </div>
-                {
-                    (this.state.redirect) ? (
-                        <Redirect to="/"/>
-                    ) : (
-                        null
-                    )
+                    (this.state.redirect) ? ( <Redirect to="/"/> ) : (null)
                 }
             </div>
             </div>
             </div>
+                {
+                    (this.state.error) ? (
+                        // <h5>Error with Login ..</h5>
+                        alert("Error with Login ..")
+                    ) : (null)
+                }
             </div>
         );
     }
@@ -131,7 +154,6 @@ const mapStatesToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        change_state_true : () => dispatch(Auth_True()),
         addtoken : () => dispatch(Add_token())
     }
 }

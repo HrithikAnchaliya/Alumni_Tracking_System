@@ -30,8 +30,9 @@ export default class Profilecard extends React.Component{
                         <p className="subtitle is-6"><b>College Name</b> - {college}</p>
                         <p className="subtitle is-6"><b>Degree</b> - {degree}</p>
                         <p className="subtitle is-6"><b>City</b> - {location.city}</p>
-                        {(skills) ? (
+                        {(skills) ? ( // Should be Skills.lenght
                         skills.map((item,index) => <a key={index} href="http://www.google.com"> #{item} </a>)) : (null)}
+                        <br/>
                         <a href={socialProfiles.facebook}> Facebook </a> <a href={socialProfiles.linkedin}> Linkedin </a>
                         </div>
                     </div>
