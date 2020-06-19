@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import Facebookbutton from './facebookLogin';
+import Facebookbutton from './facebookLogin';
 import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
 import Serialize from './Utils/data';
@@ -62,7 +62,7 @@ class Login extends React.Component{
         this.redirect();
         }
         catch(error){
-            // console.log(error.message)
+            console.log(error)
             this.setState({
                 error : true,
                 loading:false
@@ -119,9 +119,9 @@ class Login extends React.Component{
                     <button id='Submit-button'disabled={loading} type='submit'>submit</button>
                 </form>
                 <br/>
-                {/* <div id='facebook-flex'>
+                <div id='facebook-flex'>
                 Or <Facebookbutton/>
-                </div> */}
+                </div>
                 <br/>
                 <h6 id='login-span-text'>Or , You can</h6>
                 <br/>
