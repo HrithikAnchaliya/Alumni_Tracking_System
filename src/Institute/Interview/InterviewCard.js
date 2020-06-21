@@ -10,7 +10,7 @@ export default class Interviewcard extends React.Component{
         console.log(this.props.topic)
         return(
             <div>
-            <div id='job'>
+            <div id='interview'>
                 <div style={{width:'320px'}}className="card">
                 <header style={{width:'320px',height:'55px'}} className="card-header" >
                 <p className=" is-centered card-header-title">

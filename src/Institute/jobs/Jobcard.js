@@ -11,8 +11,8 @@ export default class Jobcard extends React.Component{
         return(
             <div>
             <div id='job'>
-                <div style={{width:'320px'}}className="card">
-                <header style={{width:'320px',height:'55px'}} className="card-header" >
+                <div className="card" id='card-job'> {/* style={{width:'320px'}} was here */ }
+                <header style={{width:'auto',height:'55px'}} className="card-header" > {/* before auto it was 320px */}
                 <p className=" is-centered card-header-title">
                 {this.props.company}
                 </p>
@@ -28,7 +28,7 @@ export default class Jobcard extends React.Component{
                 <br/>
                 </div>
                 </div>
-                <footer style={{width:'320px',height:'50px'}} className="card-footer">
+                <footer style={{width:'auto',height:'50px'}} className="card-footer"> {/* was here */}
                 <Link style={{"textDecoration":'none'}} className="card-footer-item" to={`/jobs/${this.props.id}`}>Link</Link>
                 </footer>
                 </div>

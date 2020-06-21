@@ -2,6 +2,7 @@ import React from 'react';
 import Attendees from './Attendees'
 import { connect } from 'react-redux'
 import EventInfo from './EventInfo'
+import { base_url_user } from '../../Endpoint/endpoint'
 
 class Eventpage extends React.Component{
     constructor(props){
@@ -24,7 +25,7 @@ class Eventpage extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`https://alumni-backend-app.herokuapp.com/alumni/events/${locationId}`, values);
+        const response = await fetch(`${base_url_user}/events/${locationId}`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404

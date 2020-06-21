@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { base_url_user } from '../../Endpoint/endpoint'
 import InterviewPageInfo from './InterviewPageInfo'
 
 
@@ -23,7 +24,7 @@ class InterviewPage extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`https://alumni-backend-app.herokuapp.com/alumni/interviews/${InterviewId}`, values);
+        const response = await fetch(`${base_url_user}/interviews/${InterviewId}`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.statusText); // 404

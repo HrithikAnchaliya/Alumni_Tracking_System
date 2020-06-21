@@ -28,7 +28,7 @@ export const loadState = () => {
 // New Addition - Users
   export const loaduser = () => {
     try{
-      const serializeduser = loadState.getItem('Auth_user');
+      const serializeduser = localStorage.getItem('Auth_user');
       if(serializeduser === null){
         return null;
       }
@@ -41,7 +41,7 @@ export const loadState = () => {
     }
   }
 
-    
+  
 const intialState = {
     Auth_state : loadState(),
     Auth_token : loadtoken(),

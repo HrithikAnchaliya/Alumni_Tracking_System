@@ -1,6 +1,7 @@
 import React from 'react';
 import UserInfo from './UserInfo';
 import { connect } from 'react-redux' 
+import { base_url_user } from '../../Endpoint/endpoint'
 
 class UserProfile extends React.Component{
     constructor(props){
@@ -19,7 +20,7 @@ class UserProfile extends React.Component{
             } 
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/profile', values);
+        const response = await fetch(`${base_url_user}/profile`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404

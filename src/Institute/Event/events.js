@@ -1,7 +1,8 @@
 import React from 'react';
 import Eventcard from './Eventcard'
 import { connect } from 'react-redux'
-import Spinner from 'react-bootstrap/Spinner'
+import { base_url_user } from '../../Endpoint/endpoint'
+ import Spinner from 'react-bootstrap/Spinner'
 
 
 class Events extends React.Component{
@@ -25,7 +26,7 @@ class Events extends React.Component{
             } 
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/events', values);
+        const response = await fetch(`${base_url_user}/events`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404

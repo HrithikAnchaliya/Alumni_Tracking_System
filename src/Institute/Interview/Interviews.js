@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import Interviewcard from './InterviewCard';
 import Spinner from 'react-bootstrap/Spinner'
+import { base_url_user } from '../../Endpoint/endpoint'
 import  './Style/toStyle.css';
 
 
@@ -12,12 +13,19 @@ class Interviews extends React.Component{
         this.state = {
             all: null,
             loading : true,
-            data : null
+            data : null,
+            search:null,
+            onSearch : false
           }
         
-          this.toArray = this.toArray.bind(this);
+          this.onSearch = this.onSearch.bind(this);
     }
 
+    onSearch = () => {
+        this.setState({
+            onSearch : !this.state.onSearch
+        })
+    }
     async componentDidMount(){
         const values = {
             method : "GET",
@@ -26,7 +34,7 @@ class Interviews extends React.Component{
             } 
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/interviews', values);
+        const response = await fetch(`${base_url_user}/interviews`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -59,8 +67,16 @@ class Interviews extends React.Component{
     
 
     render(){
+        let search = this.state.search
+        let onSearch = this.state.onSearch
         return(
             <div>
+                <div id='job-search-div'>
+                { (onSearch) ? 
+                (<input id='job-search' defaultValue={search}></input>) : (null)
+                }
+                <img id='search-img' alt="Search" onClick={this.onSearch} src="https://img.icons8.com/cotton/64/000000/search--v1.png"/>
+                </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
                 <Link className='button' to='/addinterview'>Add Experience</Link>

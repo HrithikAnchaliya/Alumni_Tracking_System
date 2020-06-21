@@ -55,7 +55,13 @@
 #job{
     margin-left: 20px;
     margin-top: 20px;
+    
 }
 #addjobcontainer{
     margin-top:50px;
+}
+
+#card-job {
+    width: 300px;
+    height: 280px;
 }

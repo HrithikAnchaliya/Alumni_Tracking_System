@@ -2,6 +2,7 @@ import React from 'react';
 import { combine } from './Utills/data'
 import { connect } from 'react-redux'
 import { Redirect } from "react-router-dom";
+import { base_url_user } from '../../Endpoint/endpoint'
 
 
 class Confirmationform extends React.Component{
@@ -35,7 +36,7 @@ class Confirmationform extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/profile',values)
+            const response = await fetch(`${base_url_user}/profile`,values)
             if(!response.ok) {
                 throw new Error(response.status); // 404
             }

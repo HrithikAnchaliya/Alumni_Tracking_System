@@ -33,6 +33,7 @@ import EditPage from './Institute/temp_Profile/EditPage'
 import users from './Institute/Search Profile/users';
 import OtherProfile from './Institute/Search Profile/OtherProfile';
 import Setup from './Institute/Funds/setup';
+import Import from './Institute/Import Alumni/import';
 
 
 class App extends React.Component {
@@ -50,6 +51,7 @@ class App extends React.Component {
             <ProtectedRoute path='/searchprofile' component={users}/>
             <ProtectedRoute path={`/profile/:id`} component={OtherProfile}/>
             <Route path='/profilepage' component={Profilepage}/>
+            <Route path='/import' component={Import}/>
             <ProtectedRoute path='/user' component={UserProfile}/>
             <ProtectedRoute path='/edit' component={EditPage}/>
             <ProtectedRoute path='/map' component={GeoJsonMap}/>

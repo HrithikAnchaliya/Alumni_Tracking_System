@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import Jobcard from './Jobcard'
 import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner'
+import { base_url_user } from '../../Endpoint/endpoint'
 import './Style/toStyle.css'
+
 
 
 class Jobs extends React.Component{
@@ -12,10 +14,19 @@ class Jobs extends React.Component{
         this.state = {
             all: null,
             loading : true,
-            data : null
+            data : null,
+            search:null,
+            onSearch : false
           }
         
           this.toArray = this.toArray.bind(this);
+          this.onSearch = this.onSearch.bind(this);
+    }
+
+    onSearch = () => {
+        this.setState({
+            onSearch : !this.state.onSearch
+        })
     }
 
     async componentDidMount(){
@@ -26,7 +37,8 @@ class Jobs extends React.Component{
             } 
         }
         try{
-        const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/jobs', values);
+        
+        const response = await fetch(`${base_url_user}/jobs`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -59,8 +71,16 @@ class Jobs extends React.Component{
 
 
     render(){
+        let search = this.state.search
+        let onSearch = this.state.onSearch
         return(
             <div>
+                <div id='job-search-div'>
+                { (onSearch) ? 
+                (<input id='job-search' defaultValue={search}></input>) : (null)
+                }
+                <img id='search-img' alt="Search" onClick={this.onSearch} src="https://img.icons8.com/cotton/64/000000/search--v1.png"/>
+                </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
                 <button id="Addbutton-class" type='button'><Link id='AddButton-Link'  to='/addjobs'>Add Job</Link></button>
@@ -71,7 +91,6 @@ class Jobs extends React.Component{
                     <span className="sr-only">Loading...</span>
                     </Spinner>
                     </div>
-                    // null
                 ) : (
                     <div id="Jobcard-id">{this.state.data.map((item,index) => 
                     <Jobcard key={index} 
@@ -95,7 +114,8 @@ class Jobs extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Auth_True from '../../Redux/action/actions'
 import Remove_token from '../../Redux/action/removetoken'
 import { Redirect } from 'react-router-dom';
+import { base_url_user } from '../../Endpoint/endpoint'
 
 
 
@@ -27,7 +28,7 @@ class Logoff extends React.Component{
             }
         }
         try{
-        await fetch('https://alumni-backend-app.herokuapp.com/alumni/logout',values)
+        await fetch(`${base_url_user}/logout`,values)
         window.localStorage.removeItem('Auth_state')
         window.localStorage.removeItem('Auth_token')
         window.localStorage.removeItem('Auth_user')

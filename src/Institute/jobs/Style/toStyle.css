@@ -8,6 +8,9 @@
     display: grid;
     grid-template-columns: auto auto auto;
     justify-content: center;
+    /* NEw */
+    align-content: center;
+    /* End */
     padding-bottom: 20px;
     overflow-x: auto;
 }
@@ -26,6 +29,7 @@
     animation-timing-function: ease;
     animation-name: rollin;
     animation-duration: 1.5s;
+    margin-top: 33px;
 
 }
 
@@ -44,4 +48,28 @@
 #Loading-id {
     padding-top: 40px;
     text-align: center;
+}
+
+#job-search {
+    width: 160px;
+    border: none;
+    border-bottom: 2px solid black ;
+    animation-timing-function: ease;
+    animation-name: rollout-search;
+    animation-duration: 1s;
+}
+
+@keyframes rollout-search {
+    from {width : 0;}
+    to {width: 160px; }
+}
+
+
+#job-search-div{
+    float: right;
+    margin-right: 25px;
+    margin-top: 10px;
+}
+#search-img {
+    width: 43px;
 }

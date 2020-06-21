@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { base_url_user } from '../../Endpoint/endpoint'
 import 'bulma/css/bulma.css';
 
 class Jobinfo extends React.Component{
@@ -43,7 +44,7 @@ class Jobinfo extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/jobs',values)
+            const response = await fetch(`${base_url_user}/jobs`,values)
             const json = await response.json()
             console.log(json)
         }

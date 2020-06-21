@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import 'bulma/css/bulma.css';
+import { base_url_user } from '../../Endpoint/endpoint'
 
 
 class TicketInfo extends React.Component{
@@ -22,7 +23,7 @@ class TicketInfo extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/tickets',values)
+            const response = await fetch(`${base_url_user}/tickets`,values)
             if (!response.ok) {
                 throw new Error(response.status); // 404
             }
