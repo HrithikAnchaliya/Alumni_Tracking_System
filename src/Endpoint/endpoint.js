@@ -1,7 +1,6 @@
-import store from '../Redux/store/storage'
+// import store from '../Redux/store/storage'
 
-let state = store.getState();
-let user = state.Auth_user;
+// let user = JSON.parse(localStorage.getItem('Auth_user'))
 
-export const base_url_user = `https://alumni-backend-app.herokuapp.com/${user}`
-export const base_url = 'https://alumni-backend-app.herokuapp.com'
+// export let base_url_user = `https://alumni-backend-app.herokuapp.com/${user}`
+export let base_url = 'https://alumni-backend-app.herokuapp.com'

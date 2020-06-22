@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Jobcard from './Jobcard'
 import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner'
-import { base_url_user } from '../../Endpoint/endpoint'
+import { base_url } from '../../Endpoint/endpoint'
 import './Style/toStyle.css'
 
 
@@ -38,7 +38,7 @@ class Jobs extends React.Component{
         }
         try{
         
-        const response = await fetch(`${base_url_user}/jobs`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/jobs`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -71,6 +71,7 @@ class Jobs extends React.Component{
 
 
     render(){
+        console.log(this.props.user)
         let search = this.state.search
         let onSearch = this.state.onSearch
         return(

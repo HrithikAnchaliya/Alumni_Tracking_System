@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import 'bulma/css/bulma.css';
-import { base_url_user } from '../../Endpoint/endpoint'
+import {  base_url } from '../../Endpoint/endpoint'
 
 
 class TicketInfo extends React.Component{
@@ -23,7 +23,7 @@ class TicketInfo extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch(`${base_url_user}/tickets`,values)
+            const response = await fetch(`${base_url}/${this.props.user}/tickets`,values)
             if (!response.ok) {
                 throw new Error(response.status); // 404
             }
@@ -78,7 +78,8 @@ class TicketInfo extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

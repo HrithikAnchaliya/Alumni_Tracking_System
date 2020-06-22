@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Facebookbutton from './facebookLogin';
 import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
-import Serialize from './Utils/data';
+import { Serialize }from './Utils/data';
 import '../Style/toStyleLogin.css'
 import 'bulma/css/bulma.css';
 

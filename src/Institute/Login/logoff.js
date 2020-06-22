@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import Auth_True from '../../Redux/action/actions'
 import Remove_token from '../../Redux/action/removetoken'
 import { Redirect } from 'react-router-dom';
-import { base_url_user } from '../../Endpoint/endpoint'
+import { Deserialize } from './Utils/data';
+import { base_url} from '../../Endpoint/endpoint'
 
 
 
@@ -20,24 +21,25 @@ class Logoff extends React.Component{
     }
 
     async officiallogoff(){
-        const deserialized_token = JSON.parse( window.localStorage.getItem('Auth_token'));
         const values = {
             method : "delete",
             headers : {
-                'x-auth' : deserialized_token
+                'x-auth' : this.props.token
             }
         }
         try{
-        await fetch(`${base_url_user}/logout`,values)
-        window.localStorage.removeItem('Auth_state')
-        window.localStorage.removeItem('Auth_token')
-        window.localStorage.removeItem('Auth_user')
+        await fetch(`${base_url}/${this.props.user}/logout`,values)
+        Deserialize();
         await this.props.removetoken();
         this.toRedirect();
         }
         catch(error){
             console.log(error)
         }
+    }
+
+    componentWillUnmount = () => {
+        console.log("Logout")
     }
 
     toRedirect = () => {
@@ -74,7 +76,9 @@ class Logoff extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        Auth : state.Auth_state
+        Auth : state.Auth_state,
+        user : state.Auth_user,
+        token : state.Auth_token
     }
 }
 

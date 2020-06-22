@@ -2,7 +2,7 @@ import React from 'react';
 import Attendees from './Attendees'
 import { connect } from 'react-redux'
 import EventInfo from './EventInfo'
-import { base_url_user } from '../../Endpoint/endpoint'
+import { base_url } from '../../Endpoint/endpoint'
 
 class Eventpage extends React.Component{
     constructor(props){
@@ -25,7 +25,7 @@ class Eventpage extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url_user}/events/${locationId}`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/events/${locationId}`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -102,7 +102,8 @@ class Eventpage extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user:state.Auth_user
     }
 }
 

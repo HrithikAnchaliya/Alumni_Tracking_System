@@ -1,7 +1,7 @@
 import React from 'react';
 import Eventcard from './Eventcard'
 import { connect } from 'react-redux'
-import { base_url_user } from '../../Endpoint/endpoint'
+import { base_url} from '../../Endpoint/endpoint'
  import Spinner from 'react-bootstrap/Spinner'
 
 
@@ -26,7 +26,7 @@ class Events extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url_user}/events`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/events`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -84,7 +84,8 @@ class Events extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

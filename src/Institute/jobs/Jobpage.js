@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import JobPageInfo from './Jobpageinfo'
-import { base_url_user } from '../../Endpoint/endpoint'
+import {  base_url } from '../../Endpoint/endpoint'
 
 class Jobpage extends React.Component{
     constructor(props){
@@ -23,7 +23,7 @@ class Jobpage extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url_user}/jobs/${jobId}`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/jobs/${jobId}`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.statusText); // 404
@@ -87,7 +87,8 @@ class Jobpage extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

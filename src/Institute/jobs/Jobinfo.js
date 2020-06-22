@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { base_url_user } from '../../Endpoint/endpoint'
+import { base_url } from '../../Endpoint/endpoint'
 import 'bulma/css/bulma.css';
 
 class Jobinfo extends React.Component{
@@ -44,7 +44,7 @@ class Jobinfo extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch(`${base_url_user}/jobs`,values)
+            const response = await fetch(`${base_url}/${this.props.user}/jobs`,values)
             const json = await response.json()
             console.log(json)
         }
@@ -144,7 +144,8 @@ class Jobinfo extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user    
     }
 }
 

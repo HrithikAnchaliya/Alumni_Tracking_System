@@ -1,7 +1,7 @@
 import React from 'react';
 import UserInfo from './UserInfo';
 import { connect } from 'react-redux' 
-import { base_url_user } from '../../Endpoint/endpoint'
+import {  base_url } from '../../Endpoint/endpoint'
 
 class UserProfile extends React.Component{
     constructor(props){
@@ -20,7 +20,7 @@ class UserProfile extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url_user}/profile`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/profile`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -58,7 +58,8 @@ class UserProfile extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import Interviewcard from './InterviewCard';
 import Spinner from 'react-bootstrap/Spinner'
-import { base_url_user } from '../../Endpoint/endpoint'
+import { base_url } from '../../Endpoint/endpoint'
 import  './Style/toStyle.css';
 
 
@@ -34,7 +34,7 @@ class Interviews extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url_user}/interviews`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/interviews`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -67,6 +67,7 @@ class Interviews extends React.Component{
     
 
     render(){
+        console.log(this.props.user)
         let search = this.state.search
         let onSearch = this.state.onSearch
         return(
@@ -109,7 +110,8 @@ class Interviews extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 
