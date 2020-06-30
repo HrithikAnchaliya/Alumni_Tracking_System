@@ -16,8 +16,8 @@ const handleSubmit = async (event) => {
   });
 
   if(!error){
-    const { id } = paymentMethod;
-    console.log(id)
+    // const { id } = paymentMethod;
+    console.log(paymentMethod)
   }
 
   try{

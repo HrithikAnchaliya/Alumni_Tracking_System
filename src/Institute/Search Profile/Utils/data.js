@@ -31,7 +31,7 @@ export function intoUrl(state){
     })}
     console.log(location)
     let url = buildUrl('https://alumni-backend-app.herokuapp.com',{
-        path : 'alumni/users',
+        path : 'alumni/users',   // no college
         disableCSV: true,
         queryParams : {
             search : searchvalue,

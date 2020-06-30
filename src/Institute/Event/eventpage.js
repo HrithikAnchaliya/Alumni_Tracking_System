@@ -17,7 +17,7 @@ class Eventpage extends React.Component{
         }          
     
        async componentDidMount(){
-        let locationId = this.props.computedMatch.params.id;
+        let eventId = this.props.computedMatch.params.id;
         const values = {
             method : "GET",
             headers : {
@@ -25,7 +25,7 @@ class Eventpage extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url}/${this.props.user}/events/${locationId}`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/events/${eventId}`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
@@ -43,19 +43,18 @@ class Eventpage extends React.Component{
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.jsonPosts)              
+        if(this.state.jsonPosts.event.attendees.length !== 0)              
         {
             const stateall = this.state.jsonPosts.event.attendees;
             console.log(stateall)
             Object.keys(stateall).forEach(key => {
                 dataarray.push(stateall[key])
             })
-            console.log(dataarray[0].firstName)
-            this.setState({
-                posts : dataarray,
-                loading : false
-            })
         }
+        this.setState({
+            posts : dataarray,
+            loading : false
+        })
     }
 
     render(){
@@ -78,7 +77,7 @@ class Eventpage extends React.Component{
                         eventId = {eventId}
                     />
                         <div>
-                            {this.state.jsonPosts.event.attendees[0] ? 
+                            {(this.state.jsonPosts.event.attendees.length !== 0) ? 
                                 (
                             <div>
                                 <br/>

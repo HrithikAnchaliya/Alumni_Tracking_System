@@ -80,7 +80,8 @@ class Interviews extends React.Component{
                 </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
-                <Link className='button' to='/addinterview'>Add Experience</Link>
+                {(this.props.user === 'alumni') ? (
+                <Link className='button' to='/addinterview'>Add Experience</Link>) : ( null )}
                 { this.state.loading || !this.state.data ?
                 (
                     <div id='Loading-id'>

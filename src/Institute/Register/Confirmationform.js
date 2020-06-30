@@ -26,7 +26,8 @@ export default class Confirmationform extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/register',values)
+            let user = this.props.values.user
+            const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/register`,values)
             const json = await response.json()
             console.log(json)
         }

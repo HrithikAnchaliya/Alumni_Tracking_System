@@ -84,7 +84,8 @@ class Jobs extends React.Component{
                 </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
-                <button id="Addbutton-class" type='button'><Link id='AddButton-Link'  to='/addjobs'>Add Job</Link></button>
+                {(this.props.user !== 'student') ? (
+                <button id="Addbutton-class" type='button'><Link id='AddButton-Link'  to='/addjobs'>Add Job</Link></button>) : ( null )}
                 { this.state.loading || !this.state.data ?
                 (
                     <div id='Loading-id'>

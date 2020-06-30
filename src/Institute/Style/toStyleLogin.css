@@ -63,6 +63,23 @@ label {
     to {width: 70px; }
 }
 
+#Login-Select-facebook {
+    appearance: none;
+    width: 70px;
+    border: none;
+    border-bottom: 2px solid black ;
+    animation-timing-function: ease;
+    animation-name: rollout-Login-Select-facebook;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes rollout-Login-Select-facebook {
+    from {width : 0;}
+    to {width: 70px; }
+}
+
+
 #Submit-button {
     width: 60%;
     height: 50px;
@@ -98,3 +115,20 @@ label {
 #login-span-text {
     font-style: italic;
 }
+
+.division-to-login { 
+    display: flex; 
+    flex-direction: row; 
+} 
+  
+.division-to-login:before, 
+.division-to-login:after { 
+    content: ""; 
+    flex: 1 1; 
+    border-bottom: .01px solid rgb(53, 52, 18); 
+    margin: auto; 
+}
+
+/* .division-to-login:before {
+    padding-right: 15px;
+} */

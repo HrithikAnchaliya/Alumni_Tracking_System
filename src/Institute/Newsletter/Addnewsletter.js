@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-export default class Addnewsletter extends React.Component{
+class Addnewsletter extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            file : ''
+            newsletter : ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -12,23 +13,26 @@ export default class Addnewsletter extends React.Component{
 
     onChange = (event) => {
         this.setState({
-        file :  event.target.files[0]
+            newsletter :  event.target.files[0]
     })}
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const { file } = this.state;
-        if(file.type === "application/pdf"){
+        const { newsletter } = this.state;
+        if(newsletter.type === "application/pdf"){
             console.log("Uploading")
             let data = new FormData()
-            data.append('files', file)
+            data.append('newsletter', newsletter)
 
             const values = {
                 method : "POST",
-                body : data
+                body : data,
+                headers : {
+                    'x-auth' : this.props.token,
+                }
             }
             try{
-            const response = await fetch('http://localhost:4000/college/newsletters',values)
+            const response = await fetch('https://alumni-backend-app.herokuapp.com/college/newsletters',values)
             const json = await response.json()
             if(!response.ok){
                 throw new Error(response.status); // 404
@@ -40,9 +44,9 @@ export default class Addnewsletter extends React.Component{
                 
             }
                 // console.log(values)
-                for (let pair of data.entries()) {
-                    console.log(pair[0]+ ', ' + pair[1]); 
-                }
+                // for (let pair of data.entries()) {
+                //     console.log(pair[0]+ ', ' + pair[1]); 
+                // }
         }
         else alert('Please Upload a PDF')
     }
@@ -66,3 +70,13 @@ export default class Addnewsletter extends React.Component{
         )
     }
 }
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token,
+        user:state.Auth_user
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (Addnewsletter);

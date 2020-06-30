@@ -6,7 +6,9 @@ import { base_url } from '../../Endpoint/endpoint'
 class EventInfo extends React.Component{
     constructor(props){
         super(props)
-
+            this.state = {
+                attended : false
+            }
             this.toAttend = this.toAttend.bind(this);
         }
 
@@ -26,6 +28,9 @@ class EventInfo extends React.Component{
           }
         const json = await response.json();
         console.log(json)
+        this.setState({
+            attended : true
+        })
         }
         catch(error){
             console.log(error)
@@ -34,6 +39,7 @@ class EventInfo extends React.Component{
 
 
     render(){
+        let toDisable = this.state.attended
         return(
             <div>
                 <div>
@@ -89,7 +95,9 @@ class EventInfo extends React.Component{
                        <strong>Speaker-Bio</strong>
                         </p>
                         <br/>
-                        <button onClick={this.toAttend} type='button'>Wanna Attend, Click Me!!</button>
+                        {(this.props.user === 'alumni') ? (
+                        <button disabled={toDisable} onClick={this.toAttend} type='button'>Wanna Attend, Click Me!!</button>) : (null)
+                        }
                     </div>
                 </div>
             </div>

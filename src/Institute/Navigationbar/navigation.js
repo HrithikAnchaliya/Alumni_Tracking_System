@@ -14,11 +14,12 @@ class Navigation extends React.Component{
                   Home
                 </Link>
               </li>
-              <li>
+              {(this.props.user !== 'college') ? (
+                <li>
                 <Link to='/user'>
                   Profile
                 </Link>
-              </li>
+              </li>) : ( null )}
               <li>
                 <Link to='/events'>
                   Events
@@ -35,7 +36,7 @@ class Navigation extends React.Component{
                 </Link>
               </li>
               <li>
-                <Link to='/addnewsletter'>
+                <Link to='/newsletters'>
                   Newsletter
                 </Link>
               </li>
@@ -71,7 +72,8 @@ class Navigation extends React.Component{
 
 const mapStatesToProps = state => {
   return{
-    Auth : state.Auth_state
+    Auth : state.Auth_state,
+    user: state.Auth_user
   }
 }
 

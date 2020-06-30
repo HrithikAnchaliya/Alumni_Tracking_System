@@ -1,21 +1,17 @@
 import React from 'react';
-import Eventcard from './Eventcard'
+import { base_url } from '../../Endpoint/endpoint'
+import NewsletterCard from './newletterCard'
 import { connect } from 'react-redux'
-import { base_url} from '../../Endpoint/endpoint'
 import Spinner from 'react-bootstrap/Spinner'
+// import '../jobs/Style/toStyle.css'
 
-
-class Events extends React.Component{
+class Newsletters extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            all:null,
-            loading:true,
-            data:null
-        }
-
-    this.toArray = this.toArray.bind(this);
-
+            all: null,
+            loading : true
+          }
     }
 
     async componentDidMount(){
@@ -25,47 +21,33 @@ class Events extends React.Component{
                 'x-auth' : this.props.token,
             } 
         }
+
         try{
-        const response = await fetch(`${base_url}/${this.props.user}/events`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/newsletters`, values);
         console.log(response)
         if (!response.ok) {
             throw new Error(response.status); // 404
           }
         const json = await response.json();
         console.log(json)
-        this.setState({all:json})
-        this.toArray()
+        this.setState({all:json, loading:false})
         }
         catch(error){
             console.log(error)
         }
     }
 
-    toArray = () => {
-        const dataarray = [];
-        if(this.state.all)              
-        {
-            const stateall = this.state.all;
-            Object.keys(stateall).forEach(key => {
-                dataarray.push(stateall[key])
-            })
-            console.log(dataarray[0].title)
-            this.setState({
-                data : dataarray,
-                loading : false
-            })
-        }
-    }
-
 
     render(){
+        console.log(this.props.user)
         return(
             <div>
-                <div className="container div-Container">
+                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
                 (
-                    <div>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
+                    <div>{this.state.all.map((item,number) => < NewsletterCard key={number} id={item._id} name={item.name} />)}</div>
+                    
                 ) : (
                     <div id='Loading-id'>
                     <Spinner  animation="border" role="status">
@@ -90,8 +72,4 @@ const mapStatesToProps = state => {
 }
 
 
-export default connect(mapStatesToProps,null) (Events);
-
-
-
-
+export default connect(mapStatesToProps,null) (Newsletters);

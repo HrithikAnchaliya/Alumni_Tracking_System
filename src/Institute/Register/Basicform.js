@@ -8,7 +8,7 @@ export default class Basicform extends React.Component{
     }
 
     render(){
-        const {  firstName, lastName, country, state, city, collegeName, startYear, endYear  } = this.props.values;
+        const {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear  } = this.props.values;
         return(
             <div>
                 <div className="container is-fluid">
@@ -22,6 +22,18 @@ export default class Basicform extends React.Component{
                     <br/>
                     <h6>Last Name</h6>
                     <input type='name' name='lastName' onChange={this.props.handlechg} defaultValue={lastName}></input>
+                    <br/>
+                    <br/>
+                    <label>Please select who you are</label>
+                    <select  name='user' onChange={this.props.handlechg}>
+                        <option value=''></option>
+                        <option value='alumni'>Alumni</option>
+                        <option value='student'>Student</option>
+                        <option value='admin'>Admin</option>
+                        <option value='college'>College</option>
+                    </select>
+                    <br/>
+                    <span>Selected User : {user}</span>
                     <br/>
                     <br/>
                     <h6>Country</h6>

@@ -3,39 +3,14 @@ import{ Route, Redirect } from "react-router-dom";
 import store from '../../Redux/store/storage'
 
 
-export const ProtectedRoute = ({component : Component, ...rest}) => {   //Routes which could be viewed only when logged in  
+export const AlumniRoute = ({component : Component, ...rest}) => {   //Only Alumni Routes
     return(
         <Route {...rest} render = {
             (props) => {
                 let state = store.getState();
                 let loginstate = state.Auth_state;
-                return (loginstate) ? 
-                (
-                    <Component {...rest}/>
-
-                ) : (
-                    <Redirect to={
-                        {
-                            pathname: "/login",
-                            state: {
-                                from: props.location
-                            }
-                        }
-                    }/>
-                )
-            }
-        }/>
-    )
-}
-
-
-export const LoginRoute = ({component : Component, ...rest}) => {  //Login Route (i.e, Cant load the logout page when logged out)
-    return(
-        <Route {...rest} render = {
-            (props) => {
-                let state = store.getState();
-                let loginstate = state.Auth_state;
-                return (!loginstate) ? 
+                let loginuser = state.Auth_user;
+                return (loginstate && loginuser === 'alumni') ? 
                 (
                     <Component {...rest}/>
 
@@ -54,13 +29,14 @@ export const LoginRoute = ({component : Component, ...rest}) => {  //Login Route
     )
 }
 
-export const LogoutRoute = ({component : Component, ...rest}) => {   //Logout Route (i.e, Cant load the login page when logged in)
+export const NoStudentRoute = ({component : Component, ...rest}) => {  //Except Students Routes
     return(
         <Route {...rest} render = {
             (props) => {
                 let state = store.getState();
                 let loginstate = state.Auth_state;
-                return (loginstate) ? 
+                let loginuser = state.Auth_user;
+                return (loginstate && loginuser !== 'student') ? 
                 (
                     <Component {...rest}/>
 
@@ -79,15 +55,40 @@ export const LogoutRoute = ({component : Component, ...rest}) => {   //Logout Ro
     )
 }
 
-
-export const CollegeRoute = ({component : Component, ...rest}) => {   //Only College Route
+export const CnARoute = ({component : Component, ...rest}) => {  //College and Admin Route
     return(
         <Route {...rest} render = {
             (props) => {
                 let state = store.getState();
                 let loginstate = state.Auth_state;
-                let loginuser = state.Auth_user
-                return (loginstate && loginuser === 'college') ? 
+                let loginuser = state.Auth_user;
+                return (loginstate && (loginuser === 'college' || loginuser === 'admin')) ? 
+                (
+                    <Component {...rest}/>
+
+                ) : (
+                    <Redirect to={
+                        {
+                            pathname: "/",
+                            state: {
+                                from: props.location
+                            }
+                        }
+                    }/>
+                )
+            }
+        }/>
+    )
+}
+
+export const NoCollegeRoute = ({component : Component, ...rest}) => {   //Except College Route
+    return(
+        <Route {...rest} render = {
+            (props) => {
+                let state = store.getState();
+                let loginstate = state.Auth_state;
+                let loginuser = state.Auth_user;
+                return (loginstate && loginuser !== 'college') ? 
                 (
                     <Component {...rest}/>
 

@@ -5,6 +5,7 @@ import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
 import { Serialize }from './Utils/data';
 import '../Style/toStyleLogin.css'
+import { toast } from 'react-toastify';
 import 'bulma/css/bulma.css';
 
 
@@ -28,8 +29,7 @@ class Login extends React.Component{
 
     onChangefunc = (event) =>{
         this.setState({
-          [event.target.name]: event.target.value,
-          error:false
+          [event.target.name]: event.target.value
         });
       }
 
@@ -49,12 +49,17 @@ class Login extends React.Component{
             },
             body : JSON.stringify(data)
         }
-        try{
+        try{    
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/login`,values)
+        // for (let [key, value] of response.headers) {
+        //     alert(`${key} = ${value}`);
+        // }
         const json = await response.json()
         if(!response.ok){
             throw new Error(response.status); // 404
         }
+        console.log(json)
+        console.log(json.header)
         let storeToken = json.user.tokens[0].token;
         let storeUser = this.state.user;
         Serialize(storeToken,storeUser);
@@ -67,6 +72,9 @@ class Login extends React.Component{
                 error : true,
                 loading:false
             });
+            if(this.state.error){
+                this.notifyError();
+            }
             
         }
 
@@ -79,6 +87,17 @@ class Login extends React.Component{
             })
         }
     }
+
+    notifyError = () => toast.dark('Enter Correct Mail and Password', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+
 
     render(){
         console.log(this.props.Auth)
@@ -119,8 +138,9 @@ class Login extends React.Component{
                     <button id='Submit-button'disabled={loading} type='submit'>submit</button>
                 </form>
                 <br/>
+                <h6 className='division-to-login' id='login-span-text'>  or  </h6>
                 <div id='facebook-flex'>
-                Or <Facebookbutton/>
+                <Facebookbutton Redirect={this.redirect}/>
                 </div>
                 <br/>
                 <h6 id='login-span-text'>Or , You can</h6>
@@ -135,12 +155,12 @@ class Login extends React.Component{
             </div>
             </div>
             </div>
-                {
+                {/* {
                     (this.state.error) ? (
                         // <h5>Error with Login ..</h5>
                         alert("Error with Login ..")
                     ) : (null)
-                }
+                } */}
             </div>
         );
     }
