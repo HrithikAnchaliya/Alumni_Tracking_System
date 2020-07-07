@@ -1,4 +1,4 @@
-Link to this Project - to see the development in process - [Alumni Management System](https://alumni.now.sh/)
+Link to this Project - to see the development in progress - [Alumni Management System](https://alumni.now.sh/)
 
 
 ## Initial Command
