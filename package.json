@@ -21,6 +21,7 @@
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-chat-ui": "^0.3.2",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",
     "react-leaflet": "^2.7.0",
