@@ -5,6 +5,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+// import './Institute/Style/Fonts/Futura Std Light Oblique.otf'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Institute/Style/style.css'
@@ -41,6 +42,10 @@ import NewsletterPage from './Institute/Newsletter/NewsletterPage';
 import Addnewsletter from './Institute/Newsletter/Addnewsletter'
 import FundsPage from './Institute/Funds/FundsPage';
 import AddFund from './Institute/Funds/AddFund';
+import Dashboard from './Institute/Dashboard/dashboard';
+import Rooms from './Institute/Chat/Rooms';
+import ChatRoom from './Institute/Chat/ChatRoom';
+
 
 
 class App extends React.Component {
@@ -79,6 +84,9 @@ class App extends React.Component {
             <ProtectedRoute path='/funds' exact component={Funds}/>
             <ProtectedRoute path={`/funds/:id`} exact component={FundsPage}/>
             <CollegeRoute path='/addfund' exact component={AddFund}/>
+            <CnARoute path='/dashboard/' component={Dashboard}/>
+            <ProtectedRoute path='/chat' exact component={Rooms}/>
+            <ProtectedRoute path='/chatroom' exact component={ChatRoom}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer

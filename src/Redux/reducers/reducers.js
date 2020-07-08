@@ -19,7 +19,7 @@ export const loadState = () => {
         return null;
       }
       else {
-        return JSON.parse(serializedtoken);
+        return serializedtoken;  //De-parsed
       }
     } catch(error){
         return undefined
@@ -33,7 +33,7 @@ export const loadState = () => {
         return null;
       }
       else{
-        return JSON.parse(serializeduser)
+        return serializeduser;   //De-parsed
       }
     }
     catch(error){
