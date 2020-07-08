@@ -5,6 +5,7 @@ import Standardform from './Standardform'
 import Confirmationform from './Confirmationform'
 import { connect } from 'react-redux'
 import update from 'immutability-helper';
+import { notifyError_with_msg } from '../Utils/Message'
 
 
 
@@ -45,14 +46,21 @@ class EditPage extends React.Component{
         try{
             const response = await fetch('https://alumni-backend-app.herokuapp.com/alumni/profile',values)
             const json = await response.json()
+            if(!response.ok){
+                this.setState({goNext : true})
+                notifyError_with_msg(json._message);
+            }
+            if(response.ok){
             console.log(json)
             this.setState({
                 data : json,
                 goNext : false
             })
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState({goNext : true})
+            notifyError_with_msg("Can't Load the Page");
         }
     }
 

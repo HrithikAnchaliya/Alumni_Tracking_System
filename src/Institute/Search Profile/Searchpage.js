@@ -110,8 +110,11 @@ export default class SearchPage extends React.Component{
                     <option value='2011'>2011</option>
                     <option value='2012'>2012</option>
                     <option value='2013'>2013</option>
+                    <option value='2016'>2016</option>
+                    <option value='2018'>2018</option>
+                    <option value='2019'>2019</option>
                     <option value='2020'>2020</option>
-                    <option value='Present'>Present</option>
+                    <option value='2021'>2021</option>
                 </select>
                 
                 <div>

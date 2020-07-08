@@ -5,7 +5,7 @@ import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
 import { Serialize }from './Utils/data';
 import '../Style/toStyleLogin.css'
-import { toast } from 'react-toastify';
+import { notifyError_with_msg } from  '../Utils/Message'
 import 'bulma/css/bulma.css';
 
 
@@ -36,10 +36,7 @@ class Login extends React.Component{
     
     async officiallogin(e){
         e.preventDefault();
-        this.setState({
-            error : false,
-            loading:true
-        })
+        this.setState({ loading:true })
         const { email , password, user } = this.state
         const data = { email , password } 
             const values = {
@@ -51,30 +48,23 @@ class Login extends React.Component{
         }
         try{    
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/login`,values)
-        // for (let [key, value] of response.headers) {
-        //     alert(`${key} = ${value}`);
-        // }
         const json = await response.json()
         if(!response.ok){
-            throw new Error(response.status); // 404
+            notifyError_with_msg('Check your Password, Email and User');
+            this.setState({ loading : false })
         }
-        console.log(json)
-        console.log(json.header)
+        if(response.ok){
         let storeToken = json.user.tokens[0].token;
         let storeUser = this.state.user;
         Serialize(storeToken,storeUser);
         await this.props.addtoken();
         this.redirect();
         }
+        }
         catch(error){
             console.log(error)
-            this.setState({
-                error : true,
-                loading:false
-            });
-            if(this.state.error){
-                this.notifyError();
-            }
+            this.setState({ loading:false });
+            notifyError_with_msg('Check your Password, Email and User');
             
         }
 
@@ -88,19 +78,8 @@ class Login extends React.Component{
         }
     }
 
-    notifyError = () => toast.dark('Enter Correct Mail and Password', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-
 
     render(){
-        console.log(this.props.Auth)
         let loading = this.state.loading
         return( 
             <div>
@@ -155,12 +134,6 @@ class Login extends React.Component{
             </div>
             </div>
             </div>
-                {/* {
-                    (this.state.error) ? (
-                        // <h5>Error with Login ..</h5>
-                        alert("Error with Login ..")
-                    ) : (null)
-                } */}
             </div>
         );
     }

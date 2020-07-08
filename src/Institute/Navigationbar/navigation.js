@@ -14,7 +14,7 @@ class Navigation extends React.Component{
                   Home
                 </Link>
               </li>
-              {(this.props.user !== 'college') ? (
+              {(this.props.user !== 'college' && this.props.Auth) ? (
                 <li>
                 <Link to='/user'>
                   Profile

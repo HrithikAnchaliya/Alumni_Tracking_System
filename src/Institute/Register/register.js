@@ -3,6 +3,7 @@ import Basicform from './Basicform'     // It Really is not so good ..
 import Workform from './Workform'
 import Standardform from './Standardform'
 import Confirmationform from './Confirmationform'
+import { base_url} from '../../Endpoint/endpoint'
 
 
 export default class Register extends React.Component{     
@@ -38,6 +39,7 @@ export default class Register extends React.Component{
             skills : '',
             education_input : [],
             work_input : [],
+            College_Names_fetch : '',
             page : 1
         }
         
@@ -50,6 +52,26 @@ export default class Register extends React.Component{
           this.AddWorkField = this.AddWorkField.bind(this);
           this.DeleteWorkField = this.DeleteWorkField.bind(this);
 
+    }
+
+    componentDidMount = async () => {
+        const values = {
+            method : "GET"
+        }
+        try{
+        const response = await fetch(`${base_url}/college`, values);
+        console.log(response)
+        if (!response.ok) {
+            throw new Error(response.status); // 404
+        }
+        if(response.ok){
+        const json = await response.json();
+        console.log(json)
+        this.setState({College_Names_fetch : json})
+        }}
+        catch(error){
+            console.log(error)
+        }
     }
 
 
@@ -119,11 +141,11 @@ export default class Register extends React.Component{
 
         const {  page, firstName, lastName, user, country, state, city, collegeName, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
-            email, password, mobileNumber, facebook, linkedin, skills , skills_array, education_input } = this.state
+            email, password, mobileNumber, facebook, linkedin, skills , skills_array, education_input, College_Names_fetch } = this.state
 
         const values = {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
-            email, password, mobileNumber, facebook, linkedin, skills, skills_array, page, education_input }
+            email, password, mobileNumber, facebook, linkedin, skills, skills_array, page, education_input, College_Names_fetch }
 
 
 

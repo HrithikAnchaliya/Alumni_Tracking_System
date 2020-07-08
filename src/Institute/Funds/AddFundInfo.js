@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
-import { toast } from 'react-toastify';
+import { notify_Success, notifyError, notifyError_with_msg } from  '../Utils/Message'
 
 
 class AddFundInfo extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            success : false,
-            error:false
+            submitted : false
         }
     }
 
     onSubmit = async (event) => {
         event.preventDefault();
+        this.setState({ submitted : true })
         let data = this.props.value;
         const values = {
             method : "POST",
@@ -27,50 +27,27 @@ class AddFundInfo extends React.Component{
         try{
         const response = await fetch(`${base_url}/college/funds`, values);  //Only College can Post
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-        }
         const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data._message);
+        }
+        if(response.ok){
         console.log(data)
-        if (response.ok) {
-            this.setState({ success : true })
-        }
-        if(this.state.success){
-            this.notify();
-        }
-        }
+        notify_Success();
+        }}
         catch(error){
             console.log(error)
-            this.setState({ error : true });
-            if(this.state.error){
-                this.notifyError();
-            }
+            this.setState({ submitted : false });
+            (error) ? (notifyError_with_msg(error)) : (notifyError('fund'))
+            
+            
         }
     }
-
-    notify = () => toast.dark('Successfully Added!', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-
-    notifyError = () => toast.error('Adding Fund Was Unsuccessful', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
 
 
     render(){
         console.log(this.props.value)
+        let submitted = this.state.submitted;
         let { title, subtitle, description, totalRaised, totalRequired } = this.props.value;
         return(
             <div>
@@ -91,7 +68,7 @@ class AddFundInfo extends React.Component{
                 <input value={totalRequired} type='number' onChange={this.props.onChange} name='totalRequired'></input>
                 <br/>
                 <br/>
-                <button type='submit'>Submit</button>
+                <button disabled={submitted} type='submit'>Submit</button>
                 </form>
             </div>
         )

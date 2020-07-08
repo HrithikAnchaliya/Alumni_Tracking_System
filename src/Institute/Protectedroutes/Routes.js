@@ -17,7 +17,7 @@ export const AlumniRoute = ({component : Component, ...rest}) => {   //Only Alum
                 ) : (
                     <Redirect to={
                         {
-                            pathname: "/",
+                            pathname: "/login",
                             state: {
                                 from: props.location
                             }
@@ -43,7 +43,7 @@ export const NoStudentRoute = ({component : Component, ...rest}) => {  //Except 
                 ) : (
                     <Redirect to={
                         {
-                            pathname: "/",
+                            pathname: "/login",
                             state: {
                                 from: props.location
                             }
@@ -69,7 +69,7 @@ export const CnARoute = ({component : Component, ...rest}) => {  //College and A
                 ) : (
                     <Redirect to={
                         {
-                            pathname: "/",
+                            pathname: "/login",
                             state: {
                                 from: props.location
                             }
@@ -95,7 +95,7 @@ export const NoCollegeRoute = ({component : Component, ...rest}) => {   //Except
                 ) : (
                     <Redirect to={
                         {
-                            pathname: "/",
+                            pathname: "/login",
                             state: {
                                 from: props.location
                             }

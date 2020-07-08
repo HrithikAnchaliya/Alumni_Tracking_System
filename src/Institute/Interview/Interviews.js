@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Interviewcard from './InterviewCard';
 import Spinner from 'react-bootstrap/Spinner'
 import { base_url } from '../../Endpoint/endpoint'
+import { notifyError_with_msg } from '../Utils/Message'
 import  './Style/toStyle.css';
 
 
@@ -15,7 +16,8 @@ class Interviews extends React.Component{
             loading : true,
             data : null,
             search:null,
-            onSearch : false
+            onSearch : false,
+            error : false
           }
         
           this.onSearch = this.onSearch.bind(this);
@@ -36,22 +38,26 @@ class Interviews extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/interviews`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const json = await response.json();
+        if (!response.ok) {
+            this.setState({ error : true })
+            notifyError_with_msg(json._message)
+        }
+        if(response.ok){
         console.log(json)
         this.setState({all:json})
         this.toArray()
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError_with_msg('unable to fetch')
         }
     }
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.all)              
+        if(this.state.all.length !== 0)              
         {
             const stateall = this.state.all;
             Object.keys(stateall).forEach(key => {
@@ -84,11 +90,12 @@ class Interviews extends React.Component{
                 <Link className='button' to='/addinterview'>Add Experience</Link>) : ( null )}
                 { this.state.loading || !this.state.data ?
                 (
-                    <div id='Loading-id'>
-                    <Spinner  animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                    </Spinner>
-                    </div>
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null)
                 ) : (
                     <div id="Jobcard-id">{this.state.data.map((item,index) => 
                     <Interviewcard

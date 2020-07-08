@@ -3,21 +3,22 @@ import React from 'react';
 
 export default class Basicform extends React.Component{
 
-    toGoNext = () => {
+    toGoNext = (event) => {
+        event.preventDefault();
         this.props.goNext();
     }
 
     render(){
-        const {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear  } = this.props.values;
+        const {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear, College_Names_fetch  } = this.props.values;
         return(
             <div>
                 <div className="container is-fluid">
                     <div className="notification">
                 <h5>Register To Login</h5>
                 <br/>
-                <form>
+                <form onSubmit={this.toGoNext}>
                     <h6>First Name</h6>
-                    <input  name='firstName' onChange={this.props.handlechg} defaultValue={firstName}></input>
+                    <input required name='firstName' onChange={this.props.handlechg} defaultValue={firstName}></input>
                     <br/>
                     <br/>
                     <h6>Last Name</h6>
@@ -37,7 +38,7 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>Country</h6>
-                    <select name="country" onChange={this.props.handlechg} className="countries" id="countryId">
+                    <select name="country" onChange={this.props.handlechg} className="countries order-alpha presel-byip " id="countryId">
                         <option value="">Select Country</option>
                     </select>
                     <br/>
@@ -45,7 +46,7 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>State</h6>
-                    <select name="state"  onChange={this.props.handlechg} className="states" id="stateId">
+                    <select name="state" onChange={this.props.handlechg} className="states order-alpha" id="stateId">
                         <option value="">Select State</option>
                     </select>
                     <br/>
@@ -53,33 +54,36 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>City</h6>
-                   <select name="city"  onChange={this.props.handlechg} className="cities" id="cityId">
+                    <select name="city" onChange={this.props.handlechg} className="cities order-alpha" id="cityId">
                         <option value="">Select City</option>
                     </select>
                     <br/>
                     <span>Selected City : {city}</span>
                     <br/>
                     <br/>
+                    {(College_Names_fetch.length !== 0) ? (
+                        <div>
                     <h6>College Name</h6>
-
-                    <select name="collegeName" onChange={this.props.handlechg} id='collegeId'>
+                    <select  name="collegeName" onChange={this.props.handlechg} id='collegeId'>
                         <option value="">Choose a college</option>
-                        <option value="srm">SRM</option>
-                        <option value="mnm">MNM</option>
+                        {College_Names_fetch.map((data,index) => (
+                            <option key={index} value={data.collegeName}>{data.collegeName}</option>
+                        ))}
                     </select>
                     <br/>
                     <span>Selected College : {collegeName}</span>
                     <br/>
                     <br/>
+                        </div>) : (null)}
                     <h6>Start Year</h6>
-                    <input type="number" name='startYear' onChange={this.props.number} defaultValue={startYear} step="1" pattern="\d+" /> 
+                    <input  type="number" name='startYear' onChange={this.props.number} defaultValue={startYear} step="1" pattern="\d+" /> 
                     <br/>
                     <br/>      
                     <h6>End Year</h6>
-                    <input type="number" name='endYear' onChange={this.props.number} defaultValue={endYear} step="1" pattern="\d+" />        
+                    <input  type="number" name='endYear' onChange={this.props.number} defaultValue={endYear} step="1" pattern="\d+" />        
                     <br/>
                     <br/>
-                    <button type='button' onClick={this.toGoNext}>Next</button>
+                    <button type='submit' >Next</button>
                 </form>
                 </div>
                 </div>

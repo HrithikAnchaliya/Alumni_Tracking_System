@@ -3,6 +3,7 @@ import Eventcard from './Eventcard'
 import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
 import Spinner from 'react-bootstrap/Spinner'
+import { notifyError_with_msg } from '../Utils/Message'
 
 
 class Events extends React.Component{
@@ -11,14 +12,14 @@ class Events extends React.Component{
         this.state = {
             all:null,
             loading:true,
-            data:null
+            data:null,
+            error:false
         }
 
     this.toArray = this.toArray.bind(this);
-
     }
 
-    async componentDidMount(){
+    componentDidMount = async () => {
         const values = {
             method : "GET",
             headers : {
@@ -28,28 +29,31 @@ class Events extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/events`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const json = await response.json();
+        if (!response.ok) {
+            this.setState( {error : true} );
+            notifyError_with_msg(json._message);
+        }
+        if(response.ok){
         console.log(json)
         this.setState({all:json})
         this.toArray()
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState( {error : true} );
+            notifyError_with_msg('Unable to Fetch');
         }
     }
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.all)              
+        if(this.state.all.length !== 0)              //If all-state length is 0 then it has nothing.
         {
             const stateall = this.state.all;
             Object.keys(stateall).forEach(key => {
                 dataarray.push(stateall[key])
             })
-            console.log(dataarray[0].title)
             this.setState({
                 data : dataarray,
                 loading : false
@@ -67,13 +71,13 @@ class Events extends React.Component{
                 (
                     <div>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
                 ) : (
+                    (!this.state.error) ? (
                     <div id='Loading-id'>
                     <Spinner  animation="border" role="status">
                     <span className="sr-only">Loading...</span>
                     </Spinner>
-                    </div>
+                    </div>) : (null)
                 )
-
                 }
                 </div>
                 </div>

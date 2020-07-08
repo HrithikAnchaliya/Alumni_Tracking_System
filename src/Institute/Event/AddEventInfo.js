@@ -2,13 +2,24 @@ import React from 'react';
 import Append from './Utils/data'
 import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
-
+import { notify_Success, notifyError, notifyError_with_msg } from  '../Utils/Message'
 
 class AddEventInfo extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            submitted : false
+    
+        }
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+    
 
     onSubmit = async (e) => {
         e.preventDefault();
+        this.setState({ submitted : true})
         let data = Append(this.props.value);
+        console.log(data);
         const values = {
             method : "POST",
             headers : {
@@ -20,19 +31,24 @@ class AddEventInfo extends React.Component{
         try{
         const response = await fetch(`${base_url}/college/events`, values);  //Only College can Post
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const data = await response.json();
-        console.log(data)
-        // this.setState({ funds : data, loading : false })
+        if (!response.ok) {
+            this.setState({ submitted : false})
+            notifyError_with_msg(data._message)
         }
+        if(response.ok){
+        console.log(data)
+        notify_Success();
+        }}
         catch(error){
-            console.log(error)
+            this.setState({ submitted : false})
+            notifyError('event');
         }
     }
 
+
     render(){
+        let submitted = this.state.submitted
         return(
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -77,7 +93,7 @@ class AddEventInfo extends React.Component{
                     </select>
                     <br/>
                     <br/>
-                    <button type='submit' >Submit</button>
+                    <button disabled={submitted} type='submit' >Submit</button>
                 </form>
             </div>
         )

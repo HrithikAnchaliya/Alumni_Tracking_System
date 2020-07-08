@@ -6,8 +6,8 @@ export default class AddEvent extends React.Component{
   constructor(props){
       super(props)
       this.state = {
-        event : [],
-        location : []
+        event : {},
+        location : {}
       }
       this.onChange = this.onChange.bind(this);
   }

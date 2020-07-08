@@ -2,13 +2,16 @@ import React from 'react';
 import UserInfo from './UserInfo';
 import { connect } from 'react-redux' 
 import {  base_url } from '../../Endpoint/endpoint'
+import { notifyError_with_msg } from '../Utils/Message'
+import Spinner from 'react-bootstrap/Spinner'
 
 class UserProfile extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             all : '',
-            loading : true
+            loading : true,
+            error  : false
         }
     }
 
@@ -22,18 +25,22 @@ class UserProfile extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/profile`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const json = await response.json();
+        if (!response.ok) {
+            this.setState({ error : true })
+            notifyError_with_msg(json._message);
+        }
+        if(response.ok){
         console.log(json)
         this.setState({
             all : json,
             loading : false    
         })
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError_with_msg("Unable to fetch");
         }
     }
 
@@ -43,7 +50,12 @@ class UserProfile extends React.Component{
             <div>
                 { this.state.loading || !this.state.all ?
                 (
-                    <h5>Loading ..</h5>
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null)
                 ) : (
                     <div>
                         <UserInfo

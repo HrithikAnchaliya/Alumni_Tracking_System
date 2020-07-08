@@ -28,7 +28,7 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>Country</h6>
-                    <select name="country" onChange={this.props.handlechg} className="countries" id="countryId">
+                    <select name="country" onChange={this.props.handlechg} className="countries order-alpha presel-byip " id="countryId">
                         <option value="">Select Country</option>
                     </select>
                     <br/>
@@ -38,7 +38,7 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>State</h6>
-                    <select name="state"  onChange={this.props.handlechg} className="states" id="stateId">
+                    <select name="state" onChange={this.props.handlechg} className="states order-alpha" id="stateId">
                         <option value="">Select State</option>
                     </select>
                     <br/>
@@ -48,7 +48,7 @@ export default class Basicform extends React.Component{
                     <br/>
                     <br/>
                     <h6>City</h6>
-                   <select name="city"  onChange={this.props.handlechg} className="cities" id="cityId">
+                    <select name="city" onChange={this.props.handlechg} className="cities order-alpha" id="cityId">
                         <option value="">Select City</option>
                     </select>
                     <br/>

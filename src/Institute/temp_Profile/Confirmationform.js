@@ -3,6 +3,7 @@ import { combine } from './Utills/data'
 import { connect } from 'react-redux'
 import { Redirect } from "react-router-dom";
 import { base_url} from '../../Endpoint/endpoint'
+import { notifyError_with_msg } from '../Utils/Message'
 
 
 class Confirmationform extends React.Component{
@@ -10,7 +11,7 @@ class Confirmationform extends React.Component{
         super(props)
 
         this.state = {
-            error : false,
+            submitted : false,
             redirect : false
         }
 
@@ -24,6 +25,7 @@ class Confirmationform extends React.Component{
 
 
     async toFetch() {
+        this.setState({ submitted : true })
         let combined = combine(this.props.values);
         console.log(combined);
         const values = {
@@ -36,21 +38,20 @@ class Confirmationform extends React.Component{
         }
         console.log(values)
         try{
-            const response = await fetch(`${base_url}/${this.props.user}/profile`,values)
-            if(!response.ok) {
-                throw new Error(response.status); // 404
-            }
+            const response = await fetch(`${base_url}/${this.props.user}/profile`,values);
             const json = await response.json()
+            if(!response.ok) {
+                notifyError_with_msg(json._message);
+                this.setState({ submitted : false })
+            }
+            if(response.ok){
             console.log(json)
-            this.setState({
-                redirect : true
-            })
-        }
+            this.setState({ redirect : true })
+        }}
         catch(error){
             console.log(error)
-            this.setState({
-                error : true
-            })
+            this.setState({ submitted : false })
+            notifyError_with_msg("Can't Submit");
         }
     }
 
@@ -58,7 +59,7 @@ class Confirmationform extends React.Component{
 
     render(){
         console.log(this.props.values)
-        let Alert = this.state.error;
+        let submitted = this.state.submitted
         let Redirects = this.state.redirect;
         return(
             <div>
@@ -71,12 +72,9 @@ class Confirmationform extends React.Component{
                 <br/>
                 <div>
                     <button onClick={this.toGoBack} type='button'>Back</button>
-                    <button onClick={this.toFetch}type='button'>Submit</button>
+                    <button onClick={this.toFetch} disabled={submitted} type='button'>Submit</button>
                 </div>
                 </div>
-                    { (Alert) ? (
-                        alert("Something Went Wrong")) : (null)
-                    }
                 </div>
                     { (Redirects) ? (
                         <Redirect to='/user' /> ) : (null)

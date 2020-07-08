@@ -4,27 +4,35 @@ import 'bulma/css/bulma.css';
 export default class InterviewPageInfo extends React.Component{
     render(){
         return(
-            <div>
-                <div id='addjobcontainer' className="container is-fluid">
-                    <div className="notification">
-                        <hr/>
-                <h5>{this.props.company}</h5>
-                <span><strong>Title : </strong>{this.props.title}</span><br/>
+            <div id='interview-div'>
+                <div className="container is-fluid">
+                    <div className="notification interview-first-div">
+                        <h2 id='interview-title'>{this.props.company}</h2>
+                        <span><strong>Title : </strong>{this.props.title}</span><br/>
                         <span><strong>Industry : </strong>{this.props.industry}</span>
-                        <hr/>
-                        <h5>Description</h5>
-                        <p><span>{this.props.description}</span></p>
-                        <br/>
-                        <span><h5>Difficulty Level : </h5><span>{this.props.difficulty}</span></span>
-                        <br/>
-                        <br/>
-                        <h5>Topics : </h5>
+                    </div>
+                </div>
+                <br/>
+                <div className="container is-fluid">
+                    <div className="notification interview-first-div">
+                        <p>
+                        <strong>Description</strong><br/>
+                        <span>{this.props.description}</span>
+                        </p>
+                        <p>
+                        <strong>Difficulty Level</strong><br/>
+                        <span>{this.props.difficulty}</span>
+                        </p>
+                        <p>
+                        <strong>Topics</strong>
                         <ul>
-                        {this.props.topics.map((item,index) => <li key={index}>{item}</li>)}
+                        {this.props.topics.map((item,index) => <span><li key={index}>#{item}</li></span>)}
                         </ul>
-                        <h5>Feedback : </h5>
-                        <p><span>{this.props.feedback}</span></p>
-                        <br/>
+                        </p>
+                        <p>
+                        <strong>Feedback</strong><br/>
+                        <span>{this.props.feedback}</span>
+                        </p>
                         <br/>
                     </div>
                 </div>

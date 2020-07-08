@@ -3,6 +3,9 @@ import Attendees from './Attendees'
 import { connect } from 'react-redux'
 import EventInfo from './EventInfo'
 import { base_url } from '../../Endpoint/endpoint'
+import Spinner from 'react-bootstrap/Spinner'
+import { notifyError_with_msg } from  '../Utils/Message'
+
 
 class Eventpage extends React.Component{
     constructor(props){
@@ -10,7 +13,8 @@ class Eventpage extends React.Component{
         this.state = {                                     
             loading: true,
             posts : null,
-            jsonPosts : null
+            jsonPosts : null,
+            error : false
             }
 
             this.toArray = this.toArray.bind(this);
@@ -26,18 +30,20 @@ class Eventpage extends React.Component{
         }
         try{
         const response = await fetch(`${base_url}/${this.props.user}/events/${eventId}`, values);
-        console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const json = await response.json();
-        console.log(json)
-        this.setState({
-            jsonPosts : json })
-        this.toArray()
+        if (!response.ok) {
+            this.setState({ error : true })
+            notifyError_with_msg(json._message);    
         }
+        if(response.ok){
+        console.log(json)
+        this.setState({ jsonPosts : json })
+        this.toArray()
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError_with_msg('Unsuccessful to fetch');
         }
     }
 
@@ -57,13 +63,20 @@ class Eventpage extends React.Component{
         })
     }
 
+
     render(){
         let eventId = this.props.computedMatch.params.id
         console.log(eventId)
         return(
-            <div>
+            <div id='event-first-div'>
                 {this.state.loading || !this.state.posts ? 
-                (<h1>Loading ..</h1>) : 
+                ((!this.state.error) ? (
+                    <div id='Loading-id'>
+                    <Spinner  animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    </div>) : (null)
+                ) : 
                 (
                     <div>
                     <EventInfo
@@ -76,20 +89,20 @@ class Eventpage extends React.Component{
                         city={this.state.jsonPosts.event.location.city}
                         eventId = {eventId}
                     />
-                        <div>
+                        <div className="container is-fluid">
+                        <div className=' notification event-detail-div'>
                             {(this.state.jsonPosts.event.attendees.length !== 0) ? 
                                 (
                             <div>
-                                <br/>
-                                <h5>People who are gonna attend this event</h5>
-                                <br/>
+                                <p>
+                                <strong>People Who Are Gonna Attend This Event</strong><br/>
                                 <div> {this.state.posts.map((item,number) => 
                                 <Attendees key={number} id={item._id} name={item.firstName} />
                                 )} </div>
+                                </p>
                             </div>
                             ) : ( null )}
-                                <br/>
-                                <br/>
+                        </div>
                         </div>
                     </div>
                 )}

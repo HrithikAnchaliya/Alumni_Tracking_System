@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profilecard from './profilecard';
 import SearchPage from './Searchpage';
+import { notifyError_with_msg } from '../Utils/Message'
 
 class Users extends React.Component{
     constructor(props){
@@ -15,27 +16,28 @@ class Users extends React.Component{
         this.FetchTheSearch = this.FetchTheSearch.bind(this);
     }
 
-    async componentDidMount(){
-        const values = {
-            method : "GET",
-            headers : {
-                'x-auth' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTk3NDc4Y2MyNDNjNDAzODk3ZGNmZmUiLCJhY2Nlc3MiOiJhdXRoIiwidHlwZSI6ImFsdW1uaSIsImlhdCI6MTU4NzEyNjMzNX0.59RES-zHbUcz6e8RqW5lbvPM0BA_Q0UlqaBu7uAl4Mw"
-            }
-        }
-        console.log(values)
-        try{
-        const fetchUser = await fetch('https://alumni-backend-app.herokuapp.com/alumni/users?search=IT cto&location.city=chengalpattu',values);
-        const json = await fetchUser.json()
-        console.log(json);
-        this.setState({
-            values : json,
-            loading : false
-        })
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
+    // async componentDidMount(){
+    //     const values = {
+    //         method : "GET",
+    //         headers : {
+    //             'x-auth' : this.props.token
+    //         }
+    //     }
+    //     console.log(values)
+    //     let user = this.props.user
+    //     try{
+    //     const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/users`,values);
+    //     const json = await fetchUser.json()
+    //     console.log(json);
+    //     this.setState({
+    //         values : json,
+    //         loading : false
+    //     })
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //     }
+    // }
 
     onSearch = (URL) => {
         this.setState({
@@ -48,20 +50,26 @@ class Users extends React.Component{
         const values = {
             method : "GET",
             headers : {
-                'x-auth' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTk3NDc4Y2MyNDNjNDAzODk3ZGNmZmUiLCJhY2Nlc3MiOiJhdXRoIiwidHlwZSI6ImFsdW1uaSIsImlhdCI6MTU4NzEyNjMzNX0.59RES-zHbUcz6e8RqW5lbvPM0BA_Q0UlqaBu7uAl4Mw"
+                'x-auth' : this.props.token
             }
         }
         console.log(values)
         try{
         const fetchUser = await fetch(URL,values);
         const json = await fetchUser.json()
+        if(!fetchUser.ok){
+            this.setState({loading : true})
+            notifyError_with_msg("Unable to find ..")
+        }
         console.log(json);
+        if(fetchUser.ok){
         this.setState({
             values : json,
             loading : false
         })
-        }
+        }}
         catch(error){
+            notifyError_with_msg("Unable to find ..")
             console.log(error);
         }
     }
@@ -83,7 +91,6 @@ class Users extends React.Component{
                                 last={data.lastName}
                                 email={data.email}
                                 branch={data.branch}
-                                college={data.collegeName}
                                 degree={data.degree}
                                 skills={data.skills}
                                 location={data.location}
@@ -98,7 +105,8 @@ class Users extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 

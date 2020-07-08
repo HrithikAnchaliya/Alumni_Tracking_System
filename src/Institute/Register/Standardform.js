@@ -13,7 +13,8 @@ export default class Standardform extends React.Component{
         this.Deletefield = this.Deletefield.bind(this);
     }
 
-    toGoNext = () => {
+    toGoNext = (event) => {
+        event.preventDefault()
         this.props.goNext();
     }
 
@@ -44,9 +45,9 @@ export default class Standardform extends React.Component{
             <div>
                 <div className="container is-fluid">
                     <div className="notification">
-                <form>
+                <form onSubmit={this.toGoNext}>
                     <h6>Email</h6>
-                    <input type='mail' onChange={this.props.handlechg} name='email' defaultValue={email} ></input>
+                    <input required type='mail' onChange={this.props.handlechg} name='email' defaultValue={email} ></input>
                     <br/>
                     <br/>
                     <h6>Password</h6>
@@ -72,7 +73,7 @@ export default class Standardform extends React.Component{
                     <br/>
                     <br/>
                     <button onClick={this.toGoBack} type='button'>Back</button>
-                    <button onClick={this.toGoNext} type='button'>Next</button>
+                    <button  type='submit'>Next</button>
                 </form>
                     </div>
                 </div>

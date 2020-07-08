@@ -5,7 +5,8 @@ import React from 'react';
 
 export default class Workform extends React.Component{
 
-    toGoNext = () => {
+    toGoNext = (event) => {
+        event.preventDefault();
         this.props.goNext();
     }
 
@@ -29,9 +30,9 @@ export default class Workform extends React.Component{
                 <div>
                     <div className="container is-fluid">
                     <div className="notification">
-                    <form>
+                    <form onSubmit={this.toGoNext}>
                     <h6>Degree</h6>
-                    <select name="degree" onChange={this.props.handlechg} id='degree'>
+                    <select required name="degree" onChange={this.props.handlechg} id='degree'>
                         <option value="">Degree</option>
                         <option value="b.tech">B.Tech</option>
                         <option value="b.e">B.E</option>
@@ -138,7 +139,7 @@ export default class Workform extends React.Component{
                     <br/>
                     <br/>
                     <button onClick={this.toGoBack} type='button'>Back</button>
-                    <button onClick={this.toGoNext} type='button'>Next</button>
+                    <button type='submit'>Next</button>
                     </form>      
                     </div>
                     </div>

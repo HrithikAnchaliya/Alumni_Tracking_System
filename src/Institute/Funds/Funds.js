@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
 import Spinner from 'react-bootstrap/Spinner'
 import Fundscard from './FundsCard';
+import { notifyError_with_msg } from '../Utils/Message'
 
 
 class Funds extends React.Component{
@@ -10,7 +11,8 @@ class Funds extends React.Component{
         super(props)
         this.state = {
             funds : '',
-            loading : true
+            loading : true,
+            error : false
         }
     }
 
@@ -24,15 +26,19 @@ class Funds extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/funds`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const data = await response.json();
+        if (!response.ok) {
+            this.setState( {error : true} );
+            notifyError_with_msg(data._message);
+        }
+        if(response.ok){
         console.log(data)
         this.setState({ funds : data, loading : false })
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState( {error : true} );
+            notifyError_with_msg('Unable to fetch');
         }
     }
 
@@ -43,11 +49,12 @@ class Funds extends React.Component{
                 <div className="notification">
                 { this.state.loading || !this.state.funds ?
                 (
-                    <div id='Loading-id'>
-                    <Spinner  animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                    </Spinner>
-                    </div>
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null)
                 ) : (
                     <div id="Jobcard-id">{this.state.funds.map((item,index) => 
                     <Fundscard

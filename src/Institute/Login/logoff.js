@@ -5,15 +5,14 @@ import Remove_token from '../../Redux/action/removetoken'
 import { Redirect } from 'react-router-dom';
 import { Deserialize } from './Utils/data';
 import { base_url} from '../../Endpoint/endpoint'
-
-
-
+import { notifyError_with_msg } from '../Utils/Message'
 
 class Logoff extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            redirect : false
+            redirect : false,
+            loading : false
         }
         
         this.officiallogoff = this.officiallogoff.bind(this);
@@ -21,6 +20,7 @@ class Logoff extends React.Component{
     }
 
     async officiallogoff(){
+        this.setState({ loading : true })
         const values = {
             method : "delete",
             headers : {
@@ -28,13 +28,20 @@ class Logoff extends React.Component{
             }
         }
         try{
-        await fetch(`${base_url}/${this.props.user}/logout`,values)
+        let response = await fetch(`${base_url}/${this.props.user}/logout`,values)
+        if(!response.ok){
+            this.setState({ loading : false})
+            notifyError_with_msg("logout unsuccessful");
+        }
+        if(response.ok){
         Deserialize();
         await this.props.removetoken();
         this.toRedirect();
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState({ loading : false})
+            notifyError_with_msg("logout unsuccessful");
         }
     }
 
@@ -52,6 +59,7 @@ class Logoff extends React.Component{
 
     
     render(){
+        let loading = this.state.loading
         return(
             <div>
                 <br/>
@@ -59,7 +67,7 @@ class Logoff extends React.Component{
                 <div className="container">
                     <div className="notification">
                     <br/>
-                        <button onClick={this.officiallogoff} type='button'>Log-off</button>
+                        <button disabled={loading} onClick={this.officiallogoff} type='button'>Log-off</button>
                     <br/>
                     {
                         (this.state.redirect) ? (

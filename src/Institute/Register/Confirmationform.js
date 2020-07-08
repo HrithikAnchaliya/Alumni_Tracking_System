@@ -1,10 +1,14 @@
 import React from 'react';
 import { combine } from './Utills/data'
+import { notifyError_with_msg, notify_Success } from '../Utils/Message'
 
 
 export default class Confirmationform extends React.Component{
     constructor (props) {
         super(props)
+        this.state = {
+            submitted : false
+        }
         this.toFetch = this.toFetch.bind(this)
       }
 
@@ -15,6 +19,7 @@ export default class Confirmationform extends React.Component{
 
 
     async toFetch() {
+        this.setState({ submitted : true })
         let combined = combine(this.props.values);
         console.log(combined);
         const values = {
@@ -29,10 +34,18 @@ export default class Confirmationform extends React.Component{
             let user = this.props.values.user
             const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/register`,values)
             const json = await response.json()
+            if(!response.ok){
+                this.setState({ submitted : false })
+                notifyError_with_msg(json._message);
+            }
+            if(response.ok){
             console.log(json)
-        }
+            notify_Success()
+        }}
         catch(error){
             console.log(error)
+            this.setState({ submitted : false })
+            notifyError_with_msg("Can't Register")
         }
     }
 
@@ -40,7 +53,7 @@ export default class Confirmationform extends React.Component{
 
     render(){
         console.log(this.props.values)
-
+        let submitted = this.state.submitted
 
         return(
             <div>
@@ -53,7 +66,7 @@ export default class Confirmationform extends React.Component{
                 <br/>
                 <div>
                     <button onClick={this.toGoBack} type='button'>Back</button>
-                    <button onClick={this.toFetch}type='button'>Submit</button>
+                    <button onClick={this.toFetch} disabled={submitted} type='button'>Submit</button>
                 </div>
                 </div>
                 </div>

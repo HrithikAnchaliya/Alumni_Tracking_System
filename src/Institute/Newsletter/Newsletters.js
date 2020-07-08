@@ -3,14 +3,17 @@ import { base_url } from '../../Endpoint/endpoint'
 import NewsletterCard from './newletterCard'
 import { connect } from 'react-redux'
 import Spinner from 'react-bootstrap/Spinner'
+import { notifyError_with_msg } from '../Utils/Message'
 // import '../jobs/Style/toStyle.css'
+
 
 class Newsletters extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             all: null,
-            loading : true
+            loading : true,
+            error : false
           }
     }
 
@@ -21,19 +24,22 @@ class Newsletters extends React.Component{
                 'x-auth' : this.props.token,
             } 
         }
-
         try{
         const response = await fetch(`${base_url}/${this.props.user}/newsletters`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const json = await response.json();
+        if (!response.ok) {
+            this.setState( {error : true} );
+            notifyError_with_msg(json._message);
+        }
+        if(response.ok){
         console.log(json)
         this.setState({all:json, loading:false})
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState( {error : true} );
+            notifyError_with_msg("Unable to fetch");
         }
     }
 
@@ -45,17 +51,16 @@ class Newsletters extends React.Component{
                  <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
-                (
-                    <div>{this.state.all.map((item,number) => < NewsletterCard key={number} id={item._id} name={item.name} />)}</div>
-                    
+                ((this.state.all.length !== 0) ? (
+                    <div>{this.state.all.map((item,number) => < NewsletterCard key={number} id={item._id} name={item.name} />)}</div>) 
+                    : (null)
                 ) : (
-                    <div id='Loading-id'>
-                    <Spinner  animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                    </Spinner>
-                    </div>
-                )
-
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null))
                 }
                 </div>
                 </div>

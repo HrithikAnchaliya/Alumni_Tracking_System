@@ -1,5 +1,8 @@
+import store from '../../../Redux/store/storage'
 let cities = require ('countries-cities');
 var buildUrl = require('build-url');
+
+
 
 
 export function selector(countries){
@@ -21,8 +24,10 @@ export function cityList(country){
     return selection;
 }
 
-export function intoUrl(state){
-    let { searchvalue, yearvalue, selectedCity } = state;
+export function intoUrl(states){
+    let state = store.getState();
+    let user = state.Auth_user;
+    let { searchvalue, yearvalue, selectedCity } = states;
     let location = [];
     if(selectedCity){
     selectedCity.forEach((city) => {
@@ -31,7 +36,7 @@ export function intoUrl(state){
     })}
     console.log(location)
     let url = buildUrl('https://alumni-backend-app.herokuapp.com',{
-        path : 'alumni/users',   // no college
+        path : `${user}/users`,   // no college
         disableCSV: true,
         queryParams : {
             search : searchvalue,

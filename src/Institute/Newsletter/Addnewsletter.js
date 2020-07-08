@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { notifyError_with_msg, notify_Success } from  '../Utils/Message'
 
 class Addnewsletter extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            newsletter : ''
+            newsletter : '',
+            loading : false
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -18,12 +20,12 @@ class Addnewsletter extends React.Component{
 
     onSubmit = async (e) => {
         e.preventDefault();
+        this.setState({loading : true})
         const { newsletter } = this.state;
         if(newsletter.type === "application/pdf"){
             console.log("Uploading")
             let data = new FormData()
             data.append('newsletter', newsletter)
-
             const values = {
                 method : "POST",
                 body : data,
@@ -35,24 +37,26 @@ class Addnewsletter extends React.Component{
             const response = await fetch('https://alumni-backend-app.herokuapp.com/college/newsletters',values)
             const json = await response.json()
             if(!response.ok){
-                throw new Error(response.status); // 404
+                notifyError_with_msg('Something Went Down ..');
+                this.setState({loading : false})
             }
+            if(response.ok){
             console.log(json)
-        }
+            notify_Success();
+            }}
             catch(error){
                 console.log(error)
-                
+                notifyError_with_msg('Unsuccessful to Post')
+                this.setState({loading : false})
             }
-                // console.log(values)
-                // for (let pair of data.entries()) {
-                //     console.log(pair[0]+ ', ' + pair[1]); 
-                // }
         }
-        else alert('Please Upload a PDF')
+        else {
+            notifyError_with_msg('Maybe try uploading a pdf');
+            this.setState({loading : false})}
     }
 
     render(){
-        console.log(this.state.file)
+        let loading = this.state.loading;
         return(
             <div>
                 <div className="container">
@@ -62,7 +66,7 @@ class Addnewsletter extends React.Component{
                     <input required name = 'file' onChange={this.onChange}  type='file'></input>
                     <br/>
                     <br/>
-                    <button type='submit'>Submit</button>
+                    <button disabled={loading} type='submit'>Submit</button>
                     </form>
                     </div>
                 </div>

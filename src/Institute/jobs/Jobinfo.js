@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { base_url } from '../../Endpoint/endpoint'
 import 'bulma/css/bulma.css';
+import { notify_Success, notifyError, notifyError_with_msg } from  '../Utils/Message'
 
 class Jobinfo extends React.Component{
     constructor(props){
         super(props)
-    
+
         this.toGather = this.toGather.bind(this);
         this.toPost = this.toPost.bind(this);
-          }
+    }
 
     async toGather(e){
           e.preventDefault();
@@ -47,9 +48,15 @@ class Jobinfo extends React.Component{
             const response = await fetch(`${base_url}/${this.props.user}/jobs`,values)
             const json = await response.json()
             console.log(json)
-        }
+            if(!response.ok){
+                notifyError_with_msg(json._message);
+            }
+            if(response.ok){
+            notify_Success();
+        }}
         catch(error){
             console.log(error)
+            notifyError('job');
         }
     }
 

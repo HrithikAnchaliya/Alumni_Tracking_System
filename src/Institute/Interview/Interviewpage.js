@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {  base_url } from '../../Endpoint/endpoint'
 import InterviewPageInfo from './InterviewPageInfo'
+import Spinner from 'react-bootstrap/Spinner'
+import { notifyError_with_msg } from  '../Utils/Message'
+import '../Style/toStyleInterview.css'
 
 
 class InterviewPage extends React.Component{
@@ -10,7 +13,8 @@ class InterviewPage extends React.Component{
             this.state = {
                 interivew : '',
                 loading : '',
-                arrayed_interview : ''
+                arrayed_interview : '',
+                error : false
             }
         this.toArray = this.toArray.bind(this);
     }
@@ -26,23 +30,26 @@ class InterviewPage extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/interviews/${InterviewId}`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.statusText); // 404
-          }
         const json = await response.json();
-        console.log(json)
-        this.setState({
-            interivew : json })
-        this.toArray()
+        if (!response.ok) {
+            this.setState({ error : true })
+            notifyError_with_msg(json._message);
         }
+        if(response.ok){
+        console.log(json)
+        this.setState({ interivew : json })
+        this.toArray()
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError_with_msg('unable to fetch');
         }
     }
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.interivew)              
+        if(this.state.interivew.length !== 0)              
         {
             const stateall = this.state.interivew;
             console.log(stateall)
@@ -62,9 +69,16 @@ class InterviewPage extends React.Component{
         return(
             <div>
                 {this.state.loading || !this.state.arrayed_interview ? 
-                (<h6>Loading ..</h6>) : 
                 (
-                    <div>
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null)
+                ) : 
+                (
+                    <div id='interview-div'>
                         <InterviewPageInfo
                         title={this.state.interivew.workTitle}
                         industry={this.state.interivew.industry}

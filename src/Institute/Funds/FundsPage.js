@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
 import FundsPageInfo from './FundsPageInfo'
 import Spinner from 'react-bootstrap/Spinner'
+import { notifyError_with_msg } from  '../Utils/Message'
 
 
 class FundsPage extends React.Component{
@@ -10,7 +11,8 @@ class FundsPage extends React.Component{
         super(props)
         this.state = {
             fund : '',
-            loading : true
+            loading : true,
+            error : false
         }
     }
 
@@ -25,15 +27,19 @@ class FundsPage extends React.Component{
         try{
         const response = await fetch(`${base_url}/${this.props.user}/funds/${FundId}`, values);
         console.log(response)
-        if (!response.ok) {
-            throw new Error(response.status); // 404
-          }
         const data = await response.json();
+        if (!response.ok) {
+            this.setState({ error : true })
+            notifyError_with_msg(data._message);
+        }
+        if(response.ok){
         console.log(data)
         this.setState({ fund : data, loading : false })
-        }
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError_with_msg('Unsuccessful to fetch');
         }
     }
 
@@ -45,12 +51,14 @@ class FundsPage extends React.Component{
                 <div className="notification">
                 { (!loading) ? (
                     <FundsPageInfo
-                    fund={this.state.fund}/>) : (
-                        <div id='Loading-id'>
-                        <Spinner  animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                        </Spinner>
-                        </div>
+                    fund={this.state.fund}/>) : 
+                    (
+                        (!this.state.error) ? (
+                            <div id='Loading-id'>
+                            <Spinner  animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                            </Spinner>
+                            </div>) : (null)
                     )}
                 </div>
                 </div>

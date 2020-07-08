@@ -94,9 +94,9 @@ export const CollegeRoute = ({component : Component, ...rest}) => {   //Only Col
                 ) : (
                     <Redirect to={
                         {
-                            pathname: "/",
-                            state: {
-                                from: props.location
+                            pathname: "/login",            //Why to login page?? (Its because when not loggedin it will redirt to login page)
+                            state: {                       //if not then (i.e, Logged in then that protected route (another function) wil reditet to home)
+                                from: props.location       //It was '/' (before) 
                             }
                         }
                     }/>

@@ -4,6 +4,7 @@ import Add_token from '../../Redux/action/addtoken'
 import { connect } from 'react-redux'
 import { Serialize }from './Utils/data';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { notifyError_with_msg } from '../Utils/Message'
 
 class Facebookbutton extends React.Component{
     constructor(props){
@@ -14,17 +15,14 @@ class Facebookbutton extends React.Component{
             loading:true
           }
 
-        // this.onChangefunc = this.onChangefunc.bind(this);
-        // this.officiallogin = this.officiallogin.bind(this);
-        // this.redirect = this.redirect.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
 
     responseFacebook = async (response) => {
-        // e.preventDefault();
         const { accessToken, userID } = response;
         const {  user } = this.state 
+        this.setState({ loading : true });
         const data = { accessToken, userID } 
             const values = {
             method : "POST",
@@ -37,21 +35,20 @@ class Facebookbutton extends React.Component{
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/facebookLogin`,values)
         const json = await response.json()
         if(!response.ok){
-            throw new Error(response.status); // 404
+            this.setState({ loading : false });
+            notifyError_with_msg("User Should be Registered Before Using Facebook Login")
         }
+        if(response.ok){
         let storeToken = json.user.tokens[0].token;
         let storeUser = this.state.user;
         Serialize(storeToken,storeUser);
         await this.props.addtoken();
         this.props.Redirect();
-        }
+        }}
         catch(error){
             console.log(error)
-            this.setState({
-                error : true
-                // loading:true
-            });
-            
+            this.setState({ loading : false });
+            notifyError_with_msg("User Should be Registered Before Using Facebook Login")
         }
     }
 
@@ -93,12 +90,6 @@ class Facebookbutton extends React.Component{
         );
     }
 }
-
-// const mapStatesToProps = state => {
-//     return{
-//         Auth : state.Auth_state
-//     }
-// }
 
 const mapDispatchToProps = dispatch => {
     return{

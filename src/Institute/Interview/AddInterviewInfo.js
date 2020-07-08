@@ -3,11 +3,15 @@ import { connect } from 'react-redux'
 import 'bulma/css/bulma.css';
 import { base_url } from '../../Endpoint/endpoint'
 import Interviews from './Utils/data' 
+import { notify_Success, notifyError, notifyError_with_msg } from  '../Utils/Message'
 
 class AddInterviewInfo extends React.Component{
     constructor(props){
         super(props)
-    
+        this.state = {
+            success : false,
+            error : false
+        }
         this.toPost = this.toPost.bind(this);
         }
 
@@ -28,9 +32,18 @@ class AddInterviewInfo extends React.Component{
             const response = await fetch(`${base_url}/${this.props.user}/interviews`,values)
             const json = await response.json()
             console.log(json)
-        }
+            if(!response.ok){
+                notifyError_with_msg(json._message)
+            }
+            if(response.ok){
+            this.setState({ success : true })
+            notify_Success();
+        }}
         catch(error){
             console.log(error)
+            this.setState({ error : true })
+            notifyError('experience');
+            
         }
     }
     

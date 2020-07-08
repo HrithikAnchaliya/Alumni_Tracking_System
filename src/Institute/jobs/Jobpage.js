@@ -1,15 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import JobPageInfo from './Jobpageinfo'
+import Spinner from 'react-bootstrap/Spinner'
 import {  base_url } from '../../Endpoint/endpoint'
+import { notifyError_with_msg } from  '../Utils/Message'
+
 
 class Jobpage extends React.Component{
     constructor(props){
         super(props)
             this.state = {
                 job : '',
-                loading : '',
-                arrayed_job : ''
+                loading : true,
+                arrayed_job : '',
+                error : false
             }
         this.toArray = this.toArray.bind(this);
     }
@@ -24,24 +28,26 @@ class Jobpage extends React.Component{
         }
         try{
         const response = await fetch(`${base_url}/${this.props.user}/jobs/${jobId}`, values);
-        console.log(response)
-        if (!response.ok) {
-            throw new Error(response.statusText); // 404
-          }
         const json = await response.json();
-        console.log(json)
-        this.setState({
-            job : json })
-        this.toArray()
+        if (!response.ok) {
+            this.setState( {error : true} );
+            notifyError_with_msg(json._message);
         }
+        if(response.ok){
+        console.log(json)
+        this.setState({ job : json })
+        this.toArray()
+        }}
         catch(error){
-            console.log(error)
+            console.log(error);
+            this.setState( {error : true} );
+            notifyError_with_msg('Unsuccessful to fetch')
         }
     }
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.job)              
+        if(this.state.job.length !== 0)              
         {
             const stateall = this.state.job;
             console.log(stateall)
@@ -61,7 +67,14 @@ class Jobpage extends React.Component{
         return(
             <div>
                 {this.state.loading || !this.state.arrayed_job ? 
-                (<h6>Loading ..</h6>) : 
+                (
+                    (!this.state.error) ? (
+                        <div id='Loading-id'>
+                        <Spinner  animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        </div>) : (null)
+                ) : 
                 (
                     <div>
                         <JobPageInfo
