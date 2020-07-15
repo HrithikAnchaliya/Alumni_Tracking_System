@@ -45,6 +45,7 @@ import AddFund from './Institute/Funds/AddFund';
 import Dashboard from './Institute/Dashboard/dashboard';
 import Rooms from './Institute/Chat/Rooms';
 import ChatRoom from './Institute/Chat/ChatRoom';
+import SendEmail from './Institute/Email/SendEmail';
 
 
 
@@ -86,7 +87,8 @@ class App extends React.Component {
             <CollegeRoute path='/addfund' exact component={AddFund}/>
             <CnARoute path='/dashboard/' component={Dashboard}/>
             <ProtectedRoute path='/chat' exact component={Rooms}/>
-            <ProtectedRoute path='/chatroom' exact component={ChatRoom}/>
+            <ProtectedRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
+            <ProtectedRoute path='/sendemail' exact component={SendEmail}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer
