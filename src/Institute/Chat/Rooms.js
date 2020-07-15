@@ -55,7 +55,7 @@ const Rooms = () => {
                 <div className="notification">
                 {!loading ? 
                 (
-                    <div>{rooms.map((room,index) => <RoomCard key={index} name={room.name}/>)}</div>
+                    <div>{rooms.map((room,index) => <RoomCard key={index} id={room._id} name={room.name}/>)}</div>
                 ) : (
                     (!error) ? (
                     <div id='Loading-id'>

@@ -4,8 +4,12 @@ import { base_url } from '../../Endpoint/endpoint'
 import { notifyError_with_msg } from '../Utils/Message'
 import { ChatFeed } from 'react-chat-ui'
 import Spinner from 'react-bootstrap/Spinner'
-import loadChat from './Utils/data'
+import loadChat, { pushToChat, pushUserChat } from './Utils/data'
+import io from 'socket.io-client';
 import '../Style/toStyleChat.css'
+
+const ENDPOINT = base_url;
+
 
 class ChatRoom extends React.Component {
     constructor(props){
@@ -20,9 +24,12 @@ class ChatRoom extends React.Component {
         this.loadMessage = this.loadMessage.bind(this);
         this.setMessage = this.setMessage.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
+
+        
     }
 
     componentDidMount = async () => {
+        const chatRoomId = this.props.computedMatch.params.id;
         const values = {
             method : "GET",
             headers : {
@@ -30,11 +37,11 @@ class ChatRoom extends React.Component {
             } 
         }
         try{
-        const response = await fetch(`${base_url}/${this.props.user}/chatrooms/5eff17cd74b16f000407db87`, values);
+        const response = await fetch(`${base_url}/${this.props.user}/chatrooms/${chatRoomId}`, values);
         const json = await response.json();
         if (!response.ok) {
             this.setState({ error : true})
-            notifyError_with_msg(json._message);
+            notifyError_with_msg(json.err);
         }console.log(json)
         if(response.ok){ 
             this.setState({ msgData : json, loading : false });
@@ -49,24 +56,51 @@ class ChatRoom extends React.Component {
 
 
     loadMessage = () => {
+        let token = this.props.token;
+        const chatRoomId = this.props.computedMatch.params.id;
         if(!this.state.loading){
             let msg = loadChat(this.state.msgData);
-            this.setState({messages : msg})
-        }
-    }   
+            this.setState({messages : msg});
+            this.socket = io(ENDPOINT);
+            this.socket.emit('join', {chatRoomId,token}, (error) => {
+                if(error){
+                    notifyError_with_msg('Unable to connect to socket');
+                }
+        });
+            this.socket.on('messageToGroup', (message) => {
+                let newMsg = pushToChat(message);
+                let totalMessages = this.state.messages;
+                totalMessages.push(newMsg);
+                this.setState({ messages : totalMessages })
+            });
+    } 
+}
+
+    componentWillUnmount(){
+        if(this.socket !== undefined){
+        this.socket.disconnect();
+        this.socket.off(() => {
+            console.log("socket is off")
+        });
+    }}
+
 
     setMessage = (event) => {
         this.setState({ message : event.target.value})
     }
 
     sendMessage = (event) => {
-        // in reactjs keyPress function refreshes the page
         event.preventDefault();
         if(this.state.message){
-            // socket.emit('sendMessage', message, () => setMessage('') );
-            console.log(this.state.message)
+            this.socket.emit('messageToGroup', { message : this.state.message }, (error) => {
+                if(error){
+                    notifyError_with_msg('Unable to connect to socket');
+                }});
+            let userMsg = pushUserChat(this.state.message);
+            let totalMessages = this.state.messages;
+            totalMessages.push(userMsg);
+            this.setState({ messages : totalMessages })
         }
-        
     }
 
 

@@ -41,8 +41,9 @@ class Interviews extends React.Component{
         const json = await response.json();
         if (!response.ok) {
             this.setState({ error : true })
-            notifyError_with_msg(json._message)
+            notifyError_with_msg(json.err)
         }
+        console.log(json)
         if(response.ok){
         console.log(json)
         this.setState({all:json})

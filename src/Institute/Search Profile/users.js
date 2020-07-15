@@ -16,28 +16,33 @@ class Users extends React.Component{
         this.FetchTheSearch = this.FetchTheSearch.bind(this);
     }
 
-    // async componentDidMount(){
-    //     const values = {
-    //         method : "GET",
-    //         headers : {
-    //             'x-auth' : this.props.token
-    //         }
-    //     }
-    //     console.log(values)
-    //     let user = this.props.user
-    //     try{
-    //     const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/users`,values);
-    //     const json = await fetchUser.json()
-    //     console.log(json);
-    //     this.setState({
-    //         values : json,
-    //         loading : false
-    //     })
-    //     }
-    //     catch(error){
-    //         console.log(error);
-    //     }
-    // }
+    async componentDidMount(){
+        const values = {
+            method : "GET",
+            headers : {
+                'x-auth' : this.props.token
+            }
+        }
+        console.log(values)
+        let user = this.props.user
+        try{
+        const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/users`,values);
+        const json = await fetchUser.json()
+        if(!fetchUser.ok){
+            notifyError_with_msg(json.err);
+        }
+        console.log(json);
+        if(fetchUser.ok){
+        this.setState({
+            values : json,
+            loading : false
+        })
+        }}
+        catch(error){
+            console.log(error);
+            notifyError_with_msg(error);
+        }
+    }
 
     onSearch = (URL) => {
         this.setState({

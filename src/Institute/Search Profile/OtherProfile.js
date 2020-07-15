@@ -22,10 +22,10 @@ class OtherProfile extends React.Component{
         try{
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/alumni/users/${ProfileId}`, values);
         console.log(response)
+        const json = await response.json();
         if (!response.ok) {
             throw new Error(response.status); // 404
           }
-        const json = await response.json();
         console.log(json)
         this.setState({
             all : json,
