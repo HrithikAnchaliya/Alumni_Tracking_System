@@ -50,7 +50,7 @@ class ChatRoom extends React.Component {
         catch(error){
             console.log(error)
             this.setState({ error : true})
-            notifyError_with_msg('Unable to Chat Data');
+            notifyError_with_msg('Unable To Fetch Chat Data');
         }
     }    
 
@@ -94,7 +94,7 @@ class ChatRoom extends React.Component {
         if(this.state.message){
             this.socket.emit('messageToGroup', { message : this.state.message }, (error) => {
                 if(error){
-                    notifyError_with_msg('Unable to connect to socket');
+                    notifyError_with_msg('Unable To Emit From Socket');
                 }});
             let userMsg = pushUserChat(this.state.message);
             let totalMessages = this.state.messages;
