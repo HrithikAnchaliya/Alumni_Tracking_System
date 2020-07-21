@@ -22,8 +22,8 @@ export default class RaiseTicket extends React.Component{
 
     render(){
         console.log(this.state)
-        const {title , subtitle , description} = this.state;
-        const values = {title , subtitle , description};
+        const {title , subTitle , description} = this.state;
+        const values = {title , subTitle , description};
 
         return(
             <div>
