@@ -3,7 +3,7 @@ Link to this Project - to see the development in progress - [Alumni Management S
 
 ## Initial Command
 
-Run `npm init` 
+Run `npm install` 
 to install the node modules.
 
 ## Available Scripts
