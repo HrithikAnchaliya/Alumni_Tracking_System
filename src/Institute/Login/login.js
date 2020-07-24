@@ -47,14 +47,16 @@ class Login extends React.Component{
             body : JSON.stringify(data)
         }
         try{    
+        let storeToken = ''
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/login`,values)
-        const json = await response.json()
+        // const json = await response.json()
         if(!response.ok){
             notifyError_with_msg('Check your Password, Email and User');
             this.setState({ loading : false })
         }
         if(response.ok){
-        let storeToken = json.user.tokens[0].token;
+        for (var pair of response.headers.entries()) {
+            if(pair[0] === 'x-auth'){ storeToken = pair[1]; break}}
         let storeUser = this.state.user;
         Serialize(storeToken,storeUser);
         await this.props.addtoken();

@@ -1,23 +1,26 @@
 import React from 'react';
-// import Users from './users'
 import 'bulma/css/bulma.css';
 import Select from 'react-select';
 import { selector, cityList, intoUrl } from './Utils/data'
+import { connect } from 'react-redux';
+import { notifyError_with_msg } from '../Utils/Message'
+import CollegeOptions from '../Email/Utils/data'
 let countries = require ('countries-cities').getCountries();
 
 
-export default class SearchPage extends React.Component{
+class SearchPage extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             searchvalue : '',
             yearvalue : '',
             yesno : false,
-            // isSelected : false,
             selected : null,
             selectedCity : '',
             countryList : [],
-            cityList : []
+            cityList : [],
+            collegesList : [],
+            selectedCollege : []
         }
 
         this.onChange = this.onChange.bind(this);
@@ -25,14 +28,35 @@ export default class SearchPage extends React.Component{
         this.toGatherCity = this.toGatherCity.bind(this);
         this.onChangeCity = this.onChangeCity.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
+        this.onChangeCollege = this.onChangeCollege.bind(this);
 
     }
 
-    componentDidMount(){
+    componentDidMount = async() => {
         let countrylist = selector(countries); 
         this.setState({
             countryList : countrylist
-        })   
+        });
+        if(this.props.user === 'admin'){
+        const values = {
+            method : "GET"
+        }
+        console.log(values)
+        try{
+        const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/college`,values);
+        const json = await fetchUser.json()
+        if(!fetchUser.ok){
+            notifyError_with_msg(json.err);
+        }
+        console.log(json);
+        if(fetchUser.ok){
+        let list = CollegeOptions(json);
+        this.setState({ collegesList : list });
+        }}
+        catch(error){
+            console.log(error);
+            notifyError_with_msg(error);
+        }}
     }
 
     onChange = (event) => {
@@ -42,8 +66,8 @@ export default class SearchPage extends React.Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        let { searchvalue, yearvalue, selectedCity } = this.state
-        let state = { searchvalue, yearvalue, selectedCity } 
+        let { searchvalue, yearvalue, selectedCity, selectedCollege } = this.state
+        let state = { searchvalue, yearvalue, selectedCity, selectedCollege} 
         let url = intoUrl(state);
         console.log(url);
         this.props.onSearch(url);
@@ -73,6 +97,12 @@ export default class SearchPage extends React.Component{
     onChangeCity = (selectedOption) => {
         this.setState({
             selectedCity : selectedOption
+        });
+    }
+
+    onChangeCollege = (selectedOption) => {
+        this.setState({
+            selectedCollege : selectedOption
         });
     }
 
@@ -146,6 +176,23 @@ export default class SearchPage extends React.Component{
                     ) : ( null )
                     }
                 </div>
+                <div>
+                    { ((this.props.user === 'admin') && (this.state.collegesList))   ? (
+                        <div>
+                        Select College:
+                        <Select
+                        value={this.state.selectedCollege}
+                        options={this.state.collegesList}
+                        isMulti
+                        isSearchable
+                        placeholder='Select College'
+                        name='collegeId'
+                        onChange={this.onChangeCollege}/>
+                        <br/>
+                        </div>
+                    ) : ( null )
+                    }
+                </div>
                     <button type='submit'>Submit</button>
                     </form>
                 </div>
@@ -157,3 +204,13 @@ export default class SearchPage extends React.Component{
         )
     }
 }
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token,
+        user : state.Auth_user
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (SearchPage);

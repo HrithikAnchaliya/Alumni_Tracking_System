@@ -27,21 +27,28 @@ export function cityList(country){
 export function intoUrl(states){
     let state = store.getState();
     let user = state.Auth_user;
-    let { searchvalue, yearvalue, selectedCity } = states;
+    let { searchvalue, yearvalue, selectedCity, selectedCollege  } = states;
     let location = [];
+    let colleges = [];
     if(selectedCity){
     selectedCity.forEach((city) => {
         let array = city.value
         location.push(array)
     })}
+    if(selectedCollege){
+        selectedCollege.forEach((college) => {
+            let array = college.value
+            colleges.push(array)
+    })}
     console.log(location)
     let url = buildUrl('https://alumni-backend-app.herokuapp.com',{
-        path : `${user}/users`,   // no college
+        path : `${user}/alumni`,   // no college
         disableCSV: true,
         queryParams : {
             search : searchvalue,
             endYear : yearvalue,
-            'location.city' : location
+            'location.city' : location,
+            collegeId : colleges
         }
     })
     return decodeURI(url);

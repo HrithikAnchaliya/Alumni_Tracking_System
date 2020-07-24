@@ -26,7 +26,7 @@ class Users extends React.Component{
         console.log(values)
         let user = this.props.user
         try{
-        const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/users`,values);
+        const fetchUser = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/alumni`,values);
         const json = await fetchUser.json()
         if(!fetchUser.ok){
             notifyError_with_msg(json.err);

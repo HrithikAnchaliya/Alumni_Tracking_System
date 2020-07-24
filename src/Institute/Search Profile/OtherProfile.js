@@ -20,7 +20,7 @@ class OtherProfile extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`https://alumni-backend-app.herokuapp.com/alumni/users/${ProfileId}`, values);
+        const response = await fetch(`https://alumni-backend-app.herokuapp.com/${this.props.user}/alumni/${ProfileId}`, values);
         console.log(response)
         const json = await response.json();
         if (!response.ok) {
@@ -58,7 +58,8 @@ class OtherProfile extends React.Component{
 
 const mapStatesToProps = state => {
     return{
-        token : state.Auth_token
+        token : state.Auth_token,
+        user : state.Auth_user
     }
 }
 
