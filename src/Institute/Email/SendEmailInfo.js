@@ -1,9 +1,12 @@
 import React from 'react'
 import Select from 'react-select'
 import { YearOptions, BranchOption } from './Utils/data'
-// import { base_url} from '../../Endpoint/endpoint'
+import { intoUrl } from './Utils/data'
+import { connect } from 'react-redux'
+import { notify_Success, notifyError_with_msg } from  '../Utils/Message'
 
-export default class SendEmailInfo extends React.Component{
+ 
+class SendEmailInfo extends React.Component{
 
     
     componentWillMount = () => {
@@ -13,13 +16,41 @@ export default class SendEmailInfo extends React.Component{
         this.props.setBranchList(branchOptions);
     }
 
+    onSubmit = async(e) => {
+        e.preventDefault();
+        let URL = intoUrl(this.props.data);
+        console.log(URL);
+        const values = {
+            method : "POST",
+            headers : {
+                'x-auth' : this.props.token
+            }
+        }
+        try{
+        const response = await fetch(URL, values);  //Only College can Post
+        console.log(response)
+        const data = await response.json();
+        if (!response.ok) {
+            notifyError_with_msg(data.err)
+        }
+        if(response.ok){
+        notify_Success();
+        }}
+        catch(error){
+            notifyError_with_msg('Cannot Send Mail') 
+        }
+    }
+
     render(){
         return(
             <div>
-                {(this.props.colleges.length !== 0) ? (
+                <form onSubmit={this.onSubmit}>
+                {( (this.props.user === 'admin') && (this.props.colleges.length !== 0)) ? (
+                  
                     <div>
                         <h6>College Name</h6>
                         <Select 
+                        required
                         value={this.props.college}
                         options={this.props.colleges}
                         isMulti
@@ -34,6 +65,7 @@ export default class SendEmailInfo extends React.Component{
                     <div>
                         <h6>Batch</h6>
                         <Select 
+                        required
                         value={this.props.year}
                         options={this.props.yearList}
                         isMulti
@@ -48,6 +80,7 @@ export default class SendEmailInfo extends React.Component{
                     <div>
                         <h6>Branch</h6>
                         <Select 
+                        required
                         value={this.props.branch}
                         options={this.props.BranchList}
                         isMulti
@@ -56,9 +89,22 @@ export default class SendEmailInfo extends React.Component{
                         name='branch'
                         onChange={this.props.setBranch}/>
 
-                    </div>) : (null)}
-
+                    </div>
+                    ) : (null)}
+                    <br/>
+                    <button type='submit'>Submit</button>
+                </form>
             </div>
         )
     }
 }
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token,
+        user : state.Auth_user
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (SendEmailInfo);

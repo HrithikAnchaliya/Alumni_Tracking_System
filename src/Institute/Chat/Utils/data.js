@@ -10,7 +10,7 @@ const loadChat = (data) => {
             let innerobj = {id:'', message:'', senderName:''}
             innerobj.id = element.senderId._id
             innerobj.message = element.message
-            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName)
+            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || null
             let obj = new Message(innerobj);
             message.push(obj);
         }
@@ -29,9 +29,9 @@ const loadChat = (data) => {
 
 export const pushToChat = (data) => {
     let innerobj = {id:'', message:'', senderName:''}
-    innerobj.id = data.newMessage.senderId
+    innerobj.id = data.newMessage.senderId._id
     innerobj.message = data.newMessage.message
-    innerobj.senderName = (data.newMessage.firstName) || (data.newMessage.collegeName) || null
+    innerobj.senderName = (data.newMessage.senderId.firstName) || (data.newMessage.senderId.collegeName) || null
     let obj = new Message(innerobj);
 
     return obj;

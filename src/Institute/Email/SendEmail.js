@@ -71,8 +71,8 @@ export default class SendEmail extends React.Component{
     }
 
     render(){
-        console.log(this.state.college);
-        console.log(this.state.year);
+        let {college, year, branch } = this.state;
+        let data = {college, year, branch }
         return(
             <div>
                 <SendEmailInfo 
@@ -86,7 +86,8 @@ export default class SendEmail extends React.Component{
                 BranchList={this.state.BranchList}
                 branch={this.state.branch}
                 setBranchList={this.setBranchList}
-                setBranch={this.setBranch}/>
+                setBranch={this.setBranch}
+                data={data}/>
             </div>
         )
     }
