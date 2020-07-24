@@ -47,6 +47,8 @@ import Rooms from './Institute/Chat/Rooms';
 import ChatRoom from './Institute/Chat/ChatRoom';
 import SendEmail from './Institute/Email/SendEmail';
 import CreateChat from './Institute/Chat/CreateChat';
+import VerifyAlumni from './Institute/Verify Alumni/VerifyAlumni';
+import Tickets from './Institute/Tickets/Tickets';
 
 
 
@@ -79,6 +81,7 @@ class App extends React.Component {
             <ProtectedRoute path='/interviews' exact component={Interviews}/>
             <AlumniRoute path='/addinterview' exact component={Addinterview}/>
             <AlumniRoute path='/raiseticket' exact component={RaiseTicket}/>
+            <ProtectedRoute path='/tickets' exact component={Tickets}/>
             <ProtectedRoute path='/newsletters' exact component={Newsletters}/>
             <ProtectedRoute path={`/newsletters/:id`} component={NewsletterPage}/>
             <CnARoute path='/addnewsletter/' component={Addnewsletter}/>
@@ -91,6 +94,7 @@ class App extends React.Component {
             <ProtectedRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
             <ProtectedRoute path='/createchat' exact component={CreateChat}/>
             <ProtectedRoute path='/sendemail' exact component={SendEmail}/>
+            <ProtectedRoute path='/verify-alumni' exact component={VerifyAlumni}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer
