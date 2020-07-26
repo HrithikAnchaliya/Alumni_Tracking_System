@@ -1,5 +1,6 @@
 Link to this Project - to see the development in progress - [Alumni Management System](https://alumni.now.sh/)
 
+Read the Wiki of this Repository to quickly get you started
 
 ## Initial Command
 
