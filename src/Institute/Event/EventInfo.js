@@ -43,7 +43,7 @@ class EventInfo extends React.Component{
         }
     }
 
-
+    
     render(){
         let toDisable = this.state.attended
         let date_convert = new Date(this.props.date)

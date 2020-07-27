@@ -92,7 +92,8 @@ export default class Workform extends React.Component{
                     <select name="branch" onChange={this.props.handlechg} id='branch'>
                         <option value="">Branch</option>
                         <option value="cse">Computer Science</option>
-                        <option value="mech">Mechanical Engineering</option>
+                        <option value="mech">Mechanical</option>
+                        <option value='civil'>Civil</option>
                     </select>
                     <br/>
                     <span>Selected Branch : {branch}</span>

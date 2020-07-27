@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Profilecard from './profilecard';
 import SearchPage from './Searchpage';
 import { notifyError_with_msg } from '../Utils/Message'
+import '../Style/toStyleSearch.css'
 
 class Users extends React.Component{
     constructor(props){
@@ -88,7 +89,7 @@ class Users extends React.Component{
                     onSearch={this.onSearch}/>
                 </div>
                 {!loading && (values.length !== 0) ? (
-                        <div>{values.map((data,index) => 
+                        <div id='search-profile-div'>{values.map((data,index) => 
                             (<Profilecard 
                                 key={index} 
                                 id={data._id} 

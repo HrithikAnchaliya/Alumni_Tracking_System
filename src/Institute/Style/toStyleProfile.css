@@ -1,0 +1,37 @@
+#profile-first-div{
+    -webkit-box-shadow: 0 0 10px px #050305;
+    box-shadow: 0 0 10px px #050305;
+    background-color: yellowgreen;
+    width : 700px;
+    height : 80px;
+    margin-left: 360px;
+    text-align: center;
+}
+
+#profile-sec-div{
+    -webkit-box-shadow: 0 0 10px px #050305;
+    box-shadow: 0 0 10px px #050305;
+    background-color: white;
+    width : 700px;
+    height : 190px;
+    margin-left: 360px;
+    text-align: center;
+}
+
+#basic-id-profile{
+    text-align: left;
+}
+
+#profile-span{
+    text-align: center;
+    padding-right: 400px;
+}
+
+#basic-profile-p{
+    padding-right: 500px;
+}
+
+#basic-strong-id{
+    background-color: #69C0EF;
+    width: 200px;
+}

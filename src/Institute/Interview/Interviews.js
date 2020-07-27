@@ -76,11 +76,11 @@ class Interviews extends React.Component{
     render(){
         console.log(this.props.user)
         let search = this.state.search
-        let onSearch = this.state.onSearch
+        // let onSearch = this.state.onSearch
         return(
             <div>
                 <div id='job-search-div'>
-                { (onSearch) ? 
+                { (this.state.onSearch) ? 
                 (<input id='job-search' defaultValue={search}></input>) : (null)
                 }
                 <img id='search-img' alt="Search" onClick={this.onSearch} src="https://img.icons8.com/cotton/64/000000/search--v1.png"/>

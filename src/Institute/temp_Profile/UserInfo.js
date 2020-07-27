@@ -1,5 +1,7 @@
 import React from 'react';
+import 'bulma/css/bulma.css';
 import { Link }from 'react-router-dom'
+import '../Style/toStyleProfile.css'
 
 export default class UserInfo extends React.Component{
     constructor(props){
@@ -12,24 +14,38 @@ export default class UserInfo extends React.Component{
     render(){
         console.log(this.props.json.education)
         return(
-            <div className="container">
-                <div className="notification">
+                <div>
                     <Link style={{"textDecoration":'none'}} className="card-footer-item" to='/edit'>Edit</Link>
+                    <div id='profile-first-div'>
                     <span>
-                    <hr/>
                     <h5>Profile</h5>
                     {(this.props.json.verified) ? (
                         <h6>Verified</h6>) : ( <h6>Not - Verified</h6>)}
-                    <hr/>
-                    <br/>
                     </span>
-                    <div>
-                    <h5>Basic</h5><hr/>
-                    <h6>Name  :  {this.props.json.firstName} {this.props.json.lastName}</h6>
-                    <h6>College Name :   {this.props.json.collegeName}</h6>
-                    <h6>Degree  :    {this.props.json.degree}</h6>
-                    <h6>Branch   :  {this.props.json.branch}</h6>
-                    <h6>{this.props.json.startYear} -  {this.props.json.endYear}</h6><hr/>
+                    </div>
+                    <br/>
+                    <div id='profile-sec-div'>
+                    <p id='basic-id-profile'>
+                    <strong id='basic-strong-id'>Basic</strong><hr/>
+                    </p>
+                    <p id='basic-profile-p'>
+                    <strong>Name</strong><br/>
+                    </p>
+                    <p id='profile-span'>
+                    <span >{this.props.json.firstName}</span>
+                    </p>
+                    <p  id='basic-profile-p'>
+                    <strong>Degree</strong><br/>
+                    </p>
+                    <p id='profile-span'>
+                    <span>{this.props.json.degree}</span>
+                    </p>
+                    <p  id='basic-profile-p'>
+                    <strong>Branch</strong><br/>
+                    </p>
+                    <p id='profile-span'>
+                    <span>{this.props.json.branch}</span>
+                    </p>
                     </div>
                     <br/>
                     <div>
@@ -75,7 +91,9 @@ export default class UserInfo extends React.Component{
                     </div>
                     
                 </div>
-                </div>
+               
         )
     }
 }
+
+ 

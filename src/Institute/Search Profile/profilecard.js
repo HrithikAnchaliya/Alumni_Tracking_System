@@ -1,14 +1,15 @@
 import React from 'react';
 import 'bulma/css/bulma.css'
 import { Link } from "react-router-dom";
+import '../Style/toStyleSearch.css'
 
 export default class Profilecard extends React.Component{
     render(){
         let { id, name, last, email, branch, degree, skills, location, socialProfiles } = this.props
         console.log(location)
         return(
-            <div style={{width:'290px' , height:'600px'}}>
-                <div className="card">
+            <div >
+                <div id='profilecard-div' className="card">
                     {/* <div className="card-image">
                         <figure className="image is-4by3">
                         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder"></img>
@@ -32,7 +33,7 @@ export default class Profilecard extends React.Component{
                         {/* {(location !== null) ? (
                         <p className="subtitle is-6"><b>City</b> : {location.city}</p>) : (null)
                         } */}
-                        {(skills.length !== 0) ? ( // Should be Skills.lenght
+                        {(skills.length !== 0) ? ( 
                         skills.map((item,index) => <a key={index} href="void"> #{item} </a>)) : (null)}
                         <br/>{(socialProfiles.length !== 0) ? 
                         (<div><a href={socialProfiles.facebook}> Facebook </a> <a href={socialProfiles.linkedin}> Linkedin </a> </div>) 

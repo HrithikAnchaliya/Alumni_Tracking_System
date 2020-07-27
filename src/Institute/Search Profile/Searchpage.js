@@ -5,6 +5,9 @@ import { selector, cityList, intoUrl } from './Utils/data'
 import { connect } from 'react-redux';
 import { notifyError_with_msg } from '../Utils/Message'
 import CollegeOptions from '../Email/Utils/data'
+import { Link } from "react-router-dom";
+import '../Style/toStyleSearch.css'
+import Button from 'react-bootstrap/Button'
 let countries = require ('countries-cities').getCountries();
 
 
@@ -20,7 +23,8 @@ class SearchPage extends React.Component{
             countryList : [],
             cityList : [],
             collegesList : [],
-            selectedCollege : []
+            selectedCollege : [],
+            onFocus : 'search'
         }
 
         this.onChange = this.onChange.bind(this);
@@ -106,81 +110,96 @@ class SearchPage extends React.Component{
         });
     }
 
+    changeFocus = (event) => {
+        this.setState({ onFocus : event.target.id })
+    }
+
     render(){
         let countryOptions = this.state.countryList;
-    
-        // console.log(this.state)
+        let onFocus = this.state.onFocus
 
         return(
             <div>
                 <div>
-                <form  onSubmit={this.onSubmit}>
-                <article className="panel is-primary">
-                <p className="panel-heading">
-                    Search
+               
+                <article id='filter-element'className="panel is-primary">
+                <p id='search-filter-element' className="panel-heading">
+                    Filter
                 </p>
                 <p className="panel-tabs">
-                    <a href='http://www.google.com'className="is-active">Search</a>
-                    <a href='http://www.google.com'>Year</a>
-                    <a href='http://www.google.com'>Location</a>
+                   <Link id='search' onClick={this.changeFocus} className={(onFocus === 'search')? ('is-active') : ('not-active')}>Search</Link>
+
+                   <Link id='year' onClick={this.changeFocus} className={(onFocus === 'year')? ('is-active') : ('not-active')}>Year</Link>
+
+                   { (this.props.user === 'admin') ? (<Link id='college' onClick={this.changeFocus} className={(onFocus === 'college')? ('is-active') : ('not-active')}>College</Link>) : (null)}
+
+                   <Link id='location' onClick={this.changeFocus} className={(onFocus === 'location')? ('is-active') : ('not-active')}>Location</Link>
                 </p>
                 <div className="panel-block">
+                <form  onSubmit={this.onSubmit}>
+                    {  (this.state.onFocus === 'search') ? 
+                    (<div>
                     <p className="control has-icons-left">
-                    <input onChange={this.onChange} value = {this.state.searchvalue} name = "searchvalue" className="input is-primary" type="text" placeholder="Search"></input>
+                    <input onChange={this.onChange} id='focus-on-search' value = {this.state.searchvalue} name = "searchvalue" className="input is-primary" type="text" placeholder="Search"></input>
                     <span className="icon is-left">
                         <i className="fas fa-search" aria-hidden="true"></i>
                     </span>
                     </p>
-                </div>
-                </article>
-                <label>Year</label>
-                <br/>
-                <select name='yearvalue' onChange={this.onChange}>
-                    <option>Select Year</option>
-                    <option value='2011'>2011</option>
-                    <option value='2012'>2012</option>
-                    <option value='2013'>2013</option>
-                    <option value='2016'>2016</option>
-                    <option value='2018'>2018</option>
-                    <option value='2019'>2019</option>
-                    <option value='2020'>2020</option>
-                    <option value='2021'>2021</option>
-                </select>
-                
-                <div>
-                    <br/>   
-                    <label>Search Country: </label> 
-                    <Select 
-                    value={this.state.selected}
-                    options={countryOptions}
-                    isSearchable
-                    placeholder='Select Country'
-                    name='location.country'
-                    onChange={this.onChangeCountry}/>
+                    </div>) : (null)}
+                    
+                    {  (this.state.onFocus === 'year') ? 
+                    (<div>
+                    <select id='focus-on-search' name='yearvalue' onChange={this.onChange}>
+                        <option>Select Year</option>
+                        <option value='2011'>2011</option>
+                        <option value='2012'>2012</option>
+                        <option value='2013'>2013</option>
+                        <option value='2016'>2016</option>
+                        <option value='2018'>2018</option>
+                        <option value='2019'>2019</option>
+                        <option value='2020'>2020</option>
+                        <option value='2021'>2021</option>
+                    </select>
                     <br/>
-                </div>
-                <div>
-                    { (this.state.yesno) ? (
+                    <br/>
+                    </div>) : (null)}
+                    { (this.state.onFocus === 'location') ? 
+                    (<div>
                         <div>
-                        Search City:
-                        <Select 
-                        value={this.state.selectedCity}
-                        options={this.state.cityList}
-                        isMulti
-                        isSearchable
-                        placeholder='Select City'
-                        name='location.city'
-                        onChange={this.onChangeCity}/>
-                        <br/>
+                            <Select 
+                            id='focus-on-search'
+                            value={this.state.selected}
+                            options={countryOptions}
+                            isSearchable
+                            placeholder='Select Country'
+                            name='location.country'
+                            onChange={this.onChangeCountry}/>
+                            <br/>
                         </div>
-                    ) : ( null )
-                    }
-                </div>
-                <div>
+                        <div>
+                            { (this.state.yesno) ? (
+                                <div>
+                                <Select 
+                                id='focus-on-search'
+                                value={this.state.selectedCity}
+                                options={this.state.cityList}
+                                isMulti
+                                isSearchable
+                                placeholder='Select City'
+                                name='location.city'
+                                onChange={this.onChangeCity}/>
+                                <br/>
+                                </div>
+                            ) : ( null )
+                            }
+                        </div>
+                    </div>) : (null)}
+                    { (this.state.onFocus === 'college') ? 
+                    (<div>
                     { ((this.props.user === 'admin') && (this.state.collegesList))   ? (
                         <div>
-                        Select College:
                         <Select
+                        id='focus-on-search'
                         value={this.state.selectedCollege}
                         options={this.state.collegesList}
                         isMulti
@@ -190,15 +209,13 @@ class SearchPage extends React.Component{
                         onChange={this.onChangeCollege}/>
                         <br/>
                         </div>
-                    ) : ( null )
-                    }
-                </div>
-                    <button type='submit'>Submit</button>
+                        ) : ( null )
+                        }
+                    </div>) : (null)}
+                    <Button variant="outline-primary" id='search-submit-button' type='submit'>Submit</Button>
                     </form>
-                </div>
-                <br/>
-                <div>
-                    {/* <Users/> */}
+                    </div>
+                </article>   
                 </div>
             </div>
         )

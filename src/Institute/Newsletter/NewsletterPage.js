@@ -53,7 +53,7 @@ class NewsletterPage extends React.Component{
         console.log(chunksAll)
         const file = new Blob([chunksAll, 'file'], {type: 'application/pdf'});
         const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
+        window.open(fileURL, '_blank', 'nodeIntegration=no');
         }
         catch(error){
             console.log(error)

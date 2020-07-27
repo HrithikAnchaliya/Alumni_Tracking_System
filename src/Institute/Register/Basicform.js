@@ -30,8 +30,6 @@ export default class Basicform extends React.Component{
                         <option value=''></option>
                         <option value='alumni'>Alumni</option>
                         <option value='student'>Student</option>
-                        <option value='admin'>Admin</option>
-                        <option value='college'>College</option>
                     </select>
                     <br/>
                     <span>Selected User : {user}</span>

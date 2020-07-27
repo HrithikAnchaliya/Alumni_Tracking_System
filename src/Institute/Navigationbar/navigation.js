@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import './style.css'
 
+// import DropdownButton from 'react-bootstrap/DropdownButton'
+// import Dropdown from 'react-bootstrap/Dropdown'
+
 class Navigation extends React.Component{
     render(){
         return(
@@ -14,7 +17,7 @@ class Navigation extends React.Component{
                   Home
                 </Link>
               </li>
-              {(this.props.user !== 'college' && this.props.Auth) ? (
+              {(this.props.user !== 'college' && this.props.user !== 'admin' && this.props.Auth) ? (
                 <li>
                 <Link to='/user'>
                   Profile
@@ -49,6 +52,36 @@ class Navigation extends React.Component{
                 <Link to='/searchprofile'>
                 Search People</Link>
               </li>
+               {(this.props.user !== 'student' && this.props.Auth) ? (
+                <li>
+                <Link to='/chat'>
+                  Chat
+                </Link>
+              </li>) : ( null )}
+              {(this.props.user === 'college' && this.props.Auth) ? (
+                <li>
+                <Link to='/tickets'>
+                  Tickets
+                </Link>
+              </li>) : ( null )}
+               {(this.props.user === 'alumni' && this.props.Auth) ? (
+                <li>
+                <Link to='/funds'>
+                  Funds
+                </Link>
+              </li>) : ( null )}
+                {((this.props.user === 'college' || this.props.user === 'admin') && this.props.Auth) ? (
+                <li>
+                <Link to='/sendemail'>
+                  Send Mail
+                </Link>
+              </li>) : ( null )}
+              {(this.props.user === 'college' && this.props.Auth) ? (
+                <li>
+                <Link to='/verify-alumni'>
+                  Verify Alumni
+                </Link>
+              </li>) : ( null )}
               { 
               (this.props.Auth) ? (
                 <li>
@@ -79,3 +112,4 @@ const mapStatesToProps = state => {
 
 
 export default connect(mapStatesToProps,null) (Navigation);
+
