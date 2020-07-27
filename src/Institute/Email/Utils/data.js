@@ -21,7 +21,7 @@ export function YearOptions(){
 }
 
 export function BranchOption(){
-    let branch = ['Computer Science', 'Mechanical', 'Bio-Technology', 'Law', 'Civil', 'Musical'];
+    let branch = ['cse', 'mech', 'civil'];
     let selection = [];
     branch.forEach((value) => {
         let obj = { value : `${value}`, label:`${value}`}

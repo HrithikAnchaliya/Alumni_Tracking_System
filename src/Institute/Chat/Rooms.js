@@ -11,7 +11,7 @@ const Rooms = () => {
     let [ error, setError ] = useState(false);
     let [ loading, setLoading ] = useState(true);
     let [ rooms, setRooms ] = useState(null);
-    let [ colleges, setColleges ] = useState(null);
+    let [ colleges, setColleges ] = useState([]);
     let [ college, setCollege ] = useState(null);
 
     const { token, user } = useSelector(state => ({
