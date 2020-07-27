@@ -5,7 +5,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-// import './Institute/Style/Fonts/Futura Std Light Oblique.otf'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Institute/Style/style.css'
@@ -14,8 +13,6 @@ import Navigation from './Institute/Navigationbar/navigation'
 import Login from './Institute/Login/login.js';
 import Logoff from './Institute/Login/logoff'
 import Register from './Institute/Register/register'
-// import Profilepage from './Institute/Profile/profilepage.js';
-// import Searchprofile from './Institute/Profile/searchprofile.js'
 import GeoJsonMap from './Institute/Map/leafletmap'
 import Events from './Institute/Event/events.js';
 import AddEvent from './Institute/Event/AddEvent';
@@ -29,7 +26,7 @@ import Addinterview from './Institute/Interview/Addinterview'
 import RaiseTicket from './Institute/Tickets/RaiseTicket'
 import Newsletters from './Institute/Newsletter/Newsletters'
 import { ProtectedRoute, LoginRoute, LogoutRoute, CollegeRoute } from './Institute/Protectedroutes/index'
-import { AlumniRoute, NoStudentRoute, CnARoute, NoCollegeRoute } from './Institute/Protectedroutes/Routes'
+import { AlumniRoute, NoStudentRoute, CnARoute } from './Institute/Protectedroutes/Routes'
 import { Provider } from 'react-redux';
 import store from './Redux/store/storage';
 import UserProfile from './Institute/temp_Profile/UserProfile';
@@ -49,6 +46,7 @@ import SendEmail from './Institute/Email/SendEmail';
 import CreateChat from './Institute/Chat/CreateChat';
 import VerifyAlumni from './Institute/Verify Alumni/VerifyAlumni';
 import Tickets from './Institute/Tickets/Tickets';
+import TicketPage from './Institute/Tickets/TicketPage'
 
 
 
@@ -62,14 +60,13 @@ class App extends React.Component {
           </div>
           <Switch>
             <Route path='/' exact component={Home}/>
-            <LoginRoute path='/login' component={Login}/>
-            <LogoutRoute path='/logoff' component={Logoff}/>
-            <ProtectedRoute path='/searchprofile' component={users}/>
+            <LoginRoute path='/login' exact component={Login}/>
+            <LogoutRoute path='/logoff' exact component={Logoff}/>
+            <ProtectedRoute path='/searchprofile' exact component={users}/>
             <ProtectedRoute path={`/profile/:id`} component={OtherProfile}/>
-            {/* <Route path='/profilepage' component={Profilepage}/> */}
-            <Route path='/import' component={Import}/>
-            <NoCollegeRoute path='/user' exact component={UserProfile}/>
-            <ProtectedRoute path='/edit' exact component={EditPage}/>
+            <CollegeRoute path='/import' component={Import}/>
+            <AlumniRoute path='/user' exact component={UserProfile}/>
+            <AlumniRoute path='/edit' exact component={EditPage}/>
             <ProtectedRoute path='/map' exact component={GeoJsonMap}/>
             <ProtectedRoute path={`/events/:id`} exact component={Eventpage}/>
             <CollegeRoute path='/addevent' exact component={AddEvent}/>
@@ -81,20 +78,21 @@ class App extends React.Component {
             <ProtectedRoute path='/interviews' exact component={Interviews}/>
             <AlumniRoute path='/addinterview' exact component={Addinterview}/>
             <AlumniRoute path='/raiseticket' exact component={RaiseTicket}/>
-            <ProtectedRoute path='/tickets' exact component={Tickets}/>
+            <CollegeRoute path='/tickets' exact component={Tickets}/>
+            <CollegeRoute path={`/tickets/:id`} component={TicketPage}/>
             <ProtectedRoute path='/newsletters' exact component={Newsletters}/>
             <ProtectedRoute path={`/newsletters/:id`} component={NewsletterPage}/>
             <CnARoute path='/addnewsletter/' component={Addnewsletter}/>
             <LoginRoute path='/register' component={Register}/>
-            <ProtectedRoute path='/funds' exact component={Funds}/>
-            <ProtectedRoute path={`/funds/:id`} exact component={FundsPage}/>
+            <AlumniRoute path='/funds' exact component={Funds}/>
+            <AlumniRoute path={`/funds/:id`} exact component={FundsPage}/>
             <CollegeRoute path='/addfund' exact component={AddFund}/>
-            <CnARoute path='/dashboard/' component={Dashboard}/>
-            <ProtectedRoute path='/chat' exact component={Rooms}/>
-            <ProtectedRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
-            <ProtectedRoute path='/createchat' exact component={CreateChat}/>
-            <ProtectedRoute path='/sendemail' exact component={SendEmail}/>
-            <ProtectedRoute path='/verify-alumni' exact component={VerifyAlumni}/>
+            <ProtectedRoute path='/dashboard/' component={Dashboard}/>
+            <NoStudentRoute path='/chat' exact component={Rooms}/>
+            <NoStudentRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
+            <NoStudentRoute path='/createchat' exact component={CreateChat}/>
+            <CnARoute path='/sendemail' exact component={SendEmail}/>
+            <CollegeRoute path='/verify-alumni' exact component={VerifyAlumni}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer
@@ -113,8 +111,6 @@ class App extends React.Component {
 
     }
 }
-
-
 
 
 ReactDOM.render(
