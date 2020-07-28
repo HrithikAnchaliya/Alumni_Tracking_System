@@ -8,7 +8,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import 'bulma/css/bulma.css';
 
 
-
 class NoticeComponent extends React.Component{
     constructor(props){
         super(props);
@@ -21,7 +20,7 @@ class NoticeComponent extends React.Component{
 
     async componentDidMount(){
 
-        this.setState({isLoading: true});
+        this.setState({ isLoading: true });
 
         const options = {
             method : "GET",
@@ -30,7 +29,6 @@ class NoticeComponent extends React.Component{
             } 
         };
 
-
         try {
             const response = await fetch(`${base_url}/${this.props.user}/notices`, options);
             const json = await response.json();
@@ -38,18 +36,14 @@ class NoticeComponent extends React.Component{
                 this.setState( {error : true} );
                 return notifyError_with_msg(json.err);
             } else {
-                console.log(json);
                 // If response is OK - True
                 this.setState({
                     isLoading: false,
                     notices: json
                 });
                 console.log(json);
+            };
 
-            }
-
-
-            
         } catch (error) {
             console.log(error);
             this.setState( {error : true} );
@@ -60,49 +54,45 @@ class NoticeComponent extends React.Component{
     render(){
         return (
             <div>
-
-                {this.state.isLoading ? 
-                (
-                    <div id='Loading-id'>
-                        <Spinner animation="border" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </Spinner>
-                    </div>
-                ) 
+                {
+                    this.state.isLoading ? 
+                        (
+                            <div id='Loading-id'>
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </div>
+                        ) 
                     : 
-                (
-                    <Scrollbar style={{ width: 750, height: 450 }}>
+                        (
+                            <Scrollbar style={{ width: 750, height: 450 }}>
+                                {
+                                    this.state.notices.map((notice) => {
+                                        return (
+                                            <article className="message is-dark">
+                                                <div className="message-header">
+                                                    <p> 
+                                                        {notice.title} 
+                                                    </p>  
+                                                </div>
 
-                    <div>
-                        {
-                            this.state.notices.map((notice) => {
-                                return (
-                                    <article className="message is-dark">
-                                        <div className="message-header">
-                                            <p> {notice.title}</p>  
-                                        </div>
+                                                <div className="message-body">
+                                                    {notice.subTitle}
+                                                </div>
+                                            
+                                                <div> 
+                                                    <strong>
+                                                        Posted By: {notice.postedBy.collegeName || notice.postedBy.adminName} - {notice.onModel}
+                                                    </strong>
+                                                </div>
 
-                                        <div className="message-body">
-                                            {notice.subTitle}
-                                        </div>
-                                    
-                                        <div> 
-                                            <strong>
-                                                Posted By: {notice.postedBy.collegeName || notice.postedBy.adminName} - {notice.onModel}
-                                            </strong>
-                                        </div>
-
-                                    </article>
-                                )
-                            })
-                        
-
-                        }
-                    </div>
-                    </Scrollbar>
-                )
+                                            </article>
+                                        )
+                                    })
+                                }
+                            </Scrollbar>
+                        )
                 }
-
             </div>
         )
     }
