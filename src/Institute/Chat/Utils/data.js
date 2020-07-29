@@ -45,5 +45,21 @@ export const pushUserChat = (data) => {
     return obj;
 }
 
+export const fetchByCategory = (data) => {
+    let { category } = data;
+    if(category === 'year'){
+        let { category, year } = data;
+        return { category, year }
+    }
+    if(category === 'yearCourse'){
+        let { category, year, course } = data;
+        return { category, year, course }
+    }
+    if(category === 'interest'){
+        let { category, name } = data;
+        return { category, name }
+    }
+}
+
 export default loadChat;
 

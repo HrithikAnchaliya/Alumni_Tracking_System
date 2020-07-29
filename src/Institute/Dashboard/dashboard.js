@@ -8,8 +8,6 @@ import split from './Utils/data';
 import '../Style/toStyleChart.css'
 
 
-
-
 class Dashboard extends React.Component{
     constructor(props){
         super(props)
@@ -49,6 +47,7 @@ class Dashboard extends React.Component{
     render(){
         return(
             <div>
+                {(this.props.user !== 'alumni') ? (
                 <div className="container is-fluid">
                 <div className="notification">
                     <span><span>Add Events</span>
@@ -59,16 +58,40 @@ class Dashboard extends React.Component{
                     <br/>
                     <span><span>Add Newletter</span>
                     <Link to='/addnewsletter'>Add-Newsletter</Link></span>
+                    <span><span>Create Chat</span>
+                    <Link to='/createchat-college'>Create Chat</Link></span>
                 </div>
-                </div>
-                {(this.state.all !== null) ? ( 
+                </div>) : (null)}
+                <br/>
+                <br/>
+                {(this.state.all !== null) ? (
+                <div>
+                    <nav className="level">
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">Events</p>
+                            <p className="title">{this.state.all.upcomingEvents}</p>
+                            </div>
+                        </div>
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">Past Events</p>
+                            <p className="title">{this.state.all.pastEvents}</p>
+                            </div>
+                        </div>
+                    </nav>
+              </div>) : (null)}
+                <br/>
+                <br/>
+                {(this.state.all !== null) ? (
+                <div>
                 <div id='alumni-chart'>
                 <Line
                 data={split(this.state.all.alumni, 'Alumni')}
                 options={{
                     title:{
                     display:true,
-                    text:'No of Alumni Joined',
+                    text:'No of Alumni',
                     fontSize:20
                     },
                     legend:{
@@ -76,7 +99,38 @@ class Dashboard extends React.Component{
                     position:'right'
                     }
                 }}
-                /></div>) : (null)}
+                /></div>
+                <div id='alumni-chart'>
+                <Line
+                data={split(this.state.all.jobs, 'Jobs')}
+                options={{
+                    title:{
+                    display:true,
+                    text:'Jobs',
+                    fontSize:20
+                    },
+                    legend:{
+                    display:true,
+                    position:'right'
+                    }
+                }}
+                /></div>
+                <div id='alumni-chart'>
+                <Line
+                data={split(this.state.all.interviews, 'Interviews')}
+                options={{
+                    title:{
+                    display:true,
+                    text:'Experience',
+                    fontSize:20
+                    },
+                    legend:{
+                    display:true,
+                    position:'right'
+                    }
+                }}
+                /></div>
+                </div>) : (null)}
                
             </div>
         )
@@ -92,3 +146,6 @@ const mapStatesToProps = state => {
 
 
 export default connect(mapStatesToProps,null) (Dashboard);
+
+
+ 

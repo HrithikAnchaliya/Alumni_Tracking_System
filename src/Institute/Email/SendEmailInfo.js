@@ -92,6 +92,14 @@ class SendEmailInfo extends React.Component{
                     </div>
                     ) : (null)}
                     <br/>
+                    <div>
+                        <label>Subject</label>
+                        <input name='subject' onChange={this.props.onChangeInput}></input>
+                        <br/>
+                        <label>Message</label>
+                        <textarea name='message' onChange={this.props.onChangeInput}></textarea>
+                    </div>
+                    <br/>
                     <button type='submit'>Submit</button>
                 </form>
             </div>

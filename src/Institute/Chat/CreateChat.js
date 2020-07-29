@@ -18,7 +18,7 @@ class CreateChat extends React.Component{
 
     onSubmit = async (event) => {
         event.preventDefault();
-        let data = this.state.name;
+        let data = {name : this.state.name};
         const values = {
             method : "POST",
             headers : {

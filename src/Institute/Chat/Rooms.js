@@ -10,9 +10,8 @@ const Rooms = () => {
 
     let [ error, setError ] = useState(false);
     let [ loading, setLoading ] = useState(true);
-    let [ rooms, setRooms ] = useState(null);
+    let [ rooms, setRooms ] = useState([]);
     let [ colleges, setColleges ] = useState([]);
-    let [ college, setCollege ] = useState(null);
 
     const { token, user } = useSelector(state => ({
         token: state.Auth_token,
@@ -61,6 +60,7 @@ const Rooms = () => {
             }console.log(json)
             if(response.ok){ 
                 setColleges(json);
+                setLoading(false);
             }}
             catch(error){
                 console.log(error)
@@ -77,23 +77,20 @@ const Rooms = () => {
     }, [token,user])
 
     function handlechg(event){
-        setCollege(event.target.value);
-        onChoose();
+        onChoose(event.target.value);
     } 
 
-    async function onChoose(){
+    async function onChoose(collegeId){
         setLoading(true);
-        let data = college;
         const values = {
             method : "GET",
             headers : {
                 'Content-Type' : 'application/json',
                 'x-auth' : token,
-            },
-            body : JSON.stringify(data)
+            }
         }
         try{
-        const response = await fetch(`${base_url}/admin/chatrooms`, values);
+        const response = await fetch(`${base_url}/admin/chatrooms?collegeId=${collegeId}`, values);
         console.log(response)
         const json = await response.json();
         if (!response.ok) {
@@ -122,7 +119,7 @@ const Rooms = () => {
                     <select  onChange={handlechg} id='collegeId'>
                         <option value="">Choose a college</option>
                         {colleges.map((data,index) => (
-                            <option key={index} value={data.collegeId}>{data.collegeName}</option>
+                            <option key={index} value={data._id}>{data.collegeName}</option>
                         ))}
                     </select>
                     </div>) : (null)

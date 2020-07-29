@@ -16,6 +16,7 @@ export default function split(chatData, chartName){
         }
         return alumnus;
     }
+
     if(chartName === 'Alumni'){
     return{
         labels: norepeat_data,
@@ -30,6 +31,37 @@ export default function split(chatData, chartName){
             data: ChartData
           }
         ]}
+    }
+    if(chartName === 'Interviews'){
+        return{
+            labels: norepeat_data,
+            datasets: [
+              {
+                label: 'Interviews',
+                fill: false,
+                lineTension: 0.5,
+                backgroundColor: 'rgba(75,192,192,1)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 2,
+                data: ChartData
+              }
+            ]}
+        }
+    
+    if(chartName === 'Jobs'){
+        return{
+            labels: norepeat_data,
+            datasets: [
+              {
+                label: 'Jobs',
+                fill: false,
+                lineTension: 0.5,
+                backgroundColor: 'rgba(75,192,192,1)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 2,
+                data: ChartData
+              }
+            ]}
     }
 }
 

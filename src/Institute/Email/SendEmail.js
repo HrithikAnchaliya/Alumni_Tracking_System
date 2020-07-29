@@ -13,12 +13,15 @@ export default class SendEmail extends React.Component{
             yearList : '',
             year : [],
             BranchList : '',
-            branch : []
+            branch : [],
+            subject : '',
+            message : ''
         }
         this.onChangeCollege = this.onChangeCollege.bind(this);
         this.callback = this.callback.bind(this);
         this.setYearList = this.setYearList.bind(this);
         this.setYears = this.setYears.bind(this);
+        this.onChangeInput = this.onChangeInput.bind(this);
     }
 
     componentDidMount = async () => {
@@ -40,6 +43,10 @@ export default class SendEmail extends React.Component{
         catch(error){
             console.log(error)
         }
+    }
+
+    onChangeInput = (event) => {
+        this.setState({ [event.target.name] : event.target.value })
     }
 
     callback = () => {
@@ -71,8 +78,8 @@ export default class SendEmail extends React.Component{
     }
 
     render(){
-        let {college, year, branch } = this.state;
-        let data = {college, year, branch }
+        let {college, year, branch, subject, message } = this.state;
+        let data = {college, year, branch, subject, message }
         return(
             <div>
                 <SendEmailInfo 
@@ -80,6 +87,7 @@ export default class SendEmail extends React.Component{
                 colleges={this.state.CollegeOptions}
                 onChangeCollege={this.onChangeCollege}
                 setYearList={this.setYearList}
+                onChangeInput={this.onChangeInput}
                 year={this.state.year}
                 yearList={this.state.yearList}
                 setYears={this.setYears}
