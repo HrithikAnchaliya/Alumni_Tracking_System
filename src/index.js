@@ -47,6 +47,7 @@ import CreateChat from './Institute/Chat/CreateChat';
 import VerifyAlumni from './Institute/Verify Alumni/VerifyAlumni';
 import Tickets from './Institute/Tickets/Tickets';
 import TicketPage from './Institute/Tickets/TicketPage'
+import CreateCollegeChat from './Institute/Chat/CreateCollegeChat';
 
 
 
@@ -91,6 +92,7 @@ class App extends React.Component {
             <NoStudentRoute path='/chat' exact component={Rooms}/>
             <NoStudentRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
             <NoStudentRoute path='/createchat' exact component={CreateChat}/>
+            <CollegeRoute path='/createchat-college' exact component={CreateCollegeChat}/>
             <CnARoute path='/sendemail' exact component={SendEmail}/>
             <CollegeRoute path='/verify-alumni' exact component={VerifyAlumni}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
