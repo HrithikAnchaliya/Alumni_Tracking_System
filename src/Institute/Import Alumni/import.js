@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-
+import {shallowEqual, useSelector } from 'react-redux'
+import { notifyError_with_msg, notify_Success_msg} from '../Utils/Message'
 
 const Import = () => {
     
+    const { token, user } = useSelector(state => ({
+        token: state.Auth_token,
+        user: state.Auth_user,
+      }), shallowEqual);
+
     const [ excel, setexcel  ] = useState('')
     console.log(excel);
 
@@ -17,18 +23,22 @@ const Import = () => {
 
             const values = {
                 method : "POST",
+                headers : {
+                    'x-auth' : token,
+                },
                 body : data
             }
             try{
-            const response = await fetch('http://localhost:4000/college/newsletters',values)
-            const json = await response.json()
+            const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/insertAlumniExcel`,values)
+            // const json = await response.json()
             if(!response.ok){
-                throw new Error(response.status); // 404
+                notifyError_with_msg(response.err)
             }
-            console.log(json)
-        }
+            if(response.ok){
+                notify_Success_msg("Successfully Imported")
+            }}
             catch(error){
-                console.log(error)
+                notifyError_with_msg("Unable To Import")
                 
             }
     }

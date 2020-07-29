@@ -1,9 +1,55 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { base_url } from '../../Endpoint/endpoint'
+import { notify_Success_msg, notifyError_with_msg } from  '../Utils/Message'
 
 
-export default class FundsPageInfo extends React.Component{
+
+class FundsPageInfo extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            amount : '',
+            amountField : false       
+        }
+    }
+
+    showInput = () => {
+        this.setState({ amountField : true})
+    }
+
+    setAmount = (e) => {
+        this.setState({amount : e.target.value})
+    }
+    
+    paymentIntent = async () => {
+        let amount = {amount : this.state.amount};
+        const values = {
+            method : "POST",
+            headers : {
+                'Content-Type' : 'application/json',
+                'x-auth' : this.props.token
+            },
+            body : JSON.stringify(amount)
+        }
+        console.log(values)
+        try{
+            const response = await fetch(`${base_url}/${this.props.user}/funds/${this.props.fund._id}`,values)
+            const json = await response.json()
+            console.log(json)
+            if(!response.ok){
+                notifyError_with_msg(json.err);
+            }
+            if(response.ok){
+                notify_Success_msg("Successfully Paid");
+        }}
+        catch(error){
+            console.log(error)
+            notifyError_with_msg('Unable To Complete Payment');
+        }
+    }
+
     render(){
         let { title, subtitle, description, totalRaised, totalRequired} = this.props.fund
         console.log(totalRaised)
@@ -28,9 +74,28 @@ export default class FundsPageInfo extends React.Component{
                 <hr/>
                 <br/>
                 <span>
-                    {/* <Link>Raise</Link> */}
+                    <button onClick = {this.showInput}>Raise Fund</button>
                 </span>
+                {   (this.state.amountField) ? (
+                    <div>
+                        <input name ='amount' value={this.state.amount} onChange={this.setAmount}></input><br/>
+                        <button type='button' onClick={this.paymentIntent}>Pay!</button>
+                    </div>
+                ) : (null)
+
+                }
             </div>
         )
     }
 }
+
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token,
+        user : state.Auth_user    
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (FundsPageInfo);
