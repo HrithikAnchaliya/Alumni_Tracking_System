@@ -19,12 +19,13 @@ class SendEmailInfo extends React.Component{
     onSubmit = async(e) => {
         e.preventDefault();
         let URL = intoUrl(this.props.data);
-        console.log(URL);
         const values = {
             method : "POST",
             headers : {
+                'Content-Type' : 'application/json',
                 'x-auth' : this.props.token
-            }
+            },
+            body : JSON.stringify(this.props.body)
         }
         try{
         const response = await fetch(URL, values);  //Only College can Post
@@ -94,10 +95,10 @@ class SendEmailInfo extends React.Component{
                     <br/>
                     <div>
                         <label>Subject</label>
-                        <input name='subject' onChange={this.props.onChangeInput}></input>
+                        <input required name='subject' onChange={this.props.onChangeInput}></input>
                         <br/>
                         <label>Message</label>
-                        <textarea name='message' onChange={this.props.onChangeInput}></textarea>
+                        <textarea required name='message' onChange={this.props.onChangeInput}></textarea>
                     </div>
                     <br/>
                     <button type='submit'>Submit</button>

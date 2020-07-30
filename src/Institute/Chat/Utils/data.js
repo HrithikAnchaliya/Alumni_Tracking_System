@@ -10,14 +10,14 @@ const loadChat = (data) => {
             let innerobj = {id:'', message:'', senderName:''}
             innerobj.id = element.senderId._id
             innerobj.message = element.message
-            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName);
+            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) || null
             let obj = new Message(innerobj);
             message.push(obj);
         }
         else{
             let innerobj = {id:0, message:'', senderName:''}
             innerobj.message = element.message
-            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName);
+            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) || null
             let obj = new Message(innerobj);
             message.push(obj);
         }
@@ -31,7 +31,7 @@ export const pushToChat = (data) => {
     let innerobj = {id:'', message:'', senderName:''}
     innerobj.id = data.newMessage.senderId._id
     innerobj.message = data.newMessage.message
-    innerobj.senderName = (data.newMessage.senderId.firstName) || (data.newMessage.senderId.collegeName) || null
+    innerobj.senderName = (data.newMessage.senderId.firstName) || (data.newMessage.senderId.collegeName) || (data.newMessage.senderId.adminName) || null
     let obj = new Message(innerobj);
 
     return obj;

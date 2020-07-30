@@ -6,6 +6,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { notifyError_with_msg } from '../Utils/Message'
 
 
+
 const Rooms = () => {
 
     let [ error, setError ] = useState(false);
@@ -110,24 +111,23 @@ const Rooms = () => {
 
     return(
         <div>
-            <div className="container is-fluid">
-                <div className="notification">
-                { (user === 'admin') ? (
-                    (colleges.length !== 0) ? (
-                        <div>
-                    <h6>Select College</h6>
-                    <select  onChange={handlechg} id='collegeId'>
-                        <option value="">Choose a college</option>
-                        {colleges.map((data,index) => (
-                            <option key={index} value={data._id}>{data.collegeName}</option>
-                        ))}
-                    </select>
-                    </div>) : (null)
-                ) : (null)}
+                <div>
+                    { (user === 'admin') ? (
+                        (colleges.length !== 0) ? (
+                            <div id='select-chat-div'>
+                        <select  onChange={handlechg} id='chat-Select'>
+                            <option value="">Choose a college</option>
+                            {colleges.map((data,index) => (
+                                <option key={index} value={data._id}>{data.collegeName}</option>
+                            ))}
+                        </select>
+                        </div>) : (null)
+                    ) : (null)}
+                </div>
                 <br/>
                 {!loading ? 
                 (
-                    <div>{rooms.map((room,index) => <RoomCard key={index} id={room._id} name={room.name}/>)}</div>
+                    <div id='chat-page-div' >{rooms.map((room,index) => <RoomCard key={index} id={room._id} name={room.name}/>)}</div>
                 ) : (
                     (!error) ? (
                     <div id='Loading-id'>
@@ -137,8 +137,6 @@ const Rooms = () => {
                     </div>) : (null)
                 )
                 }
-                </div>
-            </div>
         </div>
     )
 }

@@ -33,7 +33,7 @@ export function BranchOption(){
 export function intoUrl(states){
     let state = store.getState();
     let user = state.Auth_user;
-    let {college, year, branch, subject, message } = states;
+    let {college, year, branch } = states;
     let years = [];
     let colleges = [];
     let branches = [];
@@ -58,9 +58,7 @@ export function intoUrl(states){
         queryParams : {
            collegeId : colleges,
            branch : branches,
-           endYear : years,
-           subject : subject,
-           message : message
+           endYear : years
         }
     })
     return decodeURI(url);

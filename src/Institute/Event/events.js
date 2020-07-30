@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
 import Spinner from 'react-bootstrap/Spinner'
 import { notifyError_with_msg } from '../Utils/Message'
+import '../Style/toStyleEvent.css'
 
 
 class Events extends React.Component{
@@ -69,7 +70,7 @@ class Events extends React.Component{
                 <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
                 (
-                    <div>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
+                    <div id='events-page-div'>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
                 ) : (
                     (!this.state.error) ? (
                     <div id='Loading-id'>
