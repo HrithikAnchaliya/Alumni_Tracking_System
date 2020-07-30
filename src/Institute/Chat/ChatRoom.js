@@ -99,7 +99,7 @@ class ChatRoom extends React.Component {
             let userMsg = pushUserChat(this.state.message);
             let totalMessages = this.state.messages;
             totalMessages.push(userMsg);
-            this.setState({ messages : totalMessages })
+            this.setState({ messages : totalMessages, message: '' })
         }
     }
 
