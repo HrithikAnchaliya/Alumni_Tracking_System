@@ -7,7 +7,7 @@ import {
 export default class Fundscard extends React.Component{
     render(){
         return(
-            <div>
+            <div id='fund-card-div' >
             <Card style={{ width: '18rem' }}>
             <Card.Body>
             <Card.Title>{this.props.title}</Card.Title>

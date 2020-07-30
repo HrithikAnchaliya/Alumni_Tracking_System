@@ -4,7 +4,7 @@ import { base_url} from '../../Endpoint/endpoint'
 import Spinner from 'react-bootstrap/Spinner'
 import Fundscard from './FundsCard';
 import { notifyError_with_msg } from '../Utils/Message'
-
+import '../Style/toStyleFund.css'
 
 class Funds extends React.Component{
     constructor(props){
@@ -45,8 +45,6 @@ class Funds extends React.Component{
     render(){
         return(
             <div>
-                <div className="container is-fluid">
-                <div className="notification">
                 { this.state.loading || !this.state.funds ?
                 (
                     (!this.state.error) ? (
@@ -56,7 +54,7 @@ class Funds extends React.Component{
                         </Spinner>
                         </div>) : (null)
                 ) : (
-                    <div id="Jobcard-id">{this.state.funds.map((item,index) => 
+                    <div id="funds-page-div">{this.state.funds.map((item,index) => 
                     <Fundscard
                     key={index}
                     title={item.title}
@@ -65,8 +63,6 @@ class Funds extends React.Component{
                     id={item._id}/>
                     )}</div>
                 ) }
-                </div>
-                </div>
             </div>
         )
     }

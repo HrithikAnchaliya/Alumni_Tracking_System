@@ -52,16 +52,22 @@
     padding-right: 2px;
 }
 
-#job{
+/* #job{
     margin-left: 20px;
     margin-top: 20px;
     
-}
+} */
 #addjobcontainer{
     margin-top:50px;
 }
 
 #card-job {
+    margin-top: 25px;
     width: 300px;
-    height: 280px;
+    height: 265px;
+}
+
+#footer-card{
+    width: auto;
+    height: 20px;
 }

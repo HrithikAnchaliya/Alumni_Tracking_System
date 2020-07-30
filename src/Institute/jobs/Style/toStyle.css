@@ -1,5 +1,5 @@
 #jobcard-div {
-    top:50px;
+    /* top:50px; */
     background-color: white;
 }
 #Jobcard-id {
@@ -66,9 +66,8 @@
 
 
 #job-search-div{
-    float: right;
-    margin-right: 25px;
-    margin-top: 10px;
+    margin-left: 15px;
+    /* margin-top: 10px; */
 }
 #search-img {
     width: 43px;

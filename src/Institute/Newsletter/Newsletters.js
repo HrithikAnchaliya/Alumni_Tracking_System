@@ -4,7 +4,7 @@ import NewsletterCard from './newletterCard'
 import { connect } from 'react-redux'
 import Spinner from 'react-bootstrap/Spinner'
 import { notifyError_with_msg } from '../Utils/Message'
-// import '../jobs/Style/toStyle.css'
+import '../Style/toStyleNewsletter.css'
 
 
 class Newsletters extends React.Component{
@@ -52,7 +52,7 @@ class Newsletters extends React.Component{
                 <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
                 ((this.state.all.length !== 0) ? (
-                    <div>{this.state.all.map((item,number) => < NewsletterCard key={number} id={item._id} name={item.name} />)}</div>) 
+                    <div id='news-page-div'>{this.state.all.map((item,number) => < NewsletterCard key={number} id={item._id} name={item.name} />)}</div>) 
                     : (null)
                 ) : (
                     (!this.state.error) ? (

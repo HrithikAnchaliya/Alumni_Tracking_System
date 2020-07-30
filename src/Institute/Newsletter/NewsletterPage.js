@@ -2,6 +2,7 @@ import React from 'react'
 import { base_url } from '../../Endpoint/endpoint'
 import { connect } from 'react-redux'
 import { notifyError_with_msg } from  '../Utils/Message'
+import '../Style/toStyleNewsletter.css'
 
 class NewsletterPage extends React.Component{
     constructor(props){
@@ -26,6 +27,7 @@ class NewsletterPage extends React.Component{
         if(!response.ok){
             notifyError_with_msg('Something Went wrong');
         }
+        else{
         const reader = response.body.getReader();
         // getting total length
         const contentLength = +response.headers.get('Content-Length');
@@ -54,7 +56,7 @@ class NewsletterPage extends React.Component{
         const file = new Blob([chunksAll, 'file'], {type: 'application/pdf'});
         const fileURL = URL.createObjectURL(file);
         window.open(fileURL, '_blank', 'nodeIntegration=no');
-        }
+        }}
         catch(error){
             console.log(error)
             notifyError_with_msg('Unsuccessful to fetch')
@@ -67,7 +69,7 @@ class NewsletterPage extends React.Component{
         return(
             <div>
                 {this.state.loading || !this.state.posts ? 
-                (<h6>Your File is loading ..</h6>) : 
+                (<p id='span-news'>Your File is loading .. (Might Take a Minute)</p>) : 
                 (
                     <div>
                         <h6>Still Loading</h6>

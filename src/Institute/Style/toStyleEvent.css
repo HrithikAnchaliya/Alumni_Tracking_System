@@ -34,3 +34,18 @@
 .attend-button{
     float: right;
 }
+
+#events-page-div{
+    background-color: white;
+    /* margin: auto; */
+    margin-left: 85px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* justify-content: center; */
+    /* NEw */
+    /* align-content: center; */
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}

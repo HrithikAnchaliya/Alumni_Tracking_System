@@ -13,22 +13,34 @@ class Jobs extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            all: null,
+            all: [],
             loading : true,
-            data : null,
-            search:null,
+            data : [],
+            search:'',
             onSearch : false,
-            error : false
+            error : false, 
           }
         
           this.toArray = this.toArray.bind(this);
           this.onSearch = this.onSearch.bind(this);
+          this.onChange = this.onChange.bind(this);
+          this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     onSearch = () => {
         this.setState({
             onSearch : !this.state.onSearch
         })
+    }
+
+    onChange = (event) => {
+        this.setState({ search : event.target.value })
+    } 
+
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          this.componentDidMount();
+        }
     }
 
     async componentDidMount(){
@@ -39,8 +51,8 @@ class Jobs extends React.Component{
             } 
         }
         try{
-        
-        const response = await fetch(`${base_url}/${this.props.user}/jobs`, values);
+        let search = this.state.search
+        const response = await fetch(`${base_url}/${this.props.user}/jobs?search=${search}`, values);
         console.log(response)
         const json = await response.json();
         if (!response.ok) {
@@ -61,8 +73,7 @@ class Jobs extends React.Component{
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.all.length !== 0)              
-        {
+
             const stateall = this.state.all;
             Object.keys(stateall).forEach(key => {
                 dataarray.push(stateall[key])
@@ -71,27 +82,24 @@ class Jobs extends React.Component{
                 data : dataarray,
                 loading : false
             })
-        }
     }
     
 
 
     render(){
         console.log(this.props.user)
-        let search = this.state.search
-        let onSearch = this.state.onSearch
+        let { search, onSearch }= this.state
         return(
             <div>
                 <div id='job-search-div'>
-                { (onSearch) ? 
-                (<input id='job-search' defaultValue={search}></input>) : (null)
-                }
                 <img id='search-img' alt="Search" onClick={this.onSearch} src="https://img.icons8.com/cotton/64/000000/search--v1.png"/>
+                { (onSearch) ? 
+                    (<input onKeyPress={this.handleKeyPress} onChange={this.onChange} value={search} id='job-search'></input>) : (null)}
                 </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
                 {(this.props.user !== 'student') ? (
-                <button id="Addbutton-class" type='button'><Link id='AddButton-Link'  to='/addjobs'>Add Job</Link></button>) : ( null )}
+                <Link className='button'  to='/addjobs'>Add Job</Link>) : ( null )}
                 { this.state.loading || !this.state.data ?
                 (
                     (!this.state.error) ? (
@@ -110,8 +118,7 @@ class Jobs extends React.Component{
                     for={item.typeOfJob}
                     salary={item.salaryOffered}
                     description={item.description}
-                    skill1={item.skillsRequired[0]}
-                    skill2={item.skillsRequired[1]}
+                    skills={item.skillsRequired}
                     /> )}</div>
                 ) }
                 </div>

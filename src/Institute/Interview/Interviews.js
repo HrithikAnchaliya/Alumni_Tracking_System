@@ -12,15 +12,18 @@ class Interviews extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            all: null,
+            all: [],
             loading : true,
-            data : null,
-            search:null,
+            data : [],
+            search:'',
             onSearch : false,
             error : false
           }
         
-          this.onSearch = this.onSearch.bind(this);
+        this.toArray = this.toArray.bind(this);
+        this.onSearch = this.onSearch.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     onSearch = () => {
@@ -28,6 +31,17 @@ class Interviews extends React.Component{
             onSearch : !this.state.onSearch
         })
     }
+
+    onChange = (event) => {
+        this.setState({ search : event.target.value })
+    } 
+
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          this.componentDidMount();
+        }
+    }
+
     async componentDidMount(){
         const values = {
             method : "GET",
@@ -36,7 +50,8 @@ class Interviews extends React.Component{
             } 
         }
         try{
-        const response = await fetch(`${base_url}/${this.props.user}/interviews`, values);
+        let {search } = this.state
+        const response = await fetch(`${base_url}/${this.props.user}/interviews?search=${search}`, values);
         console.log(response)
         const json = await response.json();
         if (!response.ok) {
@@ -58,32 +73,27 @@ class Interviews extends React.Component{
 
     toArray = () => {
         const dataarray = [];
-        if(this.state.all.length !== 0)              
-        {
             const stateall = this.state.all;
             Object.keys(stateall).forEach(key => {
                 dataarray.push(stateall[key])
             })
-            console.log(dataarray[0].topics);
             this.setState({
                 data : dataarray,
                 loading : false
             })
-        }
     }
     
 
     render(){
         console.log(this.props.user)
-        let search = this.state.search
-        // let onSearch = this.state.onSearch
+        let { search, onSearch }= this.state
         return(
             <div>
                 <div id='job-search-div'>
-                { (this.state.onSearch) ? 
-                (<input id='job-search' defaultValue={search}></input>) : (null)
-                }
                 <img id='search-img' alt="Search" onClick={this.onSearch} src="https://img.icons8.com/cotton/64/000000/search--v1.png"/>
+                { (onSearch) ? 
+                (<input onKeyPress={this.handleKeyPress} onChange={this.onChange} id='job-search' value={search}></input>) : (null)
+                }
                 </div>
                 <div className="container div-Container">
                 <div className="notification" id="jobcard-div">
