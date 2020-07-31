@@ -60,15 +60,7 @@ class AddInterviewInfo extends React.Component{
                 <div className="field">
                     <label className="label">Company</label>
                     <div className="control">
-                        <div className="select">
-                        <select required name="company"  onChange={this.props.onChange}>
-                            <option value="">Select Company</option>
-                            <option value="microsoft">Microsoft</option>
-                            <option value="google">Google</option>
-                            <option value="hcl">HCL</option>
-                            <option value="msi">MSI</option>
-                        </select>
-                        </div>
+                    <   input  className="input" type="text" placeholder="Company"required name="company"  onChange={this.props.onChange} ></input>
                     </div>
                 </div>
 

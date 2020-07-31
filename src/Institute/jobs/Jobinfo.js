@@ -68,20 +68,12 @@ class Jobinfo extends React.Component{
             <div>
                  <form onSubmit={this.toGather} >
 
-                 <div class="box">
+                 {/* <div class="box"> */}
 
                 <div className="field">
                     <label className="label">Company</label>
                     <div className="control">
-                        <div className="select">
-                        <select name="company" onChange={this.props.theonChange}>
-                            <option value="">Select Company</option>
-                            <option value="microsoft">Microsoft</option>
-                            <option value="google">Google</option>
-                            <option value="hcl">HCL</option>
-                            <option value="msi">MSI</option>
-                        </select>
-                        </div>
+                    <   input  className="input" type="text" placeholder="Company" name="company" onChange={this.props.theonChange} ></input>
                     </div>
                 </div>
 
@@ -140,7 +132,7 @@ class Jobinfo extends React.Component{
                 <div className="field">
                     <label className="label">Experience</label>
                     <div className="control">
-                    <input  className="input" name='experience' type='number'  required pattern='[1-5]{1}' placeholder='Range is from 1 to 5'  onChange={this.props.theonChange} value={experience} ></input>
+                    <input  className="input" name='experience' type='number'  required pattern='[1-5]{1}' placeholder='Any Number'  onChange={this.props.theonChange} value={experience} ></input>
                     </div>
                 </div>
 
@@ -155,13 +147,6 @@ class Jobinfo extends React.Component{
                     <label className="label">State</label>
                     <div className="control">
                     <   input  className="input" placeholder="State" name="state"  onChange={this.props.theonChange} required ></input>
-                    </div>
-                </div>
-
-                <div className="field">
-                    <label className="label">City</label>
-                    <div className="control">
-                    <   input  className="input" placeholder="City"  name="city"  onChange={this.props.theonChange} required ></input>
                     </div>
                 </div>
 
@@ -195,7 +180,7 @@ class Jobinfo extends React.Component{
 
                 <button className="button is-black" type='submit' >Submit the Job</button>
 
-                </div>
+                {/* </div> */}
 
                 </form>
             </div>

@@ -167,7 +167,7 @@ class SearchPage extends React.Component{
                     {  (this.state.onFocus === 'year') ? 
                     (<div>
                     <select id='focus-on-search' name='yearvalue' onChange={this.onChange}>
-                        <option>Select Year</option>
+                        <option value=''>Select Year</option>
                         <option value='2011'>2011</option>
                         <option value='2012'>2012</option>
                         <option value='2013'>2013</option>

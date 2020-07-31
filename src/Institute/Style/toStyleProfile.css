@@ -19,19 +19,35 @@
 }
 
 #basic-id-profile{
-    text-align: left;
+    text-align: center;
 }
 
 #profile-span{
-    text-align: center;
-    padding-right: 400px;
+    justify-content: center;
+    font-size: 30px;
 }
 
 #basic-profile-p{
-    padding-right: 500px;
+    font-size: 20px;
+    font-family: 'Futura Std';
+}
+
+#basic-profile-header{
+    font-size: 30px;
+    font-family: 'Futura Std';
 }
 
 #basic-strong-id{
-    background-color: #69C0EF;
-    width: 200px;
+    font-size: larger;  
+}
+
+#profile-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}
+
+#just-font{
+    font-family: 'Futura Std';
+    font-size: 20px;
 }

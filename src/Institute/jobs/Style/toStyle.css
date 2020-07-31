@@ -78,3 +78,27 @@
     width: 600px;
     margin-left: 400px;
 }
+
+#jobpage-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 480px;
+}
+
+#font-change{
+    font-size: 50px;
+    font-family: 'Futura Std';
+}
+
+#other-font-change{
+    font-size: 20px;
+}
+
+#span-font-change{
+    font-size: 20px;
+}
+
+#font-change-id{
+    font-size: 30px;
+    font-family: 'Futura Std';
+}

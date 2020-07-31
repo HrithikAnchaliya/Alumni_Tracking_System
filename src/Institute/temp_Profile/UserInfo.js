@@ -15,85 +15,104 @@ export default class UserInfo extends React.Component{
         console.log(this.props.json.education)
         return(
                 <div>
-                    <Link style={{"textDecoration":'none'}} className="card-footer-item" to='/edit'>Edit</Link>
-                    <div id='profile-first-div'>
-                    <span>
-                    <h5>Profile</h5>
+                    <div className="container is-fluid">
+                    <div id = 'profile-div-id' className="notification">
+
+                    <Link className='button'  to='/edit'>Edit</Link>
+
+                    <div className='box'>
+                    <span id='basic-id-profile'>
+                    <h5 id='just-font'>Profile</h5>
                     {(this.props.json.verified) ? (
                         <h6>Verified</h6>) : ( <h6>Not - Verified</h6>)}
                     </span>
                     </div>
-                    <br/>
-                    <div id='profile-sec-div'>
-                    <p id='basic-id-profile'>
-                    <strong id='basic-strong-id'>Basic</strong><hr/>
+                        
+                    <label>Basic</label><br/>
+
+                    <div className='box'>
+                    <p >
+                    <strong id='basic-profile-p'>Name</strong><br/>
                     </p>
-                    <p id='basic-profile-p'>
-                    <strong>Name</strong><br/>
+                    <p >
+                    <span id='basic-strong-id' >{this.props.json.firstName}</span>
                     </p>
-                    <p id='profile-span'>
-                    <span >{this.props.json.firstName}</span>
+                    <p >
+                    <strong id='basic-profile-p'>Degree</strong><br/>
                     </p>
-                    <p  id='basic-profile-p'>
-                    <strong>Degree</strong><br/>
+                    <p>
+                    <span id='basic-strong-id'>{this.props.json.degree}</span>
                     </p>
-                    <p id='profile-span'>
-                    <span>{this.props.json.degree}</span>
+                    <p >
+                    <strong id='basic-profile-p'>Branch</strong><br/>
                     </p>
-                    <p  id='basic-profile-p'>
-                    <strong>Branch</strong><br/>
-                    </p>
-                    <p id='profile-span'>
-                    <span>{this.props.json.branch}</span>
+                    <p>
+                    <span id='basic-strong-id'>{this.props.json.branch}</span>
                     </p>
                     </div>
-                    <br/>
-                    <div>
-                    <h5>About</h5><hr/>
-                    <h6>Education</h6><br/>
-                    {(this.props.json.education.map((value,index) => (
-                        <div key={index}>
-                        <h6>School :  {value.school}</h6>
-                        <h6>Course :  {value.course}</h6>
-                        <h6>{value.startYear} -  {value.endYear}</h6>
-                        <br/>
+                        
+                    <label>About</label><br/>
+
+                    <div className="columns">
+                        <div className="column">
+                            <div className='box'>
+                            <h6  id='basic-profile-header'>Education</h6><br/>
+                            {(this.props.json.education.map((value,index) => (
+                                <div key={index}>
+                                <label>School :</label>  <span>{value.school}</span><br/>
+                                <label>Course :</label>  <span>{value.course}</span><br/>
+                                <label>{value.startYear} -  {value.endYear}</label>
+                                <br/>
+                                <br/>
+                                </div>
+                            ) ))}
+                            </div>
                         </div>
-                    ) ))}
-                    <br/>
-                    <span>
-                    <h6>Skills</h6>
-                    <ul>
-                    {this.props.json.skills.map((value,index) => <li key={index}>{value}</li>)}
-                    </ul>
-                    </span><br/>
-                    <h6>Work Experience</h6><br/>
-                    {(this.props.json.workExperiences.map((value,index) => (
-                        <div key={index}>
-                        <h6>company :  {value.company}</h6>
-                        <h6>Title : {value.workTitle}</h6>
-                        <h6>industry : {value.industry}</h6>
-                        <h6>{value.startYear} -  {value.endYear}</h6>
-                        <br/>
+                        <div className="column">
+                            <div className='box'>
+                                <span>
+                                <h6 id='basic-profile-header'>Skills</h6>
+                                <ul>
+                                {this.props.json.skills.map((value,index) => <li key={index}><label>{value}</label></li>)}
+                                </ul>
+                                </span><br/>
+                            </div>
                         </div>
-                    ) ))}
-                    <hr/>
-                    <br/>
-                    </div>
-                    <div>
-                    <span>
-                    <h5>Personal</h5>
-                    <hr/>
-                    <h6>Mobile :  {this.props.json.mobileNumber}</h6>
-                    <h6>Mail :  {this.props.json.email}</h6>
-                    <h6>City :  {this.props.json.location.city}</h6>
-                    <hr/>
-                    </span>
                     </div>
                     
+                    <div className='box'>
+
+                    <h6 id='basic-profile-header'>Work Experience</h6><br/>
+                    <div className="columns">
+                    {(this.props.json.workExperiences.map((value,index) => (
+                        <div  key={index} className="column">
+                            <div>
+                                <label>company : </label> <span>{value.company}</span><br/>
+                                <label>Title : </label> <span>{value.workTitle}</span><br/>
+                                <label>industry : </label> <span>{value.industry}</span><br/>
+                                <label>{value.startYear} -  {value.endYear}</label>
+                                <br/>
+                            </div>
+                        </div>
+                         ) ))}
+                    </div>
+
+                    </div>
+
+                    <label>Personal</label>
+
+                    <div className='box'>
+                    <span>
+                    <label>Mobile : </label> {this.props.json.mobileNumber}<br/>
+                    <label>Mail :</label>  {this.props.json.email}<br/>
+                    <label>City :</label>  {this.props.json.location.city}<br/>
+                    </span>
+                    </div> 
+
+                    </div>
+                    </div>
                 </div>
                
         )
     }
 }
-
- 
