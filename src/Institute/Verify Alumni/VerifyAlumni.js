@@ -45,6 +45,10 @@ class VerifyAlumni extends React.Component{
         }
     }
 
+    toSpliceRow = () => {
+        console.log("in splice");
+    }
+
     toPushData = () => {
         let row = []
         if(this.state.alumnies !== null){
@@ -69,7 +73,10 @@ class VerifyAlumni extends React.Component{
                         </Spinner>
                         </div>) : (null)
                 ) : (
-                    <DataTable rows={this.state.rows}/>
+                    <DataTable 
+                        rows={this.state.rows}
+                        toSPlice={this.toSpliceRow}    
+                    />
                 ) }
                 </div>
                 </div>
