@@ -52,23 +52,48 @@ class AddFundInfo extends React.Component{
         return(
             <div>
                 <form onSubmit={this.onSubmit}>
-                <h5>Title</h5>
-                <input value={title} onChange={this.props.onChange} name='title'></input>
-                <br/>
-                <h5>Subtitle</h5>
-                <input value={subtitle} onChange={this.props.onChange} name='subtitle'></input>
-                <br/>
-                <h5>Description</h5>
-                <textarea value={description} onChange={this.props.onChange} name='description'></textarea>
-                <br/>
-                <h5>Total-Raised</h5>
-                <input value={totalRaised} type='number' onChange={this.props.onChange} name='totalRaised'></input>
-                <br/>
-                <h5>Total-Required</h5>
-                <input value={totalRequired} type='number' onChange={this.props.onChange} name='totalRequired'></input>
-                <br/>
-                <br/>
-                <button disabled={submitted} type='submit'>Submit</button>
+
+                <div className='box'>
+
+                <div className="field">
+                    <label className="label">Title</label>
+                    <div className="control">
+                    <input  className="input" type="text" placeholder="Title" value={title} onChange={this.props.onChange} name='title'></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Subtitle</label>
+                    <div className="control">
+                    <input  className="input" type="text" placeholder="Subtitle" value={subtitle} onChange={this.props.onChange} name='subtitle'></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                    <textarea  className="textarea" type="text" placeholder="Description" value={description} onChange={this.props.onChange} name='description'></textarea>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Total-Raised</label>
+                    <div className="control">
+                    <input  className="input" placeholder="Total-Raised"  value={totalRaised} type='number' onChange={this.props.onChange} name='totalRaised'></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Total-Required</label>
+                    <div className="control">
+                    <input  className="input" placeholder="Total-Required"   value={totalRequired} type='number' onChange={this.props.onChange} name='totalRequired'></input>
+                    </div>
+                </div>
+
+                <button className="button is-black" disabled={submitted} type='submit' >Submit</button>
+
+                </div>
+
                 </form>
             </div>
         )

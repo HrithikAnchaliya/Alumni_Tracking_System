@@ -4,20 +4,21 @@ const loadChat = (data) => {
     console.log(data);
     let message = [];
     let userId = data.currentUserId
-    
+    console.log(userId);
     data.messages.forEach(element => {
+        console.log(element.senderId._id);
         if(userId !== element.senderId._id){
             let innerobj = {id:'', message:'', senderName:''}
             innerobj.id = element.senderId._id
             innerobj.message = element.message
-            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) || null
+            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) 
             let obj = new Message(innerobj);
             message.push(obj);
         }
         else{
             let innerobj = {id:0, message:'', senderName:''}
             innerobj.message = element.message
-            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) || null
+            innerobj.senderName = (element.senderId.firstName) || (element.senderId.collegeName) || (element.senderId.adminName) 
             let obj = new Message(innerobj);
             message.push(obj);
         }

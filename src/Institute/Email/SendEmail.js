@@ -82,7 +82,8 @@ export default class SendEmail extends React.Component{
         let data = {college, year, branch }
         let body = { subject, message }
         return(
-            <div>
+            <div className="container is-fluid">
+                <div id = 'addCollegeChat-div-id' className="notification">
                 <SendEmailInfo 
                 college={this.state.college}
                 colleges={this.state.CollegeOptions}
@@ -99,6 +100,7 @@ export default class SendEmail extends React.Component{
                 data={data}
                 body={body}/>
             </div>
+        </div>
         )
     }
 }

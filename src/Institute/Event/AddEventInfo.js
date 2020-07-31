@@ -51,50 +51,95 @@ class AddEventInfo extends React.Component{
         let submitted = this.state.submitted
         return(
             <div>
+                
                 <form onSubmit={this.onSubmit}>
-                    <h5>Title</h5>
-                    <input name='title' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>SubTile</h5>
-                    <input name='subtitle' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Description</h5>
-                    <input name='description' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Date</h5>
-                    <input type='date' name='date' value='2000-03-16' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Time</h5>
-                    <input type='time' name='time'  onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Venue</h5>
-                    <input  name='venue' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Address</h5>
-                    <input  name='address' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Country</h5>
-                    <input  name='country' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>state</h5>
-                    <input  name='state' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>city</h5>
-                    <input  name='city' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Year</h5>
-                    <input type='number' name='endYear' onChange={this.props.onChange} ></input>
-                    <br/>
-                    <h5>Send Email</h5>
-                    <select onChange={this.props.forEmail} name='sendEmail'>
-                    <option value=''>Select Which</option>
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                    </select>
-                    <br/>
-                    <br/>
-                    <button disabled={submitted} type='submit' >Submit</button>
+
+                <div className="box">
+                
+                <div className="field">
+                    <label className="label">Title</label>
+                    <div className="control">
+                    <   input  className="input" type="text" placeholder="Title" name='title' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Sub-Title</label>
+                    <div className="control">
+                    <   input  className="input" type="text" placeholder="subtitle" name='subtitle' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                    <textarea  className="textarea"  placeholder="Description" name='description' onChange={this.props.onChange}  ></textarea>
+                    </div>
+                </div>
+
+
+                <div className="field">
+                    <label className="label">Date</label>
+                    <div className="control">
+                    <   input  className="input" type='date' placeholder="Date" name='date' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Time</label>
+                    <div className="control">
+                    <   input  className="input" type='time' name='time'  onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Venue</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="Venue" name='venue' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Address</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="Address" name='address' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Country</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="Country" name='country' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">State</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="State"  name='state' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">City</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="City"  name='city' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Year</label>
+                    <div className="control">
+                    <   input  className="input" placeholder="Year" type='number'  name='endYear' onChange={this.props.onChange} ></input>
+                    </div>
+                </div>
+
+                <button className="button is-black" disabled={submitted} type='submit' >Submit</button>
+
+                </div>
+
                 </form>
+
             </div>
         )
     }
@@ -110,3 +155,5 @@ const mapStatesToProps = state => {
 
 
 export default connect(mapStatesToProps,null) (AddEventInfo);
+
+

@@ -6,7 +6,7 @@ import { notifyError_with_msg } from '../Utils/Message'
 import {Line} from 'react-chartjs-2';
 import split from './Utils/data';
 import '../Style/toStyleChart.css'
-
+import NoticeComponent from '../Notice/Notices'
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -83,6 +83,7 @@ class Dashboard extends React.Component{
               </div>) : (null)}
                 <br/>
                 <br/>
+                <NoticeComponent/>
                 {(this.state.all !== null) ? (
                 <div>
                 <div id='alumni-chart'>

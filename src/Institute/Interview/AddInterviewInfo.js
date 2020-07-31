@@ -52,52 +52,89 @@ class AddInterviewInfo extends React.Component{
         const {  difficulty, description, toTopics,feedback } = this.props.values
         return(
             <div>
+
             <form onSubmit={this.toPost}>
-                <div id='addjobcontainer' className="container is-fluid">
-                <div className="notification">
-                <h5>Company</h5>
-                    <select required name="company"  onChange={this.props.onChange}>
-                        <option value="">Select Company</option>
-                        <option value="microsoft">Microsoft</option>
-                        <option value="google">Google</option>
-                        <option value="hcl">HCL</option>
-                        <option value="msi">MSI</option>
-                    </select>
-                    <br/>
-                    <h5>Work - Title</h5>
-                    <select required name="workTitle"  onChange={this.props.onChange}>
-                        <option value="">select Title</option>
-                        <option value="front end dev">Front-End Developer</option>
-                        <option value="back end dev">Back-End Developer</option>
-                        <option value="software dev">Software Developer</option>
-                        <option value="database management">Database Management</option>
-                        <option value="software security">Software Security</option>
-                    </select>
-                    <br/>
-                    <h5>Industry</h5>
-                    <select required name="industry"  onChange={this.props.onChange}>
-                        <option value="">select Industry</option>
-                        <option value="IT">IT</option>
-                        <option value="automobile">Automobile</option>
-                        <option value="bio tech">Bio - Tech</option>
-                        <option value="Film">Film</option>
-                    </select>
-                    <br/>
-                    <h5>Difficulty</h5> 
-                        <input required name='difficulty' type='number' placeholder='Range is from 1 to 5' onChange={this.props.onChange} value={difficulty}></input>
-                    <br/>
-                    <h5>Description</h5>
-                    <textarea required name="description"  value={description} onChange={this.props.onChange} ></textarea>
-                    <br/>
-                    <h5>Topics</h5>
-                    <textarea required name="toTopics"  value={toTopics} onChange={this.props.onChange} placeholder='Use comma to sepreate them'></textarea>
-                    <br/>
-                    <h5>Feedback</h5>
-                    <textarea required name="feedback"  value={feedback} onChange={this.props.onChange} ></textarea>
-                    <br/>
-                    <button type='submit'>Submit</button>
+
+            <div className='box'> 
+
+                <div className="field">
+                    <label className="label">Company</label>
+                    <div className="control">
+                        <div className="select">
+                        <select required name="company"  onChange={this.props.onChange}>
+                            <option value="">Select Company</option>
+                            <option value="microsoft">Microsoft</option>
+                            <option value="google">Google</option>
+                            <option value="hcl">HCL</option>
+                            <option value="msi">MSI</option>
+                        </select>
+                        </div>
+                    </div>
                 </div>
+
+                <div className="field">
+                    <label className="label">Work - Title</label>
+                    <div className="control">
+                        <div className="select">
+                        <select required name="workTitle"  onChange={this.props.onChange}>
+                            <option value="">select Title</option>
+                            <option value="front end dev">Front-End Developer</option>
+                            <option value="back end dev">Back-End Developer</option>
+                            <option value="software dev">Software Developer</option>
+                            <option value="database management">Database Management</option>
+                            <option value="software security">Software Security</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+                <div className="field">
+                    <label className="label">Industry</label>
+                    <div className="control">
+                        <div className="select">
+                        <select required name="industry"  onChange={this.props.onChange}>
+                            <option value="">select Industry</option>
+                            <option value="IT">IT</option>
+                            <option value="automobile">Automobile</option>
+                            <option value="bio tech">Bio - Tech</option>
+                            <option value="Film">Film</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Difficulty</label>
+                    <div className="control">
+                    <input  className="input" required name='difficulty' type='number' placeholder='Range is from 1 to 5' onChange={this.props.onChange} value={difficulty}></input>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                    <textarea  className="textarea" type="text" placeholder='Description' required name="description"  value={description} onChange={this.props.onChange}></textarea>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Topics</label>
+                    <div className="control">
+                    <textarea  className="textarea" type="text" name="toTopics"  value={toTopics} onChange={this.props.onChange} placeholder='Use comma to sepreate them'></textarea>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Feedback</label>
+                    <div className="control">
+                    <textarea  className="textarea" type="text" name="feedback" placeholder='Feedback' value={feedback} onChange={this.props.onChange}></textarea>
+                    </div>
+                </div>
+
+                <button className="button is-black"  type='submit' >Submit</button>
+
+            </div>
+
             </form>
             </div>
         )

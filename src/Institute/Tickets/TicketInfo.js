@@ -50,35 +50,49 @@ class TicketInfo extends React.Component{
         let submitted = this.state.submitted
         return(
             <div>
-                <div className="container">
-                <div className="notification">
-                <form 
-                onSubmit={this.toPost}>
-                <h5>Title</h5>
-                <select required name="title"  onChange={this.props.toChange}>
-                    <option value =''>select title</option>
-                    <option value ='Marksheet'>Marksheet</option>
-                    <option value = 'TC / Related Docs'>TC / Related Docs</option>
-                    <option value ='Other Issues'>Other Issues</option>
-                </select>
-                <br/>
-                <h5>Sub - Title</h5>
-                <select required name="subTitle"  onChange={this.props.toChange}>
-                    <option value =''>select title</option>
-                    <option value = 'Marksheets/other documents'>Marksheets/other documents</option>
-                    <option value = 'Marksheet - Lost'>Marksheet - Lost</option>
-                    <option value = 'TC - Apply'>TC - Apply</option>
-                    <option value = 'Other Issues'>Other Issues</option>
-                </select>
-                <br/>
-                <h5>Description</h5>
-                <textarea  name="description" required value = {description} onChange={this.props.toChange} placeholder="More about the Issue"></textarea>
-                <br/>
-                <br/>
-                <button type='submit' disabled={submitted} >Submit</button>
+
+                <form onSubmit={this.toPost}>
+
+                <div className="field">
+                    <label className="label">Title</label>
+                    <div className="control">
+                        <div className="select">
+                        <select  required name="title"  onChange={this.props.toChange}>
+                            <option value =''>select title</option>
+                            <option value ='Marksheet'>Marksheet</option>
+                            <option value = 'TC / Related Docs'>TC / Related Docs</option>
+                            <option value ='Other Issues'>Other Issues</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Sub - Title</label>
+                    <div className="control">
+                        <div className="select">
+                        <select  required name="subTitle"  onChange={this.props.toChange}>
+                            <option value =''>select title</option>
+                            <option value = 'Marksheets/other documents'>Marksheets/other documents</option>
+                            <option value = 'Marksheet - Lost'>Marksheet - Lost</option>
+                            <option value = 'TC - Apply'>TC - Apply</option>
+                            <option value = 'Other Issues'>Other Issues</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Description</label>
+                    <div className="control">
+                    <textarea  className="textarea" type="text" name="description" required value = {description} onChange={this.props.toChange} placeholder="More about the Issue"></textarea>
+                    </div>
+                </div>
+
+                <button className="button is-black" type='submit' disabled={submitted} >Submit</button>
+
                 </form>
-                </div>
-                </div>
+
             </div>
         )
     }

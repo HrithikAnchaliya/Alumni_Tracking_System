@@ -22,3 +22,17 @@
     margin-top: 20%;
     font-size: 20px;
 }
+
+#addnewsletter-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}
+
+#header-name{
+    text-align: center;
+}
+
+#choose-file{
+    float: left;
+}

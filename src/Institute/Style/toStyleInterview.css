@@ -16,3 +16,9 @@
     font-family: 'Futura Std';
     font-size: 40px;
 }
+
+#interview-div-id{
+    background-color: white;
+    width: 800px;
+    margin-left: 350px;
+}

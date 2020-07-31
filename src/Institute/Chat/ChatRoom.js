@@ -134,7 +134,7 @@ render(){
                     <input 
                      type="text"
                      placeholder="Type a message..."
-                     defaultValue={this.state.message}
+                     value={this.state.message}
                      onChange={this.setMessage}></input>
                     <button className="sendButton" onClick={this.sendMessage}>Send</button>
                   </div>

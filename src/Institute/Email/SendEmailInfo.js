@@ -46,6 +46,9 @@ class SendEmailInfo extends React.Component{
         return(
             <div>
                 <form onSubmit={this.onSubmit}>
+
+                <div class='box'>
+
                 {( (this.props.user === 'admin') && (this.props.colleges.length !== 0)) ? (
                   
                     <div>
@@ -94,14 +97,27 @@ class SendEmailInfo extends React.Component{
                     ) : (null)}
                     <br/>
                     <div>
-                        <label>Subject</label>
-                        <input required name='subject' onChange={this.props.onChangeInput}></input>
-                        <br/>
-                        <label>Message</label>
-                        <textarea required name='message' onChange={this.props.onChangeInput}></textarea>
+
+                    <div className="field">
+                        <label className="label">Subject</label>
+                        <div className="control">
+                        <input  className="input" type="text" required placeholder="Subject" name='subject' onChange={this.props.onChangeInput}></input>
+                        </div>
                     </div>
-                    <br/>
-                    <button type='submit'>Submit</button>
+
+                    <div className="field">
+                        <label className="label">Message</label>
+                        <div className="control">
+                        <textarea  className="textarea" type="text"  placeholder="Message" required name='message' onChange={this.props.onChangeInput}></textarea>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <button className="button is-black" type='submit' >Submit</button>
+
+                    </div>
+
                 </form>
             </div>
         )

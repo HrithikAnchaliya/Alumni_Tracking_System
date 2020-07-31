@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { notifyError_with_msg, notify_Success } from  '../Utils/Message'
+import '../Style/toStyleNewsletter.css'
 
 class Addnewsletter extends React.Component{
     constructor(props){
@@ -60,13 +61,17 @@ class Addnewsletter extends React.Component{
         return(
             <div>
                 <div className="container">
-                    <div className="notification">
+                    <div id='addnewsletter-div-id' className="notification">
                     <form onSubmit={this.onSubmit}>
-                    <h5>Input a file</h5><br/>
-                    <input required name = 'file' onChange={this.onChange}  type='file'></input>
+                    <div class="box">
+                    <h5 id='header-name'>Choose A File</h5><br/>
+                    <input id='choose-file' required name = 'file' onChange={this.onChange}  type='file'></input>
                     <br/>
                     <br/>
-                    <button disabled={loading} type='submit'>Submit</button>
+
+                    <button className="button is-black" disabled={loading} type='submit' >Submit</button>
+
+                    </div>
                     </form>
                     </div>
                 </div>

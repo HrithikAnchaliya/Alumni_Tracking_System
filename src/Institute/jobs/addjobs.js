@@ -1,6 +1,6 @@
 import React from 'react';
 import Jobinfo from './Jobinfo'
-
+import './Style/toStyle.css'
 
 export default class Addjobs extends React.Component{
     constructor(props){
@@ -69,12 +69,14 @@ export default class Addjobs extends React.Component{
             experience,country,state ,city ,description ,skillsRequired ,qualification ,contactInfo,skills_array, qualif_array  }
 
         return(
-            <div>
+            <div className="container is-fluid">
+                <div id='addjob-div-id'className="notification">
                <Jobinfo
                values={values}
                theonChange={this.onChange}
                toArrayskill={this.toArraySkills}
                toArrayQualif={this.toArrayQualif}/>
+                </div>
             </div>
         );
     }

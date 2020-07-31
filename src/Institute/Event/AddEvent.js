@@ -1,6 +1,7 @@
 import React from 'react';
 import update from 'immutability-helper';
 import AddEventInfo from './AddEventInfo';
+import '../Style/toStyleEvent.css'
 
 export default class AddEvent extends React.Component{
   constructor(props){
@@ -44,7 +45,7 @@ export default class AddEvent extends React.Component{
     return(
       <div>
         <div className="container is-fluid">
-        <div className="notification">
+        <div id = 'addevent-div-id' className="notification">
           <AddEventInfo
           onChange={this.onChange}
           forEmail={this.onChangeEmail}

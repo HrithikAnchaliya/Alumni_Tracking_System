@@ -27,7 +27,7 @@ class PostNotice extends React.Component{
 
     onChangeDate = (date) => this.setState({expireAt: date});
  
-    async onSubmit(event) {
+    async onSubmit() {
         console.log(this.state);
 
         if (!this.state.title || !this.state.subTitle){
@@ -88,7 +88,9 @@ class PostNotice extends React.Component{
 
         return (
             <div> 
-
+            <div className="container is-fluid">
+            <div id = 'addevent-div-id' className="notification">
+                <div class='box'>
                 <div class="field">
                     <label class="label">Title</label>
 
@@ -120,10 +122,11 @@ class PostNotice extends React.Component{
                 </div>
 
                 <div>
-                    <h3>
+                    <label>
                         Select the date when the notice should Auto-Delete.
-                    </h3>       
-
+                    </label>       
+                    <br/>
+                    <br/>
                     <Calendar
                         name = "expireAt"
                         value = { expireAt }
@@ -131,13 +134,13 @@ class PostNotice extends React.Component{
                     />
                 </div> 
 
-                <button 
-                    class = { submitButtonClass }
-                    onClick = { this.onSubmit }
-                >
+                <button class = { submitButtonClass } onClick = { this.onSubmit } >
                     Submit
                 </button>
 
+                </div>
+                </div>
+                </div>
             </div>
         )
     }

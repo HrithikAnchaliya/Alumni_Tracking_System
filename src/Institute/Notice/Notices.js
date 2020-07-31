@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { base_url } from './../../Endpoint/endpoint';
 import { notifyError_with_msg } from  '../Utils/Message'
 import Scrollbar from 'react-scrollbars-custom'
-
 import Spinner from 'react-bootstrap/Spinner';
 import 'bulma/css/bulma.css';
+import '../Style/toStyleNotice.css'
 
 
 class NoticeComponent extends React.Component{
@@ -38,16 +38,14 @@ class NoticeComponent extends React.Component{
             } else {
                 // If response is OK - True
                 this.setState({
-                    isLoading: false,
-                    notices: json
-                });
+                    notices: json, isLoading: false });
                 console.log(json);
             };
 
         } catch (error) {
             console.log(error);
             this.setState( {error : true} );
-            notifyError_with_msg('Unsuccessful to fetch');
+            notifyError_with_msg('Unsuccessful To Fetch');
         }
     }
 
@@ -65,28 +63,24 @@ class NoticeComponent extends React.Component{
                         ) 
                     : 
                         (
-                            <Scrollbar style={{ width: 750, height: 450 }}>
+                            <Scrollbar style={{ marginLeft: 40, width: 450, height: 450 }}>
                                 {
                                     this.state.notices.map((notice) => {
-                                        return (
-                                            <article className="message is-dark">
-                                                <div className="message-header">
-                                                    <p> 
-                                                        {notice.title} 
-                                                    </p>  
-                                                </div>
-
-                                                <div className="message-body">
+                                        return (    
+                                            <div id ='notice-artice' class="card">
+                                                <header id ='notice-header' class="card-header">
+                                                    <p class="subtitle" >
+                                                    {notice.title} 
+                                                    </p>
+                                                </header>
+                                                <div class="card-content">
+                                                    <div class="content">
                                                     {notice.subTitle}
+                                                        <br/>
+                                                        <p class="card-header-title" > Posted By: {notice.postedBy.collegeName || notice.postedBy.adminName} - {notice.onModel} </p>
+                                                    </div>
                                                 </div>
-
-                                                <div> 
-                                                    <strong>
-                                                        Posted By: {notice.postedBy.collegeName || notice.postedBy.adminName} - {notice.onModel}
-                                                    </strong>
-                                                </div>
-
-                                            </article>
+                                            </div>
                                         )
                                     })
                                 }
@@ -106,3 +100,5 @@ const mapStatesToProps = state => {
 };
 
 export default connect(mapStatesToProps,null) (NoticeComponent);
+
+

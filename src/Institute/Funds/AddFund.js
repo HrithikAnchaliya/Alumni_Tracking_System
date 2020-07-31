@@ -25,7 +25,7 @@ export default class AddFund extends React.Component{
         return(
             <div>
                 <div className="container is-fluid">
-                <div className="notification">
+                <div id = 'addevent-div-id' className="notification">
                     <AddFundInfo
                     value = {this.state}
                     onChange={this.onChange}/>

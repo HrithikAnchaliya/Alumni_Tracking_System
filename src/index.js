@@ -48,7 +48,7 @@ import VerifyAlumni from './Institute/Verify Alumni/VerifyAlumni';
 import Tickets from './Institute/Tickets/Tickets';
 import TicketPage from './Institute/Tickets/TicketPage'
 import CreateCollegeChat from './Institute/Chat/CreateCollegeChat';
-
+import PostNotice from './Institute/Notice/PostNotice';
 
 
 class App extends React.Component {
@@ -95,6 +95,7 @@ class App extends React.Component {
             <CollegeRoute path='/createchat-college' exact component={CreateCollegeChat}/>
             <CnARoute path='/sendemail' exact component={SendEmail}/>
             <CollegeRoute path='/verify-alumni' exact component={VerifyAlumni}/>
+            <CnARoute path='/createnotice/' component={PostNotice}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer
