@@ -9,7 +9,7 @@ class Users extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            values : '',
+            values : [],
             loading : true
         }
         
@@ -88,7 +88,7 @@ class Users extends React.Component{
                     <SearchPage
                     onSearch={this.onSearch}/>
                 </div>
-                {!loading && (values.length !== 0) ? (
+                {!loading ? (
                         <div id='search-profile-div'>{values.map((data,index) => 
                             (<Profilecard 
                                 key={index} 

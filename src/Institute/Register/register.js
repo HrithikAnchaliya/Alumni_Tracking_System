@@ -153,7 +153,7 @@ export default class Register extends React.Component{
             case 1:
                 return <Basicform
                 values={values}
-                handlechg={this.onChangefuc}
+                handlechg={this.onChangefuc}    
                 number={this.toNumber}
                 goNext={this.goNext}/>
             case 2:

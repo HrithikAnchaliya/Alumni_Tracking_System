@@ -70,7 +70,7 @@ class Events extends React.Component{
                 <div className="notification" id="jobcard-div">
                 {!this.state.loading ? 
                 (
-                    <div id='events-page-div'>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} />)}</div>
+                    <div id='events-page-div'>{this.state.data.map((item,number) => <Eventcard key={number} id={item._id} time={item.time}title={item.title} subtitle={item.subtitle} date={item.date}/>)}</div>
                 ) : (
                     (!this.state.error) ? (
                     <div id='Loading-id'>

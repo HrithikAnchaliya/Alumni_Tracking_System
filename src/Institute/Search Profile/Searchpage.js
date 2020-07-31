@@ -11,6 +11,13 @@ import Button from 'react-bootstrap/Button'
 let countries = require ('countries-cities').getCountries();
 
 
+const Branchoptions = [
+    { value: 'cse', label: 'Computer Science' },
+    { value: 'mech', label: 'Mechanical' },
+    { value: 'civil', label: 'Civil' },
+  ];
+  
+
 class SearchPage extends React.Component{
     constructor(props){
         super(props)
@@ -24,6 +31,7 @@ class SearchPage extends React.Component{
             cityList : [],
             collegesList : [],
             selectedCollege : [],
+            selectedBranch : [],
             onFocus : 'search'
         }
 
@@ -33,6 +41,7 @@ class SearchPage extends React.Component{
         this.onChangeCity = this.onChangeCity.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
         this.onChangeCollege = this.onChangeCollege.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
 
     }
 
@@ -70,8 +79,8 @@ class SearchPage extends React.Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        let { searchvalue, yearvalue, selectedCity, selectedCollege } = this.state
-        let state = { searchvalue, yearvalue, selectedCity, selectedCollege} 
+        let { searchvalue, yearvalue, selectedCity, selectedCollege, selectedBranch } = this.state
+        let state = { searchvalue, yearvalue, selectedCity, selectedCollege, selectedBranch} 
         let url = intoUrl(state);
         console.log(url);
         this.props.onSearch(url);
@@ -110,6 +119,12 @@ class SearchPage extends React.Component{
         });
     }
 
+    onChangeBranch = (selectedOption) => {
+        this.setState({
+            selectedBranch : selectedOption
+        });
+    }
+
     changeFocus = (event) => {
         this.setState({ onFocus : event.target.id })
     }
@@ -134,6 +149,8 @@ class SearchPage extends React.Component{
                    { (this.props.user === 'admin') ? (<Link id='college' onClick={this.changeFocus} className={(onFocus === 'college')? ('is-active') : ('not-active')}>College</Link>) : (null)}
 
                    <Link id='location' onClick={this.changeFocus} className={(onFocus === 'location')? ('is-active') : ('not-active')}>Location</Link>
+
+                   <Link id='branch' onClick={this.changeFocus} className={(onFocus === 'branch')? ('is-active') : ('not-active')}>Branch</Link>
                 </p>
                 <div className="panel-block">
                 <form  onSubmit={this.onSubmit}>
@@ -211,6 +228,19 @@ class SearchPage extends React.Component{
                         </div>
                         ) : ( null )
                         }
+                    </div>) : (null)}
+                    {  (this.state.onFocus === 'branch') ? 
+                    (<div>
+                        <Select
+                        id='focus-on-search'
+                        value={this.state.selectedBranch}
+                        options={Branchoptions}
+                        isMulti
+                        isSearchable
+                        placeholder='Select Branch'
+                        name='branch'
+                        onChange={this.onChangeBranch}/>
+                    <br/>
                     </div>) : (null)}
                     <Button variant="outline-primary" id='search-submit-button' type='submit'>Submit</Button>
                     </form>

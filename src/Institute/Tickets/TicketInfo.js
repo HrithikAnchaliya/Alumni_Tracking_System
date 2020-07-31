@@ -63,7 +63,7 @@ class TicketInfo extends React.Component{
                 </select>
                 <br/>
                 <h5>Sub - Title</h5>
-                <select required name="subtitle"  onChange={this.props.toChange}>
+                <select required name="subTitle"  onChange={this.props.toChange}>
                     <option value =''>select title</option>
                     <option value = 'Marksheets/other documents'>Marksheets/other documents</option>
                     <option value = 'Marksheet - Lost'>Marksheet - Lost</option>

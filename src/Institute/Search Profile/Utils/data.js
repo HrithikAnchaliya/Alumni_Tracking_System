@@ -27,9 +27,10 @@ export function cityList(country){
 export function intoUrl(states){
     let state = store.getState();
     let user = state.Auth_user;
-    let { searchvalue, yearvalue, selectedCity, selectedCollege  } = states;
+    let { searchvalue, yearvalue, selectedCity, selectedCollege, selectedBranch  } = states;
     let location = [];
     let colleges = [];
+    let branches = [];
     if(selectedCity){
     selectedCity.forEach((city) => {
         let array = city.value
@@ -40,6 +41,11 @@ export function intoUrl(states){
             let array = college.value
             colleges.push(array)
     })}
+    if(selectedBranch){
+        selectedBranch.forEach((branch) => {
+            let array = branch.value
+            branches.push(array);
+    })}
     console.log(location)
     let url = buildUrl('https://alumni-backend-app.herokuapp.com',{
         path : `${user}/alumni`,   // no college
@@ -48,7 +54,8 @@ export function intoUrl(states){
             search : searchvalue,
             endYear : yearvalue,
             'location.city' : location,
-            collegeId : colleges
+            collegeId : colleges,
+            branch : branches
         }
     })
     return decodeURI(url);

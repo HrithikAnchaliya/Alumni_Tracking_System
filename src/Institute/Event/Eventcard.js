@@ -6,13 +6,14 @@ import {
 
 export default class Eventcard extends React.Component{
     render(){
+        let date_convert = new Date(this.props.date)
+        let date = date_convert.toDateString()
         return(
             <div>
             <Card style={{ width: '18rem' }}>
             <Card.Body>
             <Card.Title>{this.props.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">07 </Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">March 2020 </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">{this.props.time}</Card.Subtitle>
             <Card.Text>{this.props.subtitle}</Card.Text>
             <Link to={`/events/${this.props.id}`}>Card Link</Link>
