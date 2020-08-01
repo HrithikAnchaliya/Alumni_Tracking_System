@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
 import { base_url} from '../../Endpoint/endpoint'
 import { notifyError_with_msg, notify_Success_msg } from '../Utils/Message'
 import {shallowEqual, useSelector } from 'react-redux'
@@ -56,7 +56,7 @@ export default function DataTable(props) {
     let id = event.target.id;
     var method;
 
-    if(event.target.title == "verify"){
+    if(event.target.title === "verify"){
       method = "PATCH";
     } else {
       method = "DELETE";
@@ -76,7 +76,7 @@ export default function DataTable(props) {
             notifyError_with_msg(json.err);
         }
         if(response.ok){
-          if (method == "PATCH") {
+          if (method === "PATCH") {
             notify_Success_msg(`Successfully Verified ${json.firstName}`)
           } else {
             notify_Success_msg(`Successfully deleted ${json.firstName}`)

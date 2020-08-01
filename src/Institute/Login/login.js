@@ -49,9 +49,9 @@ class Login extends React.Component{
         try{    
         let storeToken = ''
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/login`,values)
-        // const json = await response.json()
+        const json = await response.json()
         if(!response.ok){
-            notifyError_with_msg('Check your Password, Email and User');
+            notifyError_with_msg(json.err);
             this.setState({ loading : false })
         }
         if(response.ok){

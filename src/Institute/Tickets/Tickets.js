@@ -3,7 +3,7 @@ import {  base_url } from '../../Endpoint/endpoint'
 import { notifyError_with_msg } from '../Utils/Message'
 import { connect } from 'react-redux'
 import Spinner from 'react-bootstrap/Spinner'
-import TicketCard from './TicketCard';
+// import TicketCard from './TicketCard';
 import { Link } from "react-router-dom";
 
 
@@ -98,7 +98,8 @@ class Tickets extends React.Component{
                             <tbody>
                                 {
                                     this.state.tickets.map((ticket) => {
-                                        if ( !(this.state.status == 'all' || this.state.status == ticket.status) ){
+                                        if ( !(this.state.status === 'all' || this.state.status === ticket.status) ){
+                                            // eslint-disable-next-line
                                             return;
                                         }
 
@@ -112,7 +113,9 @@ class Tickets extends React.Component{
                                                 break;
                                             case "closed":
                                                 spanClassName = "tag is-rounded is-danger is-small" 
-                                                break;                                           
+                                                break; 
+                                            default :
+                                                spanClassName = "tag is-rounded is-small"                                 
                                         };
 
                                         return (

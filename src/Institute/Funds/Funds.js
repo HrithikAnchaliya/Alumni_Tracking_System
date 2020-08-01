@@ -29,7 +29,7 @@ class Funds extends React.Component{
         const data = await response.json();
         if (!response.ok) {
             this.setState( {error : true} );
-            notifyError_with_msg(data._message);
+            notifyError_with_msg(data.err);
         }
         if(response.ok){
         console.log(data)
