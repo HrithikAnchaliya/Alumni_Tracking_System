@@ -5,19 +5,10 @@
 export function combine(Register) {
    
 
-   const { firstName, lastName, country, state, city, collegeName, startYear, endYear,  
+   const { firstName, lastName, country, state, city, collegeId, startYear, endYear,  
     degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
     email, password, mobileNumber, facebook, linkedin, skills, education_input, work_input  } = Register
     
-    let collegeId = ''
-    if(collegeName === 'srm')
-    {
-    collegeId = "5e8ef0055ce96f14c95ad0a5"
-    }
-    if(collegeName === 'mnm')
-    {
-    collegeId = "5e8c49555de26fa5a43b69b2"
-    }
     
     let education = [
         {

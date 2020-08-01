@@ -4,9 +4,11 @@ import { connect } from 'react-redux'
 import { base_url} from '../../Endpoint/endpoint'
 import { notifyError_with_msg } from '../Utils/Message'
 import {Line} from 'react-chartjs-2';
-import split from './Utils/data';
+import split  from './Utils/data';
 import '../Style/toStyleChart.css'
 import NoticeComponent from '../Notice/Notices'
+import '../Style/toStyleDashboard.css'
+
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -15,7 +17,8 @@ class Dashboard extends React.Component{
             all:null,
             loading:true,
             data:null,
-            error:false
+            error:false,
+            ticketCount:''
         }
     }
 
@@ -47,19 +50,17 @@ class Dashboard extends React.Component{
     render(){
         return(
             <div>
-                {(this.props.user !== 'alumni') ? (
+                {(this.props.user !== 'alumni') && (this.props.user !== 'student') ? (
                 <div className="container is-fluid">
-                <div className="notification">
-                    <span><span>Add Events</span>
-                    <Link to='/addevent'>Add-Event</Link></span>
-                    <br/>
-                    <span><span>Add Funds</span>
-                    <Link to='/addfund'>Add-Funds</Link></span>
-                    <br/>
-                    <span><span>Add Newletter</span>
-                    <Link to='/addnewsletter'>Add-Newsletter</Link></span>
-                    <span><span>Create Chat</span>
-                    <Link to='/createchat-college'>Create Chat</Link></span>
+                <div id='block-remove' className="notification">
+                    <ul id="horizontal-list">
+                        <li>Quick Links</li>
+                        <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/addevent'>Add Event</Link></span></li>
+                        {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/addfund'>Add Fund</Link></span></li>) : (null)}
+                        <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/addnewsletter'>Add Newsletter</Link></span></li>
+                        {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/createchat-college'>Create Chat</Link></span></li>) : (null)}
+                        {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/import'>Import Alumni</Link></span></li>) : (null)}
+                    </ul>
                 </div>
                 </div>) : (null)}
                 <br/>
@@ -69,7 +70,7 @@ class Dashboard extends React.Component{
                     <nav className="level">
                         <div className="level-item has-text-centered">
                             <div>
-                            <p className="heading">Events</p>
+                            <p className="heading">Upcoming Events</p>
                             <p className="title">{this.state.all.upcomingEvents}</p>
                             </div>
                         </div>
@@ -79,43 +80,93 @@ class Dashboard extends React.Component{
                             <p className="title">{this.state.all.pastEvents}</p>
                             </div>
                         </div>
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">Student Count</p>
+                            <p className="title">{this.state.all.studentsCount}</p>
+                            </div>
+                        </div>
                     </nav>
               </div>) : (null)}
                 <br/>
                 <br/>
-                <NoticeComponent/>
+                <br/>
+                <br/>
+                {/* <NoticeComponent/> */}
+
+                <div class="columns">
+                    <div class="column">
+                    <NoticeComponent/>
+                    </div>
+                    <div class="column is-half">
+                    {(this.state.all !== null) ? (
+                        <div id='alumni-chart'>
+                        <Line
+                        data={split(this.state.all.alumni, 'Alumni')}
+                        options={{
+                            title:{
+                            display:true,
+                            text:'No of Alumni',
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                        /></div>) : (null)}
+                    </div>
+                    <div class="column">
+                        {(this.state.all !== null) ? (
+                             <div id='size-corner'>
+                        <Line
+                        data={split(this.state.all.jobs, 'Jobs')}
+                        options={{
+                            title:{
+                            display:true,
+                            text:'Jobs',
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                        /></div>) : (null)}
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+
                 {(this.state.all !== null) ? (
                 <div>
-                <div id='alumni-chart'>
-                <Line
-                data={split(this.state.all.alumni, 'Alumni')}
-                options={{
-                    title:{
-                    display:true,
-                    text:'No of Alumni',
-                    fontSize:20
-                    },
-                    legend:{
-                    display:true,
-                    position:'right'
-                    }
-                }}
-                /></div>
-                <div id='alumni-chart'>
-                <Line
-                data={split(this.state.all.jobs, 'Jobs')}
-                options={{
-                    title:{
-                    display:true,
-                    text:'Jobs',
-                    fontSize:20
-                    },
-                    legend:{
-                    display:true,
-                    position:'right'
-                    }
-                }}
-                /></div>
+                    <nav className="level">
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">Open Tickets</p>
+                            <p className="title">{this.state.all.tickets[0].count}</p>
+                            </div>
+                        </div>
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">On Progress Tickets</p>
+                            <p className="title">{this.state.all.tickets[0].count}</p>
+                            </div>
+                        </div>
+                        <div className="level-item has-text-centered">
+                            <div>
+                            <p className="heading">Closed Tickets</p>
+                            <p className="title">{this.state.all.tickets[0].count}</p>
+                            </div>
+                        </div>
+                    </nav>
+              </div>) : (null)}
+
+
+                {(this.state.all !== null) ? (
+                <div>
                 <div id='alumni-chart'>
                 <Line
                 data={split(this.state.all.interviews, 'Interviews')}

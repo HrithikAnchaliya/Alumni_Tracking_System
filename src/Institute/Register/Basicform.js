@@ -10,7 +10,7 @@ export default class Basicform extends React.Component{
     }
 
     render(){
-        const {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear, College_Names_fetch  } = this.props.values;
+        const {  firstName, lastName, user, country, state, city, collegeId, startYear, endYear, College_Names_fetch  } = this.props.values;
         return(
             <div>
                 <div className="container is-fluid">
@@ -76,17 +76,17 @@ export default class Basicform extends React.Component{
                     <label class="label">College Name</label>
                     <div class="control">
                         <div class="select">
-                        <select name="collegeName" onChange={this.props.handlechg} id='collegeId'>
+                        <select name="collegeId" onChange={this.props.handlechg} id='collegeId'>
                             <option value="">Choose a college</option>
                             {College_Names_fetch.map((data,index) => (
-                                <option key={index} value={data.collegeName}>{data.collegeName}</option>
+                                <option key={index} value={data._id}>{data.collegeName}</option>
                             ))}
                         </select>
                         </div>
                     </div>
                 </div>
 
-                <label>Selected College : {collegeName}</label>
+                <label>Selected College : {collegeId}</label>
 
                 </div>
                 ) : (null)}

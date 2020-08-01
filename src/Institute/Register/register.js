@@ -16,7 +16,7 @@ export default class Register extends React.Component{
             country : '',
             state : '',
             city : '',
-            collegeName : '',
+            collegeId : '',
             startYear : '',
             endYear : '',
             degree : '',
@@ -139,11 +139,11 @@ export default class Register extends React.Component{
     render(){
         console.log(this.state)
 
-        const {  page, firstName, lastName, user, country, state, city, collegeName, startYear, endYear,  
+        const {  page, firstName, lastName, user, country, state, city, collegeId, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
             email, password, mobileNumber, facebook, linkedin, skills , skills_array, education_input, College_Names_fetch } = this.state
 
-        const values = {  firstName, lastName, user, country, state, city, collegeName, startYear, endYear,  
+        const values = {  firstName, lastName, user, country, state, city, collegeId, startYear, endYear,  
             degree, branch, rollNumber, school, course, eduStartYear, eduEndYear, workTitle, company, industry, workStartYear, workEndYear,
             email, password, mobileNumber, facebook, linkedin, skills, skills_array, page, education_input, College_Names_fetch }
 
