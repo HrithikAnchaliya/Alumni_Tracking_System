@@ -11,6 +11,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { base_url} from '../../Endpoint/endpoint'
 import { notifyError_with_msg, notify_Success_msg } from '../Utils/Message'
 import {shallowEqual, useSelector } from 'react-redux'
+import { Button } from '@material-ui/core';
+
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -49,10 +52,18 @@ export default function DataTable(props) {
 
   async function onPress(event){
     console.log(event);
-    if(event.target.checked){
+
     let id = event.target.id;
+    var method;
+
+    if(event.target.title == "verify"){
+      method = "PATCH";
+    } else {
+      method = "DELETE";
+    }
+
       const values = {
-        method : "PATCH",
+        method,
         headers : {
             'x-auth' : token,
         }
@@ -65,12 +76,16 @@ export default function DataTable(props) {
             notifyError_with_msg(json.err);
         }
         if(response.ok){
-          notify_Success_msg('Successfully Verified')
+          if (method == "PATCH") {
+            notify_Success_msg(`Successfully Verified ${json.firstName}`)
+          } else {
+            notify_Success_msg(`Successfully deleted ${json.firstName}`)
+          }
+          
     }}
     catch(error){
         console.log(error)
         notifyError_with_msg("Can't Process");
-    }
     }
     
   }
@@ -87,10 +102,13 @@ export default function DataTable(props) {
             <StyledTableCell align="right">Year</StyledTableCell>
             <StyledTableCell align="right">Roll No</StyledTableCell>
             <StyledTableCell align="right">To-Verify</StyledTableCell>
+            <StyledTableCell align="right">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
+
+        
         <TableBody>
-          {props.rows.map((row) => (
+          {props.rows.map((row, rowIdx) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
@@ -100,7 +118,40 @@ export default function DataTable(props) {
               <StyledTableCell align="right">{row.email}</StyledTableCell>
               <StyledTableCell align="right">{row.year}</StyledTableCell>
               <StyledTableCell align="right">{row.roll}</StyledTableCell>
-              <StyledTableCell align="right"><Checkbox id={row.id} onChange={onPress}/></StyledTableCell>
+              <StyledTableCell align="right">
+                {/* <Checkbox id={row.id} onChange={onPress}/> */}
+                <Button
+                  variant="outlined" 
+                  color="primary"
+                  size="small"
+                >
+                  <div 
+                    id={row.id}
+                    onClick={onPress}
+                    title="verify"
+                  >
+                    Verify
+                  </div>
+                </Button>
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                <Button
+                  variant="outlined" 
+                  color="secondary"
+                  size="small"
+                >
+                  <div 
+                    id={row.id}
+                    onClick={onPress}
+                    title="delete"
+                  >
+                    Delete
+                  </div>
+                </Button>
+              </StyledTableCell>
+
+
+
             </StyledTableRow>
           ))}
         </TableBody>
