@@ -115,6 +115,29 @@ class Dashboard extends React.Component{
                         <Line
                         data={split(this.state.all.alumni, 'Alumni')}
                         options={{
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        userCallback: function(label, index, labels) {
+                                            // when the floored value is the same as the value we have a whole number
+                                            if (Math.floor(label) === label) {
+                                                return label;
+                                            }
+
+                                        },
+                                    }
+                                }],
+                                xAxes: [
+                                    {
+                                      gridLines: {
+                                        color: '#aaa',
+                                        borderDash: [1, 3],
+                                      },
+                                      display: false, // this will hide vertical lines
+                                    },
+                                  ],
+                            },
                             title:{
                             display:true,
                             text:'No of Alumni',
@@ -133,6 +156,29 @@ class Dashboard extends React.Component{
                         <Line
                         data={split(this.state.all.jobs, 'Jobs')}
                         options={{
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        userCallback: function(label, index, labels) {
+                                            // when the floored value is the same as the value we have a whole number
+                                            if (Math.floor(label) === label) {
+                                                return label;
+                                            }
+
+                                        },
+                                    }
+                                }],
+                                xAxes: [
+                                    {
+                                      gridLines: {
+                                        color: '#aaa',
+                                        borderDash: [1, 3],
+                                      },
+                                      display: false, // this will hide vertical lines
+                                    },
+                                  ],
+                            },
                             title:{
                             display:true,
                             text:'Jobs',
@@ -152,6 +198,29 @@ class Dashboard extends React.Component{
                 <Line
                 data={split(this.state.all.interviews, 'Interviews')}
                 options={{
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                userCallback: function(label, index, labels) {
+                                    // when the floored value is the same as the value we have a whole number
+                                    if (Math.floor(label) === label) {
+                                        return label;
+                                    }
+
+                                },
+                            }
+                        }],
+                        xAxes: [
+                            {
+                              gridLines: {
+                                color: '#aaa',
+                                borderDash: [1, 3],
+                              },
+                              display: false, // this will hide vertical lines
+                            },
+                          ],
+                    },
                     title:{
                     display:true,
                     text:'Experience',

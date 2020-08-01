@@ -30,9 +30,9 @@ const Import = () => {
             }
             try{
             const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/insertAlumniExcel`,values)
-            // const json = await response.json()
+            const json = await response.json()
             if(!response.ok){
-                notifyError_with_msg(response.err)
+                notifyError_with_msg(json.err)
             }
             if(response.ok){
                 notify_Success_msg("Successfully Imported")

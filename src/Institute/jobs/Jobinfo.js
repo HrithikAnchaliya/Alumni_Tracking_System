@@ -62,13 +62,13 @@ class Jobinfo extends React.Component{
 
     render(){
         
-        const { salaryOffered,description ,skillsRequired ,qualification,experience  } = this.props.values;
-        // ,contactInfo
+        const { salaryOffered,description ,skillsRequired ,qualification, experience } = this.props.values;
+        
         return(
             <div>
                  <form onSubmit={this.toGather} >
 
-                 {/* <div class="box"> */}
+                <div>
 
                 <div className="field">
                     <label className="label">Company</label>
@@ -178,9 +178,16 @@ class Jobinfo extends React.Component{
                     </div>
                 </div>
 
+                <div className="field">
+                    <label className="label">External Link / Reference Link</label>
+                    <div className="control">
+                    <input  className="input" type="text" placeholder="Link" name="contactInfo" onChange={this.props.theonChange} ></input>
+                    </div>
+                </div>
+
                 <button className="button is-black" type='submit' >Submit the Job</button>
 
-                {/* </div> */}
+                </div>
 
                 </form>
             </div>
