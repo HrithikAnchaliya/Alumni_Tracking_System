@@ -26,7 +26,7 @@ import Addinterview from './Institute/Interview/Addinterview'
 import RaiseTicket from './Institute/Tickets/RaiseTicket'
 import Newsletters from './Institute/Newsletter/Newsletters'
 import { ProtectedRoute, LoginRoute, LogoutRoute, CollegeRoute } from './Institute/Protectedroutes/index'
-import { AlumniRoute, NoStudentRoute, CnARoute } from './Institute/Protectedroutes/Routes'
+import { AlumniRoute, NoStudentRoute, CnARoute, AdminRoute } from './Institute/Protectedroutes/Routes'
 import { Provider } from 'react-redux';
 import store from './Redux/store/storage';
 import UserProfile from './Institute/temp_Profile/UserProfile';
@@ -49,6 +49,7 @@ import Tickets from './Institute/Tickets/Tickets';
 import TicketPage from './Institute/Tickets/TicketPage'
 import CreateCollegeChat from './Institute/Chat/CreateCollegeChat';
 import PostNotice from './Institute/Notice/PostNotice';
+import createCollege from './Institute/Create College/createCollege';
 
 
 class App extends React.Component {
@@ -95,7 +96,8 @@ class App extends React.Component {
             <CollegeRoute path='/createchat-college' exact component={CreateCollegeChat}/>
             <CnARoute path='/sendemail' exact component={SendEmail}/>
             <CollegeRoute path='/verify-alumni' exact component={VerifyAlumni}/>
-            <CnARoute path='/createnotice/' component={PostNotice}/>
+            <CnARoute path='/createnotice' component={PostNotice}/>
+            <AdminRoute path='/createcollege' component={createCollege}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer

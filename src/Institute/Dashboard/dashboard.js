@@ -63,6 +63,16 @@ class Dashboard extends React.Component{
                     </ul>
                 </div>
                 </div>) : (null)}
+                {(this.props.user === 'alumni') || (this.props.user === 'student') ? (
+                <div className="container is-fluid">
+                <div id='block-remove' className="notification">
+                    <ul id="horizontal-list">
+                        <li>Quick Links</li>
+                        <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/raiseticket'>Raise Ticket</Link></span></li>
+                        <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/chat'>Chat</Link></span></li>
+                    </ul>
+                </div>
+                </div>) : (null)}
                 <br/>
                 <br/>
                 {(this.state.all !== null) ? (
@@ -92,8 +102,9 @@ class Dashboard extends React.Component{
                 <br/>
                 <br/>
                 <br/>
-                {/* <NoticeComponent/> */}
 
+            <div class='columns'>
+                <div class='column'>
                 <div class="columns">
                     <div class="column">
                     <NoticeComponent/>
@@ -135,6 +146,26 @@ class Dashboard extends React.Component{
                         /></div>) : (null)}
                     </div>
                 </div>
+                <div class='column'>
+                {(this.state.all !== null) ? (
+                <div id='interview-chart'> 
+                <Line
+                data={split(this.state.all.interviews, 'Interviews')}
+                options={{
+                    title:{
+                    display:true,
+                    text:'Experience',
+                    fontSize:20
+                    },
+                    legend:{
+                    display:true,
+                    position:'right'
+                    }
+                }}
+                /></div>) : (null)}
+                </div>
+                </div>
+            </div>
 
                 <br/>
                 <br/>
@@ -164,26 +195,10 @@ class Dashboard extends React.Component{
                     </nav>
               </div>) : (null)}
 
+              <br/>
+                <br/>
+                <br/>
 
-                {(this.state.all !== null) ? (
-                <div>
-                <div id='alumni-chart'>
-                <Line
-                data={split(this.state.all.interviews, 'Interviews')}
-                options={{
-                    title:{
-                    display:true,
-                    text:'Experience',
-                    fontSize:20
-                    },
-                    legend:{
-                    display:true,
-                    position:'right'
-                    }
-                }}
-                /></div>
-                </div>) : (null)}
-               
             </div>
         )
     }

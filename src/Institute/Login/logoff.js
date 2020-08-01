@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { Deserialize } from './Utils/data';
 import { base_url} from '../../Endpoint/endpoint'
 import { notifyError_with_msg } from '../Utils/Message'
+import Button from 'react-bootstrap/Button'
 
 class Logoff extends React.Component{
     constructor(props){
@@ -65,9 +66,15 @@ class Logoff extends React.Component{
                 <br/>
                 <br/>
                 <div className="container">
-                    <div className="notification">
+                    <div id='addevent-div-id' className="notification">
                     <br/>
-                        <button disabled={loading} onClick={this.officiallogoff} type='button'>Log-off</button>
+                        <label>Are You Sure You Want To Logout</label>
+
+                        <br/>
+                        <br/>
+                        <Button variant="outline-dark" disabled={loading} onClick={this.officiallogoff} type='button'>Log Out</Button>
+
+                        {/* <button disabled={loading} onClick={this.officiallogoff} type='button'>Log Out</button> */}
                     <br/>
                     {
                         (this.state.redirect) ? (

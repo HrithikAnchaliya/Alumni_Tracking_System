@@ -3,20 +3,22 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import './style.css'
 
-// import DropdownButton from 'react-bootstrap/DropdownButton'
-// import Dropdown from 'react-bootstrap/Dropdown'
-
 class Navigation extends React.Component{
     render(){
         return(
             <div>
               <nav>
             <ul id="nav">
+            {(!this.props.Auth) ? (
               <li>
                 <Link to='/'>
                   Home
                 </Link>
-              </li>
+              </li>) : ( <li>
+                <Link to='/dashboard'>
+                  Dashboard
+                </Link>
+              </li> )}
               {(this.props.user !== 'college' && this.props.user !== 'admin' && this.props.Auth) ? (
                 <li>
                 <Link to='/user'>

@@ -106,3 +106,29 @@ export const NoCollegeRoute = ({component : Component, ...rest}) => {   //Except
         }/>
     )
 }
+
+export const AdminRoute = ({component : Component, ...rest}) => {   //Only Admin Route
+    return(
+        <Route {...rest} render = {
+            (props) => {
+                let state = store.getState();
+                let loginstate = state.Auth_state;
+                let loginuser = state.Auth_user
+                return (loginstate && loginuser === 'admin') ? 
+                (
+                    <Component {...rest}/>
+
+                ) : (
+                    <Redirect to={
+                        {
+                            pathname: "/login",            //Why to login page?? (Its because when not loggedin it will redirt to login page)
+                            state: {                       //if not then (i.e, Logged in then that protected route (another function) wil reditet to home)
+                                from: props.location       //It was '/' (before) 
+                            }
+                        }
+                    }/>
+                )
+            }
+        }/>
+    )
+}
