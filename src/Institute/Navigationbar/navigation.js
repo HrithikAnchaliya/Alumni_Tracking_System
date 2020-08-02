@@ -1,100 +1,106 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import './style.css'
 
 class Navigation extends React.Component{
+
+  console = () => {
+    console.log(window.location.href)
+  }
+
     render(){
+      console.log(window.location.href);
         return(
             <div>
               <nav>
             <ul id="nav">
             {(!this.props.Auth) ? (
               <li>
-                <Link to='/'>
+                <NavLink to='/'>
                   Home
-                </Link>
+                </NavLink>
               </li>) : ( <li>
-                <Link to='/dashboard'>
+                <NavLink activeClassName='link-li' to='/dashboard'>
                   Dashboard
-                </Link>
+                </NavLink>
               </li> )}
               {(this.props.user !== 'college' && this.props.user !== 'admin' && this.props.Auth) ? (
                 <li>
-                <Link to='/user'>
+                <NavLink activeClassName='link-li' to='/user'>
                   Profile
-                </Link>
+                </NavLink>
               </li>) : ( null )}
-              <li>
-                <Link to='/events'>
+              <li onClick={this.console}>
+                <NavLink activeClassName='link-li' to='/events'>
                   Events
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/map'>
+                <NavLink activeClassName='link-li' to='/map'>
                   Map
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/jobs'>
+                <NavLink activeClassName='link-li' to='/jobs'>
                   Jobs
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/newsletters'>
+                <NavLink activeClassName='link-li' to='/newsletters'>
                   Newsletter
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/interviews'>
+                <NavLink activeClassName='link-li' to='/interviews'>
                   Interview
-                </Link>
+                </NavLink>
               </li>
               <li id="sch">
-                <Link to='/searchprofile'>
-                Search People</Link>
+                <NavLink activeClassName='link-li' to='/searchprofile'>
+                Search People</NavLink>
               </li>
                {(this.props.user !== 'student' && this.props.Auth) ? (
                 <li>
-                <Link to='/chat'>
+                <NavLink activeClassName='link-li' to='/chat'>
                   Chat
-                </Link>
+                </NavLink>
               </li>) : ( null )}
               {(this.props.user === 'college' && this.props.Auth) ? (
                 <li>
-                <Link to='/tickets'>
+                <NavLink activeClassName='link-li' to='/tickets'>
                   Tickets
-                </Link>
+                </NavLink>
               </li>) : ( null )}
                {(this.props.user === 'alumni' && this.props.Auth) ? (
                 <li>
-                <Link to='/funds'>
+                <NavLink activeClassName='link-li' to='/funds'>
                   Funds
-                </Link>
+                </NavLink>
               </li>) : ( null )}
                 {((this.props.user === 'college' || this.props.user === 'admin') && this.props.Auth) ? (
                 <li>
-                <Link to='/sendemail'>
+                <NavLink activeClassName='link-li' to='/sendemail'>
                   Send Mail
-                </Link>
+                </NavLink>
               </li>) : ( null )}
               {(this.props.user === 'college' && this.props.Auth) ? (
                 <li>
-                <Link to='/verify-alumni'>
+                <NavLink activeClassName='link-li' to='/verify-alumni'>
                   Verify Alumni
-                </Link>
+                </NavLink>
               </li>) : ( null )}
               { 
               (this.props.Auth) ? (
                 <li>
-                <Link to='/logoff'>
+                <NavLink activeClassName='link-li' to='/logoff'>
                   Logout
-                </Link>
+                </NavLink>
               </li>) : (
                 <li>
-                <Link to='/login'>
+                <NavLink activeClassName='link-li' to='/login'>
                   Login
-                </Link>
+                </NavLink>
               </li>
               )
               }

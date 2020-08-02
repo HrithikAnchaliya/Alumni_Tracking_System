@@ -50,6 +50,7 @@ import TicketPage from './Institute/Tickets/TicketPage'
 import CreateCollegeChat from './Institute/Chat/CreateCollegeChat';
 import PostNotice from './Institute/Notice/PostNotice';
 import createCollege from './Institute/Create College/createCollege';
+import ContactALumni from './Institute/ContactAlumni/ContactAlumni';
 
 
 class App extends React.Component {
@@ -65,7 +66,8 @@ class App extends React.Component {
             <LoginRoute path='/login' exact component={Login}/>
             <LogoutRoute path='/logoff' exact component={Logoff}/>
             <ProtectedRoute path='/searchprofile' exact component={users}/>
-            <ProtectedRoute path={`/profile/:id`} component={OtherProfile}/>
+            <ProtectedRoute path={`/profile/:id`} exact component={OtherProfile}/>
+            <ProtectedRoute path={`/profile/:id/contact`} component={ContactALumni}/>
             <CollegeRoute path='/import' component={Import}/>
             <AlumniRoute path='/user' exact component={UserProfile}/>
             <AlumniRoute path='/edit' exact component={EditPage}/>

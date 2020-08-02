@@ -28,6 +28,7 @@
     text-decoration: none;
     position:relative;
 }
+
 #nav a::after{
     content: "";
     display:block;
@@ -38,6 +39,13 @@
     bottom:10%;
     z-index: -1;
 }
-#nav a:hover::after{
+
+#nav a:hover{
     width: 100%;
+}
+
+.link-li {
+    font-size: larger;
+    /* font-family: 'Futura Std'; */
+    /* font-weight: bold; */
 }

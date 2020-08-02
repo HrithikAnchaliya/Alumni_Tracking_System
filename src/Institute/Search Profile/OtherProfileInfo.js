@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link }from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default class OtherProfileInfo extends React.Component{
+class OtherProfileInfo extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -15,6 +17,13 @@ export default class OtherProfileInfo extends React.Component{
                     <div className="container is-fluid">
                     <div id = 'profile-div-id' className="notification">
 
+                    {this.props.user === 'college' ? (
+                    <Link className='button'  to={{
+                        pathname : `/profile/${this.props.json._id}/contact`,
+                        aboutProps : {
+                            profile_id : this.props.json._id
+                        }
+                    }}>Get In Touch</Link>) : (null)}
 
                     <div className='box'>
                     <span id='basic-id-profile'>
@@ -111,3 +120,13 @@ export default class OtherProfileInfo extends React.Component{
         )
     }
 }
+
+const mapStatesToProps = state => {
+    return{
+        token : state.Auth_token,
+        user : state.Auth_user
+    }
+}
+
+
+export default connect(mapStatesToProps,null) (OtherProfileInfo);
