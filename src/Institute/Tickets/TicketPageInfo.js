@@ -2,20 +2,28 @@ import React from 'react';
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import { base_url } from '../../Endpoint/endpoint'
-import { notifyError_with_msg } from  '../Utils/Message'
+import { notifyError_with_msg, notify_Success_msg } from  '../Utils/Message'
 
 class TicketPageInfo extends React.Component{
     constructor(props){
         super(props)
             this.state = {
-                close : false
+                close : false,
+                message: ''
             }
             this.toPost = this.toPost.bind(this);
-        }
+            this.onMessageChange = this.onMessageChange.bind(this);
+        }   
 
+    onMessageChange(event) {
+        this.setState({
+            message: event.target.value
+        });
+        console.log(this.state);
+    }
 
     async toPost(event){
-        let data = {"status" : event.target.id}
+        let data = {"status" : event.target.id, "message": this.state.message}
         let TicketId = this.props.ticket._id
         const values = {
             method : "PATCH",
@@ -36,6 +44,7 @@ class TicketPageInfo extends React.Component{
         const json = await response.json();
         console.log(json)
         this.setState({ close : true })
+        notify_Success_msg(`Ticket updated successfully.`)
         }}
         catch(error){
             console.log(error)
@@ -75,6 +84,17 @@ class TicketPageInfo extends React.Component{
                        <span>{description}</span>
                         </p>
                         <br/>
+
+                        <div className="field">
+                            <div className="control">
+                                <textarea 
+                                    className="textarea is-hovered"
+                                    placeholder="Enter message if you want to send mail."
+                                    onChange={this.onMessageChange}
+                                    >  
+                                </textarea>
+                            </div>
+                        </div>
 
                         {((this.props.user === 'college') ) ? (
                             <div>
