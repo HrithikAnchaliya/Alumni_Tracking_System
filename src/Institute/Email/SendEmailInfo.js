@@ -1,18 +1,59 @@
 import React from 'react'
 import Select from 'react-select'
-import { YearOptions, BranchOption } from './Utils/data'
+import { YearOptions, BranchOption, selector,cityList } from './Utils/data'
 import { intoUrl } from './Utils/data'
 import { connect } from 'react-redux'
 import { notify_Success, notifyError_with_msg } from  '../Utils/Message'
- 
-class SendEmailInfo extends React.Component{
+let countries = require ('countries-cities').getCountries();
 
+class SendEmailInfo extends React.Component{
+constructor(props){
+    super(props)
+    this.state = {
+        countryList : [],
+        selected : null,
+        cityList : [],
+        yesno : false,
+        selectedCity : []
+    
+    }
+}
     
     componentWillMount = () => {
         let options = YearOptions();
         this.props.setYearList(options);
         let branchOptions = BranchOption();
         this.props.setBranchList(branchOptions);
+
+        let countrylist = selector(countries); 
+        this.setState({
+            countryList : countrylist
+        });
+    }
+
+    onChangeCountry = (selectedOption) => {
+        this.setState({
+            selected : selectedOption
+        });
+        setTimeout(() => {
+            this.toGatherCity();
+        },1500);
+    }
+
+    toGatherCity = () =>{
+        if(this.state.selected){
+            let citylist = cityList(this.state.selected.value);
+            this.setState({
+                cityList : citylist,
+                yesno : true
+            })
+        }
+    }
+
+    onChangeCity = (selectedOption) => {
+        this.setState({
+            selectedCity : selectedOption
+        });
     }
 
     onSubmit = async(e) => {
@@ -42,6 +83,8 @@ class SendEmailInfo extends React.Component{
     }
 
     render(){
+        let countryOptions = this.state.countryList;
+        console.log(this.state)
         return(
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -95,6 +138,35 @@ class SendEmailInfo extends React.Component{
                     </div>
                     ) : (null)}
                     <br/>
+
+                    <div>
+                        <h6>Country</h6>
+                        <Select 
+                        value={this.state.selected}
+                        options={countryOptions}
+                        isSearchable
+                        placeholder='Select Country'
+                        name='location.country'
+                        onChange={this.onChangeCountry}/>
+                    </div>
+                        <br/>
+                    <div>
+                        { (this.state.yesno) ? (
+                            <div>
+                            <h6>City</h6>
+                            <Select 
+                            value={this.state.selectedCity}
+                            options={this.state.cityList}
+                            isMulti
+                            isSearchable
+                            placeholder='Select City'
+                            name='location.city'
+                            onChange={this.onChangeCity}/>
+                            <br/>
+                            </div>
+                        ) : ( null )
+                        }
+                    </div>
                     <div>
 
                     <div className="field">

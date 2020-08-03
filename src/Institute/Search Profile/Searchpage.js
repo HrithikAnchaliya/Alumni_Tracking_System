@@ -131,6 +131,7 @@ class SearchPage extends React.Component{
 
     render(){
         let countryOptions = this.state.countryList;
+        console.log(countryOptions)
         let onFocus = this.state.onFocus
 
         return(

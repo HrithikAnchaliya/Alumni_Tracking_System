@@ -1,5 +1,6 @@
 import store from '../../../Redux/store/storage'
 var buildUrl = require('build-url');
+let cities = require ('countries-cities');
 
 export default function CollegeOptions(colleges){
     let selection = [];
@@ -25,6 +26,25 @@ export function BranchOption(){
     let selection = [];
     branch.forEach((value) => {
         let obj = { value : `${value}`, label:`${value}`}
+        selection.push(obj);
+    })
+    return selection;
+}
+
+export function selector(countries){
+    let selection = [];
+    countries.forEach((value) => {
+        let obj = { value: `${value}`, label: `${value}` }
+        selection.push(obj);
+    })
+    return selection;
+};
+
+export function cityList(country){
+    let selection = [];
+    let cityList = cities.getCities(country);
+    cityList.forEach((value) => {
+        let obj = { value: `${value}`, label: `${value}` }
         selection.push(obj);
     })
     return selection;

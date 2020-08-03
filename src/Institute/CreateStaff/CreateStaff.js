@@ -32,7 +32,7 @@ class CreateStaff extends React.Component{
         }
         try{
         let response = await fetch(`${base_url}/${this.props.user}/faculty`,values)
-        let json = await response.JSON();
+        let json = await response.json();
         if(!response.ok){
             notifyError_with_msg(json.err);
         }
