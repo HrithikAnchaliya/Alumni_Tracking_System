@@ -15,7 +15,7 @@ const RoomCard = (props) => {
                 <footer className="card-footer" id='chat-card-footer'>
                     <p className="card-footer-item">
                     <span>
-                    <Link to={`/chatroom/${props.id}`}>Chat</Link>
+                    <Link to={`/chat/${props.id}`}>Chat</Link>
                     </span>
                     </p>
                 </footer>

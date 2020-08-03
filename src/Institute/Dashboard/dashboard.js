@@ -60,6 +60,9 @@ class Dashboard extends React.Component{
                         <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/addnewsletter'>Add Newsletter</Link></span></li>
                         {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/createchat-college'>Create Chat</Link></span></li>) : (null)}
                         {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/import'>Import Alumni</Link></span></li>) : (null)}
+                        {(this.props.user === 'admin') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/createcollege'>Create College</Link></span></li>) : (null)}
+                        <li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/createnotice'>Post Notice</Link></span></li>
+                        {(this.props.user === 'college') ? (<li><span class="tag is-success is-light"><Link style={{textDecoration : 'none'}} to='/add-faculty'>Add Faculty</Link></span></li>) : (null)}
                     </ul>
                 </div>
                 </div>) : (null)}

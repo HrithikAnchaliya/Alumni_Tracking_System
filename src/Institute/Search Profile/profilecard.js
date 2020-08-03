@@ -8,13 +8,8 @@ export default class Profilecard extends React.Component{
         let { id, name, last, email, branch, degree, skills, location, socialProfiles } = this.props
         console.log(location)
         return(
-            <div >
-                <div id='profilecard-div' className="card">
-                    {/* <div className="card-image">
-                        <figure className="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder"></img>
-                        </figure>
-                    </div> */}
+            <div>
+                <div  id='profilecard-div' className="card">
                     <div className="card-content">
                         <div className="media">
                         <div className="media-left">
@@ -30,9 +25,6 @@ export default class Profilecard extends React.Component{
                         <div className="content">
                         <p className="subtitle is-6"><b>Branch</b> : {branch}</p>
                         <p className="subtitle is-6"><b>Degree</b> : {degree}</p>
-                        {/* {(location !== null) ? (
-                        <p className="subtitle is-6"><b>City</b> : {location.city}</p>) : (null)
-                        } */}
                         {(skills.length !== 0) ? ( 
                         skills.map((item,index) => <a key={index} href="void"> #{item} </a>)) : (null)}
                         <br/>{(socialProfiles.length !== 0) ? 

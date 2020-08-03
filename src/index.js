@@ -51,6 +51,7 @@ import CreateCollegeChat from './Institute/Chat/CreateCollegeChat';
 import PostNotice from './Institute/Notice/PostNotice';
 import createCollege from './Institute/Create College/createCollege';
 import ContactALumni from './Institute/ContactAlumni/ContactAlumni';
+import CreateStaff from './Institute/CreateStaff/CreateStaff';
 
 
 class App extends React.Component {
@@ -93,13 +94,14 @@ class App extends React.Component {
             <CollegeRoute path='/addfund' exact component={AddFund}/>
             <ProtectedRoute path='/dashboard/' component={Dashboard}/>
             <NoStudentRoute path='/chat' exact component={Rooms}/>
-            <NoStudentRoute path={`/chatroom/:id`} exact component={ChatRoom}/>
+            <NoStudentRoute path={`/chat/:id`} exact component={ChatRoom}/>
             <NoStudentRoute path='/createchat' exact component={CreateChat}/>
             <CollegeRoute path='/createchat-college' exact component={CreateCollegeChat}/>
             <CnARoute path='/sendemail' exact component={SendEmail}/>
             <CollegeRoute path='/verify-alumni' exact component={VerifyAlumni}/>
             <CnARoute path='/createnotice' component={PostNotice}/>
             <AdminRoute path='/createcollege' component={createCollege}/>
+            <CollegeRoute path='/add-faculty' exact component={CreateStaff}/>
             <Route path='*'  component={() => "Ain't Femilia .. (404 Not Found)"}/>
           </Switch>
           <ToastContainer

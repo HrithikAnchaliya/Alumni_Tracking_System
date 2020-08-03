@@ -11,9 +11,15 @@ class CreateStaff extends React.Component{
             email : '',
             facultyName : ''
         }
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit = () => {
+    onChange = (e) => {
+        this.setState({ [e.target.name] : e.target.value})
+    }
+    
+    onSubmit = async () => {
         let { email, facultyName } = this.state
         let data =  { email, facultyName }
         const values = {
