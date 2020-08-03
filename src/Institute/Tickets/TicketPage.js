@@ -48,7 +48,7 @@ class TicketPage extends React.Component{
         return(
             <div>
                  <div className="container is-fluid">
-                <div className="notification">
+                <div id='raiseticket-div-id' className="notification">
                 { (!loading) ? (
                     <TicketPageInfo ticket={this.state.ticket}/>) : 
                     (

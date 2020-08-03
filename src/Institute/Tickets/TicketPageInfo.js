@@ -58,11 +58,11 @@ class TicketPageInfo extends React.Component{
         return(
             <div>
                     <div className="container is-fluid">
-                        <div className="notification">
+                        <div id='background-white' className="notification">
                         <span>
-                        <span>{postedBy.firstName}</span>
+                        <label>{postedBy.firstName}</label>
                             <br/>
-                        <span>{postedBy.lastName}</span>
+                        <label>{postedBy.lastName}</label>
                         <br/>
                         <span>{status}</span><br/>
                     </span>
@@ -70,18 +70,18 @@ class TicketPageInfo extends React.Component{
                     </div>
 
                  <div className="container is-fluid">
-                    <div className="notification">
+                    <div  id='background-white' className="notification">
                         <p>
-                        <strong>Title</strong><br/>
-                       <span>{title}</span>
+                        <strong id='tickatpage-id'>Title</strong><br/>
+                       <label>{title}</label>
                         </p>
                         <p>
-                        <strong>Subtitle</strong><br/>
-                       <span>{subTitle}</span>
+                        <strong id='tickatpage-id'>Subtitle</strong><br/>
+                       <label>{subTitle}</label>
                         </p>
                         <p>
-                       <strong>Description</strong><br/>
-                       <span>{description}</span>
+                       <strong id='tickatpage-id'>Description</strong><br/>
+                       <label>{description}</label>
                         </p>
                         <br/>
 
@@ -97,10 +97,17 @@ class TicketPageInfo extends React.Component{
                         </div>
 
                         {((this.props.user === 'college') ) ? (
-                            <div>
-                        <Button variant="outline-primary" id='closed'  onClick={this.toPost} type='button'>Close Ticket</Button>
-                        <Button variant="outline-primary" id='onProgress' disabled={toDisable} onClick={this.toPost} type='button'>Set Ticket To On-Progress</Button>
-                        </div>) : (null)
+                            
+                            <div class="field is-grouped">
+                                <div class="control">
+                                <Button variant="outline-dark" id='closed'  onClick={this.toPost} type='button'>Close Ticket</Button>
+                                </div>
+                                <div class="control">
+                                <Button variant="outline-dark" id='onProgress' disabled={toDisable} onClick={this.toPost} type='button'>Set Ticket To On-Progress</Button>
+                                </div>
+                            </div>
+
+                        ) : (null)
                         
                         }
                     </div>

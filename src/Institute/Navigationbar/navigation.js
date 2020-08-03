@@ -36,11 +36,11 @@ class Navigation extends React.Component{
                   Events
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink activeClassName='link-li' to='/map'>
                   Map
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink activeClassName='link-li' to='/jobs'>
                   Jobs

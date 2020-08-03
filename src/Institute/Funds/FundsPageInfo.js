@@ -1,9 +1,8 @@
 import React from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import { connect } from 'react-redux'
 import { base_url } from '../../Endpoint/endpoint'
 import { notify_Success_msg, notifyError_with_msg } from  '../Utils/Message'
-
+import Button from 'react-bootstrap/Button'
 
 
 class FundsPageInfo extends React.Component{
@@ -16,7 +15,7 @@ class FundsPageInfo extends React.Component{
     }
 
     showInput = () => {
-        this.setState({ amountField : true})
+        this.setState({ amountField : !this.state.amountField})
     }
 
     setAmount = (e) => {
@@ -57,29 +56,33 @@ class FundsPageInfo extends React.Component{
             <div>
                 <hr/>
                 <span>
-                <h5>{title}</h5>
-                <span>{subtitle}</span>
+                <h5 id='font-size-larger'>{title}</h5>
+                <span id='fontspan-size-larger'>{subtitle}</span>
                 </span>
                 <hr/>
                 <br/>
                 <span>
-                <h5>Description </h5><span>{description}</span>
+                <h5 id='font-size-larger'>Description </h5><span id='fontspan-size-larger'>{description}</span>
                 </span>
                 <hr/>
                 <span>
-                    <h5>Progress</h5>
+                    <h5 id='font-size-larger'>Progress</h5>
                     <br/>
-                    <ProgressBar animated now={totalRaised} max={totalRequired}/>
+                    <progress class="progress is-primary" value={totalRaised} max={totalRequired}>{totalRaised}%</progress>
                 </span>
                 <hr/>
                 <br/>
                 <span>
-                    <button onClick = {this.showInput}>Raise Fund</button>
+                    <Button variant="outline-dark" onClick = {this.showInput} type='button'>Raise Fund</Button>
                 </span>
+                <br/>
+                <br/>
                 {   (this.state.amountField) ? (
                     <div>
-                        <input name ='amount' value={this.state.amount} onChange={this.setAmount}></input><br/>
-                        <button type='button' onClick={this.paymentIntent}>Pay!</button>
+                        <input id='job-search' name ='amount' value={this.state.amount} onChange={this.setAmount}></input><br/>
+                            <br/>
+                        <Button variant="outline-dark" onClick={this.paymentIntent} type='button'>Pay</Button>
+
                     </div>
                 ) : (null)
 

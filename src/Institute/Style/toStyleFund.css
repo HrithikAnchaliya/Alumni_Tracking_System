@@ -16,3 +16,17 @@
 #fund-card-div{
     margin-bottom: 50px;
 }
+
+#fundpage-div{
+    background-color: white;
+    width: 700px;
+    margin-left: 420px;
+}
+
+#font-size-larger{
+    font-size: larger;
+}
+
+#fontspan-size-larger{
+    font-size: medium;
+}

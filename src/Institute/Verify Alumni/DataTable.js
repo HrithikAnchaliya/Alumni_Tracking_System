@@ -102,7 +102,7 @@ export default function DataTable(props) {
             <StyledTableCell align="right">Year</StyledTableCell>
             <StyledTableCell align="right">Roll No</StyledTableCell>
             <StyledTableCell align="right">To-Verify</StyledTableCell>
-            <StyledTableCell align="right">Delete</StyledTableCell>
+            {/* <StyledTableCell align="right">Delete</StyledTableCell> */}
           </TableRow>
         </TableHead>
 
@@ -134,7 +134,7 @@ export default function DataTable(props) {
                   </div>
                 </Button>
               </StyledTableCell>
-              <StyledTableCell align="right">
+              {/* <StyledTableCell align="right">
                 <Button
                   variant="outlined" 
                   color="secondary"
@@ -148,7 +148,7 @@ export default function DataTable(props) {
                     Delete
                   </div>
                 </Button>
-              </StyledTableCell>
+              </StyledTableCell> */}
 
 
 

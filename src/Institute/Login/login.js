@@ -37,7 +37,8 @@ class Login extends React.Component{
     async officiallogin(e){
         e.preventDefault();
         this.setState({ loading:true })
-        const { email , password, user } = this.state
+        let { email , password, user } = this.state
+        if(user === 'staff'){user = 'college'}
         const data = { email , password } 
             const values = {
             method : "POST",
@@ -57,8 +58,7 @@ class Login extends React.Component{
         if(response.ok){
         for (var pair of response.headers.entries()) {
             if(pair[0] === 'x-auth'){ storeToken = pair[1]; break}}
-        let storeUser = this.state.user;
-        Serialize(storeToken,storeUser);
+        Serialize(storeToken,user);
         await this.props.addtoken();
         this.redirect();
         }
@@ -112,6 +112,7 @@ class Login extends React.Component{
                         <option value='student'>Student</option>
                         <option value='admin'>Admin</option>
                         <option value='college'>College</option>
+                        <option value='staff'>Staff</option>
                     </select>
                     </div>
                     <br/>

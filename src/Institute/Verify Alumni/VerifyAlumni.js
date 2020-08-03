@@ -63,7 +63,7 @@ class VerifyAlumni extends React.Component{
         return(
             <div>
                  <div className="container is-fluid">
-                <div className="notification">
+                <div id='background-white' className="notification">
                 { this.state.loading || !this.state.alumnies ?
                 (
                     (!this.state.error) ? (

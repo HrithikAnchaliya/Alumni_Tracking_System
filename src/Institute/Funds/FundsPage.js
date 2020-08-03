@@ -48,7 +48,7 @@ class FundsPage extends React.Component{
         return(
             <div>
                 <div className="container is-fluid">
-                <div className="notification">
+                <div id='fundpage-div' className="notification">
                 { (!loading) ? (
                     <FundsPageInfo
                     fund={this.state.fund}/>) : 
