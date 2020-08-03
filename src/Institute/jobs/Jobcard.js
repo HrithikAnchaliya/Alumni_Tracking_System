@@ -13,11 +13,11 @@ export default class Jobcard extends React.Component{
             <div id='job'>
                 <div className="card" id='card-job'>
                 <header style={{width:'auto',height:'55px'}} className="card-header" > {/* before auto it was 320px */}
-                <p className=" is-centered card-header-title">
+                <p className=" is-centered card-header-title" id="job-company-name">
                 {this.props.company}
                 </p>
                 </header>
-                <div className="card-content">
+                <div className="card-content" id="job-card-content">
                 <div className="content">
                <strong>As a :   </strong>{this.props.title}<br/>
                <strong>Industry :   </strong>{this.props.industry}<br/>

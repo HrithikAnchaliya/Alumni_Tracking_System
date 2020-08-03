@@ -11,13 +11,13 @@ export default class Interviewcard extends React.Component{
         return(
             <div>
             <div id='interview'>
-                <div style={{width:'320px'}}className="card">
+                <div style={{width:'320px'}}className="card" id="interview-card">
                 <header style={{width:'320px',height:'55px'}} className="card-header" >
-                <p className=" is-centered card-header-title">
+                <p className=" is-centered card-header-title" id="companyName-interview">
                 {this.props.company}
                 </p>
                 </header>
-                <div className="card-content">
+                <div className="card-content" id="interview-card-content">
                 <div className="content">
                <strong>Title:   </strong>{this.props.title}<br/>
                <strong>Industry :   </strong>{this.props.industry}<br/>

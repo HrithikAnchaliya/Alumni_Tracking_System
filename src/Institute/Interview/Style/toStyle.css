@@ -32,3 +32,22 @@
     margin-left: 20px;
     margin-top: 20px;
 }
+
+#interview-card{
+    border: solid 1px black;
+}
+
+#interview-card:hover{
+    border: solid 2px blue;
+}
+
+#companyName-interview{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#interview-card-content{
+    font-weight: 600;
+    font-size: medium;
+}
+
