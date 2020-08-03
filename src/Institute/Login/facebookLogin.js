@@ -16,12 +16,13 @@ class Facebookbutton extends React.Component{
           }
 
         this.onClick = this.onClick.bind(this);
+        this.responseFacebook = this.responseFacebook.bind(this);
     }
-
 
     responseFacebook = async (response) => {
         const { accessToken, userID } = response;
-        const {  user } = this.state 
+        console.log(response)
+        let {  user } = this.state 
         this.setState({ loading : true });
         const data = { accessToken, userID } 
             const values = {
@@ -32,16 +33,18 @@ class Facebookbutton extends React.Component{
             body : JSON.stringify(data)
         }
         try{
+        let storeToken = ''
         const response = await fetch(`https://alumni-backend-app.herokuapp.com/${user}/facebookLogin`,values)
         const json = await response.json()
         if(!response.ok){
             this.setState({ loading : false });
-            notifyError_with_msg("User Should be Registered Before Using Facebook Login")
+            notifyError_with_msg(json.err)
         }
         if(response.ok){
-        let storeToken = json.user.tokens[0].token;
-        let storeUser = this.state.user;
-        Serialize(storeToken,storeUser);
+        for (var pair of response.headers.entries()) {
+            if(pair[0] === 'x-auth'){ storeToken = pair[1]; break}}
+        if(user === 'faculty'){user = 'college'}
+        Serialize(storeToken,user);
         await this.props.addtoken();
         this.props.Redirect();
         }}
@@ -52,13 +55,13 @@ class Facebookbutton extends React.Component{
         }
     }
 
+
     onClick=(event)=>{
         this.setState({
             [event.target.name]: event.target.value,
             loading:false
           });
-        
-        
+
     }
 
     render(){
@@ -73,16 +76,17 @@ class Facebookbutton extends React.Component{
                         <option value='student'>Student</option>
                         <option value='admin'>Admin</option>
                         <option value='college'>College</option>
+                        <option value='faculty'>Faculty</option>
                     </select>     
                 <br/><br/>
                 <FacebookLogin
-                appId="890313481439468"
+                appId="739261673534719"
                 autoLoad={false}
                 fields="name,email,picture"
                 scope="public_profile, email"
                 callback={this.responseFacebook}
                 render={renderProps => (
-                    <button type='button' disabled={loading} onClick={renderProps.onClick}>Facebook Login</button>
+                    <button id='Submit-button' type='button' disabled={loading} onClick={renderProps.onClick}>Facebook Login</button>
                 )}
                 />
                 </form>

@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
+import { base_url } from './../../Endpoint/endpoint';
+import { notifyError_with_msg, notify_Success_msg } from  '../Utils/Message'
 
 class CreateStaff extends React.Component{
     constructor(props){
@@ -24,19 +26,16 @@ class CreateStaff extends React.Component{
         }
         try{
         let response = await fetch(`${base_url}/${this.props.user}/faculty`,values)
+        let json = await response.JSON();
         if(!response.ok){
-            this.setState({ loading : false})
-            notifyError_with_msg("logout unsuccessful");
+            notifyError_with_msg(json.err);
         }
         if(response.ok){
-        Deserialize();
-        await this.props.removetoken();
-        this.toRedirect();
+            notify_Success_msg("Successfully Created");
         }}
         catch(error){
             console.log(error)
-            this.setState({ loading : false})
-            notifyError_with_msg("logout unsuccessful");
+            notifyError_with_msg("Unsuccessful To Create");
         }
     }
 

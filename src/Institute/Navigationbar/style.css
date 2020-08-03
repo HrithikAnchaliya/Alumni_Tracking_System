@@ -45,7 +45,8 @@
 }
 
 .link-li {
-    font-size: larger;
-    /* font-family: 'Futura Std'; */
-    /* font-weight: bold; */
+    /* font-size: larger; */
+    border: .1px solid black;
+    padding: 4px;
+    font-style: italic;
 }

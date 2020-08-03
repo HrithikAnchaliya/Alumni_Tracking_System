@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import Facebookbutton from './facebookLogin';
+import Facebookbutton from './facebookLogin';
 import Add_token from '../../Redux/action/addtoken'
 import { Link, Redirect } from "react-router-dom";
 import { Serialize }from './Utils/data';
@@ -38,7 +38,6 @@ class Login extends React.Component{
         e.preventDefault();
         this.setState({ loading:true })
         let { email , password, user } = this.state
-        if(user === 'staff'){user = 'college'}
         const data = { email , password } 
             const values = {
             method : "POST",
@@ -58,6 +57,7 @@ class Login extends React.Component{
         if(response.ok){
         for (var pair of response.headers.entries()) {
             if(pair[0] === 'x-auth'){ storeToken = pair[1]; break}}
+        if(user === 'faculty'){user = 'college'}
         Serialize(storeToken,user);
         await this.props.addtoken();
         this.redirect();
@@ -112,19 +112,19 @@ class Login extends React.Component{
                         <option value='student'>Student</option>
                         <option value='admin'>Admin</option>
                         <option value='college'>College</option>
-                        <option value='staff'>Staff</option>
+                        <option value='faculty'>Faculty</option>
                     </select>
                     </div>
                     <br/>
                     <br/>
-                    <button id='Submit-button'disabled={loading} type='submit'>submit</button>
+                    <button id='Submit-button' disabled={loading} type='submit'>submit</button>
                 </form>
                 <br/>
-                {/* <h6 className='division-to-login' id='login-span-text'>  or  </h6>
+                <h6 className='division-to-login' id='login-span-text'>  or  </h6>
                 <div id='facebook-flex'>
                 <Facebookbutton Redirect={this.redirect}/>
                 </div>
-                <br/> */}
+                <br/>
                 <h6 id='login-span-text'>Or , You can</h6>
                 <br/>
                     <button id='button1'><Link id='button-link' to='/register'>Register</Link></button>

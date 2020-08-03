@@ -4,7 +4,6 @@ import { YearOptions, BranchOption } from './Utils/data'
 import { intoUrl } from './Utils/data'
 import { connect } from 'react-redux'
 import { notify_Success, notifyError_with_msg } from  '../Utils/Message'
-
  
 class SendEmailInfo extends React.Component{
 
