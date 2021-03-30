@@ -1,0 +1,51 @@
+#focus-on-search{
+    margin-left: 40px;
+    width: 1090px;
+}
+
+#filter-element{
+    margin-left: 120px;
+    margin-top: 30px;
+    width: 1200px;
+}
+
+#submitButtonSearch{
+    margin-left: 10px;
+}
+
+#search-filter-element{
+    text-align: center;
+
+}
+
+#search-profile-div{
+    background-color: white;
+    /* margin: auto; */
+    margin-top: 30px;
+    margin-left: 75px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* justify-content: center; */
+    /* NEw */
+    align-content: center;
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+#search-submit-button{
+    margin-left: 550px;
+}
+
+#profilecard-div{
+    width: 320px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 25px;
+    border: .5px solid black;
+    transition: 0.5s all ease-in-out;
+}
+
+#profilecard-div:hover{
+    border: .5px solid blue;
+    transform: scale(1.05); 
+}

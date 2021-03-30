@@ -1,0 +1,134 @@
+:root {  /* CSS Variable*/
+    --pad : 4%
+}
+
+#Login-contain-1 {
+    position: relative;
+}
+
+#Login-container {
+    background-color: white;
+    margin: auto;
+    left: 20%;
+    width: 800px;
+    max-width: 900px;
+    position: absolute;
+}
+
+.LoginDiv{
+    /* background-color: aquamarine; */
+    padding-left: 28%;
+}
+
+label {
+    padding-right: var(--pad);
+    font-style: italic;
+    font-size: 20px;
+}
+
+.div-input {
+    border: none;
+    border-bottom: 2px solid black ;
+    width: 175px;
+    font-size: medium;
+    animation-timing-function: ease;
+    animation-name: rollout;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes rollout {
+    from {width : 0;}
+    to {width: 175px; }
+}
+
+
+.div-input:focus {
+    border: 2px solid rgb(79, 137, 190);
+}
+
+#Login-Select {
+    appearance: none;
+    width: 70px;
+    border: none;
+    border-bottom: 2px solid black ;
+    animation-timing-function: ease;
+    animation-name: rollout-select;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes rollout-select {
+    from {width : 0;}
+    to {width: 70px; }
+}
+
+#Login-Select-facebook {
+    appearance: none;
+    width: 70px;
+    border: none;
+    border-bottom: 2px solid black ;
+    animation-timing-function: ease;
+    animation-name: rollout-Login-Select-facebook;
+    animation-duration: 1.5s;
+
+}
+
+@keyframes rollout-Login-Select-facebook {
+    from {width : 0;}
+    to {width: 70px; }
+}
+
+
+#Submit-button {
+    width: 60%;
+    height: 50px;
+    font-size: medium;
+    background-color: black;
+    border:0 ;
+    color: white;
+}
+
+#facebook-flex {
+    display: inline;
+}
+
+
+
+#button1 {
+    font-size: medium;
+    background-color: black;
+    border-radius:0 ;
+    border:0 ;
+    width: 60%;
+    height: 50px;
+}
+
+#button-link {  /* I guess only first three propery only works with this (Link from React-Router)*/ /* Or i guess only some propery works */
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+#login-span-text {
+    font-style: italic;
+}
+
+.division-to-login { 
+    display: flex; 
+    flex-direction: row; 
+} 
+  
+.division-to-login:before, 
+.division-to-login:after { 
+    content: ""; 
+    flex: 1 1; 
+    border-bottom: .01px solid rgb(53, 52, 18); 
+    margin: auto; 
+}
+
+/* .division-to-login:before {
+    padding-right: 15px;
+} */

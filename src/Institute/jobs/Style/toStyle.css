@@ -1,0 +1,104 @@
+#jobcard-div {
+    /* top:50px; */
+    background-color: white;
+}
+#Jobcard-id {
+    background-color: white;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    /* NEw */
+    align-content: center;
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#AddButton-Link {
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+}
+
+#Addbutton-class {
+    width: 100%;
+    height: 70px;
+    border: 0;
+    background-color: black;
+    animation-timing-function: ease;
+    animation-name: rollin;
+    animation-duration: 1.5s;
+    margin-top: 33px;
+
+}
+
+@keyframes rollin {
+    from {width : 100%; height: 0;}
+    to {width: 100%; height: 70px;}
+}
+
+#Addbutton-class:hover {
+    width: 100%;
+    height: 70px;
+    border: 0;
+    background-color: rgb(29, 37, 29);
+}
+
+#Loading-id {
+    padding-top: 40px;
+    text-align: center;
+}
+
+#job-search {
+    width: 160px;
+    border: none;
+    border-bottom: 2px solid black ;
+    animation-timing-function: ease;
+    animation-name: rollout-search;
+    animation-duration: 1s;
+}
+
+@keyframes rollout-search {
+    from {width : 0;}
+    to {width: 160px; }
+}
+
+
+#job-search-div{
+    margin-left: 15px;
+    /* margin-top: 10px; */
+}
+#search-img {
+    width: 43px;
+}
+
+#addjob-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}
+
+#jobpage-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 480px;
+}
+
+#font-change{
+    font-size: 50px;
+    font-family: 'Futura Std';
+}
+
+#other-font-change{
+    font-size: 20px;
+}
+
+#span-font-change{
+    font-size: 20px;
+}
+
+#font-change-id{
+    font-size: 30px;
+    font-family: 'Futura Std';
+}

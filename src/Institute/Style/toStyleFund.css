@@ -1,0 +1,32 @@
+#funds-page-div{
+    background-color: white;
+    /* margin: auto; */
+    margin-left: 140px;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* justify-content: center; */
+    /* NEw */
+    /* align-content: center; */
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#fund-card-div{
+    margin-bottom: 50px;
+}
+
+#fundpage-div{
+    background-color: white;
+    width: 700px;
+    margin-left: 420px;
+}
+
+#font-size-larger{
+    font-size: larger;
+}
+
+#fontspan-size-larger{
+    font-size: medium;
+}

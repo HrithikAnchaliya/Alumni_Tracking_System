@@ -1,0 +1,23 @@
+
+ul#horizontal-list {
+    min-width: 696px;
+    list-style: none;
+    padding-top: 20px;
+    
+}
+
+ul#horizontal-list li {
+    display: inline;
+    padding-left: 25px;
+    font-size: 20px;
+}
+
+#block-remove{
+    background-color: white;
+}
+
+#size-corner{
+    margin-left: -240px;
+    width : 400px;
+    height: 400px;
+}

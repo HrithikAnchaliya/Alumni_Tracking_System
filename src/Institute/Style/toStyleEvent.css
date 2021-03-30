@@ -1,0 +1,57 @@
+@font-face{
+    font-family: 'Futura Std';
+    src: url(./Fonts/Futura\ Std\ Light\ Oblique.otf) format("opentype");
+}
+
+
+.event-header{
+    background-image: url("../Event/Utils/Event-bg.jpg");
+    background-size: 100%;
+    padding-bottom: 100px;
+    margin-top: -13px;
+}
+
+#event-title{
+    color: white;
+    font-family: 'Futura Std';
+    padding-top: 5%;
+    font-size: 50px;
+}
+
+.event-sec-div {
+    background-color: white;
+    border-bottom:2px solid white ;
+} 
+
+#event-first-div {
+    background-color: rgb(243, 243, 243);
+}
+
+.event-detail-div{
+    background-color: white;
+}
+
+.attend-button{
+    float: right;
+}
+
+#events-page-div{
+    background-color: white;
+    /* margin: auto; */
+    margin-left: 85px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* justify-content: center; */
+    /* NEw */
+    /* align-content: center; */
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#addevent-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}

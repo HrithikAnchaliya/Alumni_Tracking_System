@@ -1,0 +1,24 @@
+:root {
+    --bg-color-greyish: rgb(243, 243, 243);
+    --white-bg: white;
+}
+
+#interview-div{
+    background-color: var(--bg-color-greyish);
+    margin-top: -2%;
+}
+
+.interview-first-div{
+    background-color: var(--white-bg);
+}
+
+#interview-title{
+    font-family: 'Futura Std';
+    font-size: 40px;
+}
+
+#interview-div-id{
+    background-color: white;
+    width: 800px;
+    margin-left: 350px;
+}

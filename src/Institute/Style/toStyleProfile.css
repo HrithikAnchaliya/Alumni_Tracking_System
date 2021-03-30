@@ -1,0 +1,53 @@
+#profile-first-div{
+    -webkit-box-shadow: 0 0 10px px #050305;
+    box-shadow: 0 0 10px px #050305;
+    background-color: yellowgreen;
+    width : 700px;
+    height : 80px;
+    margin-left: 360px;
+    text-align: center;
+}
+
+#profile-sec-div{
+    -webkit-box-shadow: 0 0 10px px #050305;
+    box-shadow: 0 0 10px px #050305;
+    background-color: white;
+    width : 700px;
+    height : 190px;
+    margin-left: 360px;
+    text-align: center;
+}
+
+#basic-id-profile{
+    text-align: center;
+}
+
+#profile-span{
+    justify-content: center;
+    font-size: 30px;
+}
+
+#basic-profile-p{
+    font-size: 20px;
+    font-family: 'Futura Std';
+}
+
+#basic-profile-header{
+    font-size: 30px;
+    font-family: 'Futura Std';
+}
+
+#basic-strong-id{
+    font-size: larger;  
+}
+
+#profile-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}
+
+#just-font{
+    font-family: 'Futura Std';
+    font-size: 20px;
+}

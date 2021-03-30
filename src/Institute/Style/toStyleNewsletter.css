@@ -1,0 +1,38 @@
+#news-page-div{
+    background-color: white;
+    /* margin: auto; */
+    margin-left: 85px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* justify-content: center; */
+    /* NEw */
+    /* align-content: center; */
+    /* End */
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
+#newsletter-name{
+    width: 300px;
+}
+
+#span-news{
+    text-align: center;
+    margin-top: 20%;
+    font-size: 20px;
+}
+
+#addnewsletter-div-id{
+    background-color: white;
+    width: 600px;
+    margin-left: 400px;
+}
+
+#header-name{
+    text-align: center;
+}
+
+#choose-file{
+    float: left;
+}
